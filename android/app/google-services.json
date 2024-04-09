@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644115233622",
+    "project_id": "prytane-29c10",
+    "storage_bucket": "prytane-29c10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644115233622:android:8969f8ea727b82fd0374f7",
+        "android_client_info": {
+          "package_name": "com.flutterflow.prytane"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
