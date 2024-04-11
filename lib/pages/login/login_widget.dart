@@ -416,8 +416,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   }
 
                                   context.goNamedAuth(
-                                      'profilAdminCommunautairre',
-                                      context.mounted);
+                                      'Accueil', context.mounted);
                                 },
                                 text: 'Se connecter',
                                 options: FFButtonOptions(

@@ -132,7 +132,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -163,8 +164,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await launchURL('https://web.facebook.com/');
                           },
                           text: 'Avec Facebook',
                           icon: Icon(
@@ -210,8 +211,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                 return;
                               }
 
-                              context.goNamedAuth(
-                                  'profilAdminCommunautairre', context.mounted);
+                              context.goNamedAuth('Accueil', context.mounted);
                             },
                             text: 'Avec Google',
                             icon: FaIcon(
@@ -250,7 +250,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -764,15 +765,14 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                             await UsersRecord.collection
                                 .doc(user.uid)
                                 .update(createUsersRecordData(
-                                  email: '',
+                                  email: _model.emailAddressController.text,
                                   nom: _model.nomController.text,
                                   prenom: _model.prenomController.text,
                                   newsletter: _model.radioButtonValue != null &&
                                       _model.radioButtonValue != '',
                                 ));
 
-                            context.goNamedAuth(
-                                'profilAdminCommunautairre', context.mounted);
+                            context.goNamedAuth('Accueil', context.mounted);
                           },
                           text: 'Créer un compte',
                           options: FFButtonOptions(

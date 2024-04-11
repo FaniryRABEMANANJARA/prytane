@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -58,15 +61,17 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
+            borderColor: FlutterFlowTheme.of(context).secondaryBackground,
             borderRadius: 30.0,
             buttonSize: 60.0,
+            fillColor: FlutterFlowTheme.of(context).primaryBackground,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              context.safePop();
             },
           ),
           title: Text(
@@ -203,11 +208,91 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                 ),
                               ),
                               child: FlutterFlowDropDown<String>(
-                                controller: _model.typeValueController ??=
+                                controller: _model.typeValueController1 ??=
                                     FormFieldController<String>(null),
                                 options: ['Image', 'Vidéo', 'Text'],
                                 onChanged: (val) =>
-                                    setState(() => _model.typeValue = val),
+                                    setState(() => _model.typeValue1 = val),
+                                width: 300.0,
+                                height: 56.0,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      fontSize: 10.0,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                                hintText: 'Veuillez sélectionner...',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 2.0,
+                                borderRadius: 8.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                hidesUnderline: true,
+                                isOverButton: true,
+                                isSearchable: false,
+                                isMultiSelect: false,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Rôle',
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .labelMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .labelMediumFamily),
+                                ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 16.0, 8.0, 16.0),
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.44,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                border: Border.all(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  width: 2.0,
+                                ),
+                              ),
+                              child: FlutterFlowDropDown<String>(
+                                controller: _model.typeValueController2 ??=
+                                    FormFieldController<String>(null),
+                                options: ['Administrateur', 'Membre'],
+                                onChanged: (val) =>
+                                    setState(() => _model.typeValue2 = val),
                                 width: 300.0,
                                 height: 56.0,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -513,7 +598,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                 }
                               }
                             },
-                            text: 'Photo / vidéo',
+                            text: 'Photo',
                             icon: FaIcon(
                               FontAwesomeIcons.photoVideo,
                             ),
@@ -552,8 +637,20 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await PublicationsRecord.collection
+                          .doc()
+                          .set(createPublicationsRecordData(
+                            content: _model.contenuController.text,
+                            type: _model.typeValue1,
+                            userId:
+                                valueOrDefault(currentUserDocument?.nom, ''),
+                            date: _model.datePicked,
+                            fichier: _model.uploadedFileUrl,
+                            role: _model.typeValue2,
+                          ));
+
+                      context.pushNamed('Accueil');
                     },
                     text: 'Publier',
                     options: FFButtonOptions(

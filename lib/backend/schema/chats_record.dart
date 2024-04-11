@@ -52,6 +52,11 @@ class ChatsRecord extends FirestoreRecord {
   DocumentReference? get lastMessageSentBy => _lastMessageSentBy;
   bool hasLastMessageSentBy() => _lastMessageSentBy != null;
 
+  // "group_chat_id" field.
+  int? _groupChatId;
+  int get groupChatId => _groupChatId ?? 0;
+  bool hasGroupChatId() => _groupChatId != null;
+
   void _initializeFields() {
     _users = getDataList(snapshotData['users']);
     _userA = snapshotData['user_a'] as DocumentReference?;
@@ -61,6 +66,7 @@ class ChatsRecord extends FirestoreRecord {
     _lastMessageSeenBy = getDataList(snapshotData['last_message_seen_by']);
     _lastMessageSentBy =
         snapshotData['last_message_sent_by'] as DocumentReference?;
+    _groupChatId = castToType<int>(snapshotData['group_chat_id']);
   }
 
   static CollectionReference get collection =>
@@ -102,6 +108,7 @@ Map<String, dynamic> createChatsRecordData({
   String? lastMessage,
   DateTime? lastMessageTime,
   DocumentReference? lastMessageSentBy,
+  int? groupChatId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -110,6 +117,7 @@ Map<String, dynamic> createChatsRecordData({
       'last_message': lastMessage,
       'last_message_time': lastMessageTime,
       'last_message_sent_by': lastMessageSentBy,
+      'group_chat_id': groupChatId,
     }.withoutNulls,
   );
 
@@ -128,7 +136,8 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e1?.lastMessage == e2?.lastMessage &&
         e1?.lastMessageTime == e2?.lastMessageTime &&
         listEquality.equals(e1?.lastMessageSeenBy, e2?.lastMessageSeenBy) &&
-        e1?.lastMessageSentBy == e2?.lastMessageSentBy;
+        e1?.lastMessageSentBy == e2?.lastMessageSentBy &&
+        e1?.groupChatId == e2?.groupChatId;
   }
 
   @override
@@ -139,7 +148,8 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.lastMessage,
         e?.lastMessageTime,
         e?.lastMessageSeenBy,
-        e?.lastMessageSentBy
+        e?.lastMessageSentBy,
+        e?.groupChatId
       ]);
 
   @override

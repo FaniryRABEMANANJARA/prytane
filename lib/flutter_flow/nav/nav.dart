@@ -93,32 +93,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'chatMain',
-          path: '/chatMain',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'chatMain')
-              : ChatMainWidget(),
-        ),
-        FFRoute(
-          name: 'chatDetails',
-          path: '/chatDetails',
-          asyncParams: {
-            'chatUser': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => ChatDetailsWidget(
-            chatUser: params.getParam(
-              'chatUser',
-              ParamType.Document,
-            ),
-            chatRef: params.getParam(
-              'chatRef',
-              ParamType.DocumentReference,
-              false,
-              ['chats'],
-            ),
-          ),
-        ),
-        FFRoute(
           name: 'changePassword',
           path: '/changePassword',
           asyncParams: {
@@ -151,11 +125,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : ListegroupeWidget(),
         ),
         FFRoute(
-          name: 'Accueil',
-          path: '/accueil',
-          builder: (context, params) => AccueilWidget(),
-        ),
-        FFRoute(
           name: 'Ajoutpublication',
           path: '/ajoutpublication',
           builder: (context, params) => AjoutpublicationWidget(),
@@ -186,11 +155,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AccueilGroupWidget(),
         ),
         FFRoute(
-          name: 'AccueilCommunautaire',
-          path: '/accueilCommunautaire',
-          builder: (context, params) => AccueilCommunautaireWidget(),
-        ),
-        FFRoute(
           name: 'AjoutevenementGroup',
           path: '/ajoutevenementGroup',
           builder: (context, params) => AjoutevenementGroupWidget(),
@@ -203,14 +167,76 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ListeEvenement',
           path: '/listeEvenement',
-          builder: (context, params) => ListeEvenementWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'ListeEvenement')
+              : ListeEvenementWidget(),
         ),
         FFRoute(
           name: 'ListegroupeAdmin',
           path: '/listegroupeAdmin',
           builder: (context, params) => ListegroupeAdminWidget(),
+        ),
+        FFRoute(
+          name: 'ListeEvenementCommunautaire',
+          path: '/listeEvenementCommunautaire',
+          builder: (context, params) => ListeEvenementCommunautaireWidget(),
+        ),
+        FFRoute(
+          name: 'chat_2_Details',
+          path: '/chat2Details',
+          asyncParams: {
+            'chatRef': getDoc(['chats'], ChatsRecord.fromSnapshot),
+          },
+          builder: (context, params) => Chat2DetailsWidget(
+            chatRef: params.getParam(
+              'chatRef',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'chat_2_main',
+          path: '/chat2Main',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'chat_2_main')
+              : Chat2MainWidget(),
+        ),
+        FFRoute(
+          name: 'chat_2_InviteUsers',
+          path: '/chat2InviteUsers',
+          asyncParams: {
+            'chatRef': getDoc(['chats'], ChatsRecord.fromSnapshot),
+          },
+          builder: (context, params) => Chat2InviteUsersWidget(
+            chatRef: params.getParam(
+              'chatRef',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'image_Details',
+          path: '/imageDetails',
+          asyncParams: {
+            'chatMessage':
+                getDoc(['chat_messages'], ChatMessagesRecord.fromSnapshot),
+          },
+          builder: (context, params) => ImageDetailsWidget(
+            chatMessage: params.getParam(
+              'chatMessage',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Accueil',
+          path: '/accueil',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Accueil')
+              : AccueilWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

@@ -162,18 +162,42 @@ class _ProfilAdminCommunautairreWidgetState
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'Andrew D.',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).headlineLargeFamily,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).headlineLargeFamily),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        valueOrDefault(currentUserDocument?.nom, ''),
+                        style:
+                            FlutterFlowTheme.of(context).headlineLarge.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .headlineLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .headlineLargeFamily),
+                                ),
                       ),
-                ),
+                    ),
+                  ),
+                  AuthUserStreamWidget(
+                    builder: (context) => Text(
+                      valueOrDefault(currentUserDocument?.prenom, ''),
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .headlineLargeFamily,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .headlineLargeFamily),
+                              ),
+                    ),
+                  ),
+                ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -190,7 +214,7 @@ class _ProfilAdminCommunautairreWidgetState
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
                     child: Text(
-                      'andrew@domainname.com',
+                      currentUserEmail,
                       style: FlutterFlowTheme.of(context).labelMedium.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).labelMediumFamily,
@@ -350,6 +374,78 @@ class _ProfilAdminCommunautairreWidgetState
                               Icons.arrow_forward_ios,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 18.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 60.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3.0,
+                        color: Color(0x33000000),
+                        offset: Offset(
+                          0.0,
+                          1.0,
+                        ),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(8.0),
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Icon(
+                          Icons.event_note,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Evènement ',
+                            style: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .labelLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .labelLargeFamily),
+                                ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(0.9, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('Ajoutevenement');
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
                             ),
                           ),
                         ),

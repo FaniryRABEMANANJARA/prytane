@@ -1,10 +1,14 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,106 +32,6 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
     super.initState();
     _model = createModel(context, () => AjoutevenementModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (kIsWeb) {
-        final _datePicked1Date = await showDatePicker(
-          context: context,
-          initialDate: getCurrentTimestamp,
-          firstDate: getCurrentTimestamp,
-          lastDate: DateTime(2050),
-          builder: (context, child) {
-            return wrapInMaterialDatePickerTheme(
-              context,
-              child!,
-              headerBackgroundColor: FlutterFlowTheme.of(context).primary,
-              headerForegroundColor: FlutterFlowTheme.of(context).info,
-              headerTextStyle:
-                  FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).headlineLargeFamily,
-                        fontSize: 32.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).headlineLargeFamily),
-                      ),
-              pickerBackgroundColor:
-                  FlutterFlowTheme.of(context).secondaryBackground,
-              pickerForegroundColor: FlutterFlowTheme.of(context).primaryText,
-              selectedDateTimeBackgroundColor:
-                  FlutterFlowTheme.of(context).primary,
-              selectedDateTimeForegroundColor:
-                  FlutterFlowTheme.of(context).info,
-              actionButtonForegroundColor:
-                  FlutterFlowTheme.of(context).primaryText,
-              iconSize: 24.0,
-            );
-          },
-        );
-
-        TimeOfDay? _datePicked1Time;
-        if (_datePicked1Date != null) {
-          _datePicked1Time = await showTimePicker(
-            context: context,
-            initialTime: TimeOfDay.fromDateTime(getCurrentTimestamp),
-            builder: (context, child) {
-              return wrapInMaterialTimePickerTheme(
-                context,
-                child!,
-                headerBackgroundColor: FlutterFlowTheme.of(context).primary,
-                headerForegroundColor: FlutterFlowTheme.of(context).info,
-                headerTextStyle:
-                    FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).headlineLargeFamily,
-                          fontSize: 32.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).headlineLargeFamily),
-                        ),
-                pickerBackgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                pickerForegroundColor: FlutterFlowTheme.of(context).primaryText,
-                selectedDateTimeBackgroundColor:
-                    FlutterFlowTheme.of(context).primary,
-                selectedDateTimeForegroundColor:
-                    FlutterFlowTheme.of(context).info,
-                actionButtonForegroundColor:
-                    FlutterFlowTheme.of(context).primaryText,
-                iconSize: 24.0,
-              );
-            },
-          );
-        }
-
-        if (_datePicked1Date != null && _datePicked1Time != null) {
-          safeSetState(() {
-            _model.datePicked1 = DateTime(
-              _datePicked1Date.year,
-              _datePicked1Date.month,
-              _datePicked1Date.day,
-              _datePicked1Time!.hour,
-              _datePicked1Time.minute,
-            );
-          });
-        }
-      } else {
-        await DatePicker.showDateTimePicker(
-          context,
-          showTitleActions: true,
-          onConfirm: (date) {
-            safeSetState(() {
-              _model.datePicked1 = date;
-            });
-          },
-          currentTime: getCurrentTimestamp,
-          minTime: getCurrentTimestamp,
-        );
-      }
-    });
-
     _model.titreController ??= TextEditingController();
     _model.titreFocusNode ??= FocusNode();
 
@@ -136,12 +40,6 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
 
     _model.emplacementController ??= TextEditingController();
     _model.emplacementFocusNode ??= FocusNode();
-
-    _model.organisateurController ??= TextEditingController();
-    _model.organisateurFocusNode ??= FocusNode();
-
-    _model.participantController ??= TextEditingController();
-    _model.participantFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -317,48 +215,180 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            width: MediaQuery.sizeOf(context).width * 0.4,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 5.0, 12.0, 5.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    dateTimeFormat(
-                                        'd/M h:mm a', getCurrentTimestamp),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodySmallFamily,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (kIsWeb) {
+                                final _datePicked1Date = await showDatePicker(
+                                  context: context,
+                                  initialDate: getCurrentTimestamp,
+                                  firstDate: getCurrentTimestamp,
+                                  lastDate: DateTime(2050),
+                                  builder: (context, child) {
+                                    return wrapInMaterialDatePickerTheme(
+                                      context,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .headlineLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLargeFamily,
+                                            fontSize: 32.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLargeFamily),
+                                          ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
+                                    );
+                                  },
+                                );
+
+                                TimeOfDay? _datePicked1Time;
+                                if (_datePicked1Date != null) {
+                                  _datePicked1Time = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.fromDateTime(
+                                        getCurrentTimestamp),
+                                    builder: (context, child) {
+                                      return wrapInMaterialTimePickerTheme(
+                                        context,
+                                        child!,
+                                        headerBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        headerForegroundColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        headerTextStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodySmallFamily),
-                                        ),
-                                  ),
-                                  Icon(
-                                    Icons.schedule,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
-                                  ),
-                                ],
+                                                      .headlineLargeFamily,
+                                              fontSize: 32.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineLargeFamily),
+                                            ),
+                                        pickerBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                        pickerForegroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        selectedDateTimeBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        selectedDateTimeForegroundColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        actionButtonForegroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        iconSize: 24.0,
+                                      );
+                                    },
+                                  );
+                                }
+
+                                if (_datePicked1Date != null &&
+                                    _datePicked1Time != null) {
+                                  safeSetState(() {
+                                    _model.datePicked1 = DateTime(
+                                      _datePicked1Date.year,
+                                      _datePicked1Date.month,
+                                      _datePicked1Date.day,
+                                      _datePicked1Time!.hour,
+                                      _datePicked1Time.minute,
+                                    );
+                                  });
+                                }
+                              } else {
+                                await DatePicker.showDateTimePicker(
+                                  context,
+                                  showTitleActions: true,
+                                  onConfirm: (date) {
+                                    safeSetState(() {
+                                      _model.datePicked1 = date;
+                                    });
+                                  },
+                                  currentTime: getCurrentTimestamp,
+                                  minTime: getCurrentTimestamp,
+                                );
+                              }
+                            },
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 5.0, 12.0, 5.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      dateTimeFormat(
+                                          'd/M H:mm', getCurrentTimestamp),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodySmallFamily,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmallFamily),
+                                          ),
+                                    ),
+                                    Icon(
+                                      Icons.schedule,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -456,7 +486,7 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      dateTimeFormat('jm', getCurrentTimestamp),
+                                      dateTimeFormat('Hm', getCurrentTimestamp),
                                       style: FlutterFlowTheme.of(context)
                                           .bodySmall
                                           .override(
@@ -549,134 +579,192 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.organisateurController,
-                        focusNode: _model.organisateurFocusNode,
-                        autofocus: false,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Organisateur',
-                          hintText: 'Saisir le nom de l\'organisateur',
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
                               ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
+                            );
+                          }
+                          List<UsersRecord> containerUsersRecordList =
+                              snapshot.data!;
+                          return Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8.0),
+                                bottomRight: Radius.circular(8.0),
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
+                            child: FlutterFlowDropDown<String>(
+                              controller: _model.organisateurValueController ??=
+                                  FormFieldController<String>(null),
+                              options: containerUsersRecordList
+                                  .map((e) => e.prenom)
+                                  .toList(),
+                              onChanged: (val) => setState(
+                                  () => _model.organisateurValue = val),
+                              width: 300.0,
+                              height: 56.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                              hintText: 'Veuillez séléctionner',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 4.0, 16.0, 4.0),
+                              hidesUnderline: true,
+                              isOverButton: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
-                        minLines: null,
-                        validator: _model.organisateurControllerValidator
-                            .asValidator(context),
+                          );
+                        },
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.participantController,
-                        focusNode: _model.participantFocusNode,
-                        autofocus: false,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Participants',
-                          hintText: 'Saisir les noms des participants',
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
                               ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
+                            );
+                          }
+                          List<UsersRecord> containerUsersRecordList =
+                              snapshot.data!;
+                          return Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8.0),
+                                bottomRight: Radius.circular(8.0),
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0),
+                              ),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
+                            child: FlutterFlowDropDown<String>(
+                              multiSelectController:
+                                  _model.participantsValueController ??=
+                                      FormFieldController<List<String>>(
+                                          _model.participantsValue ??=
+                                              List<String>.from(
+                                containerUsersRecordList
+                                        .map((e) => e.nom)
+                                        .toList() ??
+                                    [],
+                              )),
+                              options: containerUsersRecordList
+                                  .map((e) => e.prenom)
+                                  .toList(),
+                              width: 300.0,
+                              height: 56.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                              hintText: 'Veuillez séléctionner',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 4.0, 16.0, 4.0),
+                              hidesUnderline: true,
+                              isOverButton: true,
+                              isSearchable: false,
+                              isMultiSelect: true,
+                              onMultiSelectChanged: (val) => setState(
+                                  () => _model.participantsValue = val),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyLargeFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyLargeFamily),
-                            ),
-                        minLines: null,
-                        validator: _model.participantControllerValidator
-                            .asValidator(context),
+                          );
+                        },
                       ),
                     ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          await EvenementsRecord.collection
+                              .doc()
+                              .set(createEvenementsRecordData(
+                                title: _model.titreController.text,
+                                description: _model.descriptionController.text,
+                                location: _model.emplacementController.text,
+                                dateDebut: dateTimeFormat(
+                                    'd/M h:mm a', _model.datePicked1),
+                                dateFin:
+                                    dateTimeFormat('jm', _model.datePicked2),
+                              ));
+
+                          context.pushNamed('ListeEvenement');
                         },
                         text: 'Créer un événement',
                         options: FFButtonOptions(

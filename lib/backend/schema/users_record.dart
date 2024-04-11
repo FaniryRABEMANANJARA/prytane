@@ -71,6 +71,26 @@ class UsersRecord extends FirestoreRecord {
   bool get newsletter => _newsletter ?? false;
   bool hasNewsletter() => _newsletter != null;
 
+  // "shortDescription" field.
+  String? _shortDescription;
+  String get shortDescription => _shortDescription ?? '';
+  bool hasShortDescription() => _shortDescription != null;
+
+  // "last_active_time" field.
+  DateTime? _lastActiveTime;
+  DateTime? get lastActiveTime => _lastActiveTime;
+  bool hasLastActiveTime() => _lastActiveTime != null;
+
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "role" field.
+  String? _role;
+  String get role => _role ?? '';
+  bool hasRole() => _role != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -83,6 +103,10 @@ class UsersRecord extends FirestoreRecord {
     _nom = snapshotData['nom'] as String?;
     _prenom = snapshotData['prenom'] as String?;
     _newsletter = snapshotData['newsletter'] as bool?;
+    _shortDescription = snapshotData['shortDescription'] as String?;
+    _lastActiveTime = snapshotData['last_active_time'] as DateTime?;
+    _title = snapshotData['title'] as String?;
+    _role = snapshotData['role'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -130,6 +154,10 @@ Map<String, dynamic> createUsersRecordData({
   String? nom,
   String? prenom,
   bool? newsletter,
+  String? shortDescription,
+  DateTime? lastActiveTime,
+  String? title,
+  String? role,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -144,6 +172,10 @@ Map<String, dynamic> createUsersRecordData({
       'nom': nom,
       'prenom': prenom,
       'newsletter': newsletter,
+      'shortDescription': shortDescription,
+      'last_active_time': lastActiveTime,
+      'title': title,
+      'role': role,
     }.withoutNulls,
   );
 
@@ -165,7 +197,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isHost == e2?.isHost &&
         e1?.nom == e2?.nom &&
         e1?.prenom == e2?.prenom &&
-        e1?.newsletter == e2?.newsletter;
+        e1?.newsletter == e2?.newsletter &&
+        e1?.shortDescription == e2?.shortDescription &&
+        e1?.lastActiveTime == e2?.lastActiveTime &&
+        e1?.title == e2?.title &&
+        e1?.role == e2?.role;
   }
 
   @override
@@ -180,7 +216,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isHost,
         e?.nom,
         e?.prenom,
-        e?.newsletter
+        e?.newsletter,
+        e?.shortDescription,
+        e?.lastActiveTime,
+        e?.title,
+        e?.role
       ]);
 
   @override
