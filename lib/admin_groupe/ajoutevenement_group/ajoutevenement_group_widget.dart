@@ -243,7 +243,6 @@ class _AjoutevenementGroupWidgetState extends State<AjoutevenementGroupWidget> {
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
-                        minLines: null,
                         validator: _model.titreControllerValidator
                             .asValidator(context),
                       ),
@@ -306,7 +305,6 @@ class _AjoutevenementGroupWidgetState extends State<AjoutevenementGroupWidget> {
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
                         maxLines: 3,
-                        minLines: null,
                         validator: _model.descriptionControllerValidator
                             .asValidator(context),
                       ),
@@ -543,7 +541,6 @@ class _AjoutevenementGroupWidgetState extends State<AjoutevenementGroupWidget> {
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
-                        minLines: null,
                         validator: _model.emplacementControllerValidator
                             .asValidator(context),
                       ),
@@ -605,7 +602,6 @@ class _AjoutevenementGroupWidgetState extends State<AjoutevenementGroupWidget> {
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
-                        minLines: null,
                         validator: _model.organisateurControllerValidator
                             .asValidator(context),
                       ),
@@ -667,7 +663,6 @@ class _AjoutevenementGroupWidgetState extends State<AjoutevenementGroupWidget> {
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context).bodyLargeFamily),
                             ),
-                        minLines: null,
                         validator: _model.participantControllerValidator
                             .asValidator(context),
                       ),

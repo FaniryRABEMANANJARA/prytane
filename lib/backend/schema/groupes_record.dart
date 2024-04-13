@@ -41,12 +41,18 @@ class GroupesRecord extends FirestoreRecord {
   List<DocumentReference> get administrateurs => _administrateurs ?? const [];
   bool hasAdministrateurs() => _administrateurs != null;
 
+  // "photo" field.
+  String? _photo;
+  String get photo => _photo ?? '';
+  bool hasPhoto() => _photo != null;
+
   void _initializeFields() {
     _nom = snapshotData['nom'] as String?;
     _description = snapshotData['description'] as String?;
     _type = snapshotData['type'] as String?;
     _membres = getDataList(snapshotData['membres']);
     _administrateurs = getDataList(snapshotData['administrateurs']);
+    _photo = snapshotData['photo'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -87,12 +93,14 @@ Map<String, dynamic> createGroupesRecordData({
   String? nom,
   String? description,
   String? type,
+  String? photo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'nom': nom,
       'description': description,
       'type': type,
+      'photo': photo,
     }.withoutNulls,
   );
 
@@ -109,12 +117,19 @@ class GroupesRecordDocumentEquality implements Equality<GroupesRecord> {
         e1?.description == e2?.description &&
         e1?.type == e2?.type &&
         listEquality.equals(e1?.membres, e2?.membres) &&
-        listEquality.equals(e1?.administrateurs, e2?.administrateurs);
+        listEquality.equals(e1?.administrateurs, e2?.administrateurs) &&
+        e1?.photo == e2?.photo;
   }
 
   @override
-  int hash(GroupesRecord? e) => const ListEquality()
-      .hash([e?.nom, e?.description, e?.type, e?.membres, e?.administrateurs]);
+  int hash(GroupesRecord? e) => const ListEquality().hash([
+        e?.nom,
+        e?.description,
+        e?.type,
+        e?.membres,
+        e?.administrateurs,
+        e?.photo
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is GroupesRecord;

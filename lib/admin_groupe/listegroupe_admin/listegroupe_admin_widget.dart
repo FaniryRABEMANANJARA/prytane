@@ -183,7 +183,6 @@ class _ListegroupeAdminWidgetState extends State<ListegroupeAdminWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .bodyMediumFamily),
                                   ),
-                              minLines: null,
                               cursorColor: FlutterFlowTheme.of(context).primary,
                               validator: _model.textControllerValidator
                                   .asValidator(context),

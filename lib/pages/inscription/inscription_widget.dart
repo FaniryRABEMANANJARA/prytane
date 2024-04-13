@@ -371,7 +371,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            minLines: null,
                             validator: _model.emailAddressControllerValidator
                                 .asValidator(context),
                           ),
@@ -461,7 +460,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            minLines: null,
                             validator: _model.prenomControllerValidator
                                 .asValidator(context),
                           ),
@@ -541,7 +539,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            minLines: null,
                             validator: _model.nomControllerValidator
                                 .asValidator(context),
                           ),
@@ -646,7 +643,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            minLines: null,
                             validator: _model.passwordControllerValidator
                                 .asValidator(context),
                           ),

@@ -51,6 +51,11 @@ class EvenementsRecord extends FirestoreRecord {
   String get dateFin => _dateFin ?? '';
   bool hasDateFin() => _dateFin != null;
 
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _description = snapshotData['description'] as String?;
@@ -59,6 +64,7 @@ class EvenementsRecord extends FirestoreRecord {
     _participants = getDataList(snapshotData['participants']);
     _dateDebut = snapshotData['date_debut'] as String?;
     _dateFin = snapshotData['date_fin'] as String?;
+    _image = snapshotData['image'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -101,6 +107,7 @@ Map<String, dynamic> createEvenementsRecordData({
   String? location,
   String? dateDebut,
   String? dateFin,
+  String? image,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -109,6 +116,7 @@ Map<String, dynamic> createEvenementsRecordData({
       'location': location,
       'date_debut': dateDebut,
       'date_fin': dateFin,
+      'image': image,
     }.withoutNulls,
   );
 
@@ -127,7 +135,8 @@ class EvenementsRecordDocumentEquality implements Equality<EvenementsRecord> {
         listEquality.equals(e1?.organizers, e2?.organizers) &&
         listEquality.equals(e1?.participants, e2?.participants) &&
         e1?.dateDebut == e2?.dateDebut &&
-        e1?.dateFin == e2?.dateFin;
+        e1?.dateFin == e2?.dateFin &&
+        e1?.image == e2?.image;
   }
 
   @override
@@ -138,7 +147,8 @@ class EvenementsRecordDocumentEquality implements Equality<EvenementsRecord> {
         e?.organizers,
         e?.participants,
         e?.dateDebut,
-        e?.dateFin
+        e?.dateFin,
+        e?.image
       ]);
 
   @override

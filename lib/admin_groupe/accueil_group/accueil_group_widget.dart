@@ -596,7 +596,6 @@ class _AccueilGroupWidgetState extends State<AccueilGroupWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodyMediumFamily),
                                 ),
-                            minLines: null,
                             validator: _model.textController1Validator
                                 .asValidator(context),
                           ),
@@ -982,7 +981,6 @@ class _AccueilGroupWidgetState extends State<AccueilGroupWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMediumFamily),
                                       ),
-                                  minLines: null,
                                   validator: _model.textController2Validator
                                       .asValidator(context),
                                 ),
@@ -1385,7 +1383,6 @@ class _AccueilGroupWidgetState extends State<AccueilGroupWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMediumFamily),
                                       ),
-                                  minLines: null,
                                   validator: _model.textController3Validator
                                       .asValidator(context),
                                 ),

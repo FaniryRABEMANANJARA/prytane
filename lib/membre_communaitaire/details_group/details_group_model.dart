@@ -1,20 +1,20 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'listegroupe_widget.dart' show ListegroupeWidget;
+import 'details_group_widget.dart' show DetailsGroupWidget;
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListegroupeModel extends FlutterFlowModel<ListegroupeWidget> {
+class DetailsGroupModel extends FlutterFlowModel<DetailsGroupWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController;
 
   @override
   void initState(BuildContext context) {}
@@ -22,7 +22,6 @@ class ListegroupeModel extends FlutterFlowModel<ListegroupeWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    expandableController.dispose();
   }
 }

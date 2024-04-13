@@ -231,7 +231,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodySmallFamily),
                                     ),
-                                minLines: null,
                                 validator: _model
                                     .emailAddressControllerValidator
                                     .asValidator(context),
@@ -337,7 +336,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodySmallFamily),
                                     ),
-                                minLines: null,
                                 validator: _model.passwordControllerValidator
                                     .asValidator(context),
                               ),

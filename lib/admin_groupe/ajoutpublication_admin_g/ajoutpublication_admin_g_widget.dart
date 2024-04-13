@@ -142,7 +142,6 @@ class _AjoutpublicationAdminGWidgetState
                                         .bodyMediumFamily),
                               ),
                           maxLines: 5,
-                          minLines: null,
                           validator: _model.contenuControllerValidator
                               .asValidator(context),
                         ),

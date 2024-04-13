@@ -124,7 +124,6 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).bodyMediumFamily),
                       ),
-                  minLines: null,
                   validator: _model.nomControllerValidator.asValidator(context),
                 ),
                 Padding(
@@ -183,7 +182,6 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     maxLines: 4,
-                    minLines: null,
                     validator: _model.descriptionControllerValidator
                         .asValidator(context),
                   ),

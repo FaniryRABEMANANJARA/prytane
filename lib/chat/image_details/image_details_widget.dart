@@ -234,7 +234,7 @@ class _ImageDetailsWidgetState extends State<ImageDetailsWidget>
                                   children: [
                                     SelectionArea(
                                         child: AutoSizeText(
-                                      otherUserUsersRecord.displayName,
+                                      otherUserUsersRecord.prenom,
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium

@@ -179,7 +179,6 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).titleSmallFamily),
                         ),
-                    minLines: null,
                     validator: _model.emailAddressControllerValidator
                         .asValidator(context),
                   ),

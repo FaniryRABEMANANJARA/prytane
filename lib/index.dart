@@ -3,8 +3,6 @@ export '/pages/login/login_widget.dart' show LoginWidget;
 export '/pages/change_password/change_password_widget.dart'
     show ChangePasswordWidget;
 export '/pages/inscription/inscription_widget.dart' show InscriptionWidget;
-export '/admin_communautaire/profil_admin_communautairre/profil_admin_communautairre_widget.dart'
-    show ProfilAdminCommunautairreWidget;
 export '/membre_communaitaire/listegroupe/listegroupe_widget.dart'
     show ListegroupeWidget;
 export '/membre_communaitaire/ajoutpublication/ajoutpublication_widget.dart'
@@ -21,8 +19,8 @@ export '/admin_groupe/accueil_group/accueil_group_widget.dart'
     show AccueilGroupWidget;
 export '/admin_groupe/ajoutevenement_group/ajoutevenement_group_widget.dart'
     show AjoutevenementGroupWidget;
-export '/membre_communaitaire/evenement/evenement_widget.dart'
-    show EvenementWidget;
+export '/membre_communaitaire/detail_evenement/detail_evenement_widget.dart'
+    show DetailEvenementWidget;
 export '/membre_communaitaire/liste_evenement/liste_evenement_widget.dart'
     show ListeEvenementWidget;
 export '/admin_groupe/listegroupe_admin/listegroupe_admin_widget.dart'
@@ -35,3 +33,13 @@ export '/chat/chat_2_invite_users/chat2_invite_users_widget.dart'
     show Chat2InviteUsersWidget;
 export '/chat/image_details/image_details_widget.dart' show ImageDetailsWidget;
 export '/membre_communaitaire/accueil/accueil_widget.dart' show AccueilWidget;
+export '/membre_communaitaire/ajoutstory/ajoutstory_widget.dart'
+    show AjoutstoryWidget;
+export '/membre_communaitaire/modifier_profil/modifier_profil_widget.dart'
+    show ModifierProfilWidget;
+export '/admin_communautaire/profil_admin_communautairre/profil_admin_communautairre_widget.dart'
+    show ProfilAdminCommunautairreWidget;
+export '/membre_communaitaire/profil_membre_communautairre/profil_membre_communautairre_widget.dart'
+    show ProfilMembreCommunautairreWidget;
+export '/membre_communaitaire/details_group/details_group_widget.dart'
+    show DetailsGroupWidget;

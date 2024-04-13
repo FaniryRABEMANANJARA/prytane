@@ -544,6 +544,7 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
                                                       .bodyMediumFamily),
                                         ),
                                     maxLines: 12,
+                                    minLines: 1,
                                     cursorColor:
                                         FlutterFlowTheme.of(context).primary,
                                     validator: _model.textControllerValidator

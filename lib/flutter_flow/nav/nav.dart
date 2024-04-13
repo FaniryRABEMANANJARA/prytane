@@ -111,13 +111,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => InscriptionWidget(),
         ),
         FFRoute(
-          name: 'profilAdminCommunautairre',
-          path: '/profilAdminCommunautairre',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profilAdminCommunautairre')
-              : ProfilAdminCommunautairreWidget(),
-        ),
-        FFRoute(
           name: 'Listegroupe',
           path: '/listegroupe',
           builder: (context, params) => params.isEmpty
@@ -160,9 +153,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AjoutevenementGroupWidget(),
         ),
         FFRoute(
-          name: 'Evenement',
-          path: '/evenement',
-          builder: (context, params) => EvenementWidget(),
+          name: 'DetailEvenement',
+          path: '/detailEvenement',
+          asyncParams: {
+            'detailsEvenement':
+                getDoc(['evenements'], EvenementsRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailEvenementWidget(
+            detailsEvenement: params.getParam(
+              'detailsEvenement',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ListeEvenement',
@@ -234,6 +236,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Accueil')
               : AccueilWidget(),
+        ),
+        FFRoute(
+          name: 'Ajoutstory',
+          path: '/ajoutstory',
+          builder: (context, params) => AjoutstoryWidget(),
+        ),
+        FFRoute(
+          name: 'ModifierProfil',
+          path: '/modifierProfil',
+          builder: (context, params) => ModifierProfilWidget(),
+        ),
+        FFRoute(
+          name: 'profilAdminCommunautairre',
+          path: '/profilAdminCommunautairre',
+          builder: (context, params) => ProfilAdminCommunautairreWidget(),
+        ),
+        FFRoute(
+          name: 'profilMembreCommunautairre',
+          path: '/profilMembreCommunautairre',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'profilMembreCommunautairre')
+              : ProfilMembreCommunautairreWidget(),
+        ),
+        FFRoute(
+          name: 'DetailsGroup',
+          path: '/detailsGroup',
+          asyncParams: {
+            'detailsGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsGroupWidget(
+            detailsGroup: params.getParam(
+              'detailsGroup',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

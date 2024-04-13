@@ -169,7 +169,6 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       maxLines: 5,
-                      minLines: null,
                       validator: _model.contenuControllerValidator
                           .asValidator(context),
                     ),

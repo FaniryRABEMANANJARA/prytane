@@ -129,8 +129,8 @@ class _NavBarPageState extends State<NavBarPage> {
       'Accueil': AccueilWidget(),
       'chat_2_main': Chat2MainWidget(),
       'Listegroupe': ListegroupeWidget(),
-      'profilAdminCommunautairre': ProfilAdminCommunautairreWidget(),
       'ListeEvenement': ListeEvenementWidget(),
+      'profilMembreCommunautairre': ProfilMembreCommunautairreWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -174,17 +174,17 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
-              size: 24.0,
+              Icons.event_note,
             ),
-            label: 'Profil',
+            label: 'Evenements',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.event_note,
+              Icons.person,
+              size: 24.0,
             ),
-            label: 'Evenements',
+            label: 'Profil',
             tooltip: '',
           )
         ],

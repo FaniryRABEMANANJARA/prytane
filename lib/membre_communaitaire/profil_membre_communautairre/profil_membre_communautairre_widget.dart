@@ -10,21 +10,21 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'profil_admin_communautairre_model.dart';
-export 'profil_admin_communautairre_model.dart';
+import 'profil_membre_communautairre_model.dart';
+export 'profil_membre_communautairre_model.dart';
 
-class ProfilAdminCommunautairreWidget extends StatefulWidget {
-  const ProfilAdminCommunautairreWidget({super.key});
+class ProfilMembreCommunautairreWidget extends StatefulWidget {
+  const ProfilMembreCommunautairreWidget({super.key});
 
   @override
-  State<ProfilAdminCommunautairreWidget> createState() =>
-      _ProfilAdminCommunautairreWidgetState();
+  State<ProfilMembreCommunautairreWidget> createState() =>
+      _ProfilMembreCommunautairreWidgetState();
 }
 
-class _ProfilAdminCommunautairreWidgetState
-    extends State<ProfilAdminCommunautairreWidget>
+class _ProfilMembreCommunautairreWidgetState
+    extends State<ProfilMembreCommunautairreWidget>
     with TickerProviderStateMixin {
-  late ProfilAdminCommunautairreModel _model;
+  late ProfilMembreCommunautairreModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -74,7 +74,7 @@ class _ProfilAdminCommunautairreWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfilAdminCommunautairreModel());
+    _model = createModel(context, () => ProfilMembreCommunautairreModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -563,78 +563,6 @@ class _ProfilAdminCommunautairreWidgetState
                               Icons.arrow_forward_ios,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 18.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 3.0,
-                        color: Color(0x33000000),
-                        offset: Offset(
-                          0.0,
-                          1.0,
-                        ),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(8.0),
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Icon(
-                          Icons.notifications_none,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Story ',
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelLargeFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelLargeFamily),
-                                ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(0.9, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed('Ajoutstory');
-                              },
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 18.0,
-                              ),
                             ),
                           ),
                         ),
