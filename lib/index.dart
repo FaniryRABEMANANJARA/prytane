@@ -43,3 +43,5 @@ export '/membre_communaitaire/profil_membre_communautairre/profil_membre_communa
     show ProfilMembreCommunautairreWidget;
 export '/membre_communaitaire/details_group/details_group_widget.dart'
     show DetailsGroupWidget;
+export '/membre_communaitaire/liste_video_call/liste_video_call_widget.dart'
+    show ListeVideoCallWidget;

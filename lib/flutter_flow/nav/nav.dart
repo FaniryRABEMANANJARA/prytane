@@ -271,6 +271,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'ListeVideoCall',
+          path: '/listeVideoCall',
+          builder: (context, params) => ListeVideoCallWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

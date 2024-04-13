@@ -496,6 +496,20 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
                             ],
                           ),
                         ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('ListeVideoCall');
+                          },
+                          child: Icon(
+                            Icons.video_call,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 30.0,
+                          ),
+                        ),
                       ],
                     );
                   }
