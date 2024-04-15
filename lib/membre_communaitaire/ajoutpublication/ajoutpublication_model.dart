@@ -26,11 +26,8 @@ class AjoutpublicationModel extends FlutterFlowModel<AjoutpublicationWidget> {
   TextEditingController? contenuController;
   String? Function(BuildContext, String?)? contenuControllerValidator;
   // State field(s) for type widget.
-  String? typeValue1;
-  FormFieldController<String>? typeValueController1;
-  // State field(s) for type widget.
-  String? typeValue2;
-  FormFieldController<String>? typeValueController2;
+  String? typeValue;
+  FormFieldController<String>? typeValueController;
   DateTime? datePicked;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =

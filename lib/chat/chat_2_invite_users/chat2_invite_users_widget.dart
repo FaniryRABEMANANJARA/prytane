@@ -82,7 +82,7 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Invitez vos amis',
+                'Messages groupés',
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily:
                           FlutterFlowTheme.of(context).headlineSmallFamily,
@@ -95,12 +95,14 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                 child: Text(
                   'Sélectionnez les utilisateurs ci-dessous pour démarrer une discussion.',
+                  maxLines: 3,
                   style: FlutterFlowTheme.of(context).labelSmall.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).labelSmallFamily,
                         letterSpacing: 0.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).labelSmallFamily),
+                        lineHeight: 1.0,
                       ),
                 ),
               ),

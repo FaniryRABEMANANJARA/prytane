@@ -276,6 +276,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ListeVideoCall',
           path: '/listeVideoCall',
           builder: (context, params) => ListeVideoCallWidget(),
+        ),
+        FFRoute(
+          name: 'LeverdeDons',
+          path: '/leverdeDons',
+          builder: (context, params) => LeverdeDonsWidget(),
+        ),
+        FFRoute(
+          name: 'adhesionGroup',
+          path: '/adhesionGroup',
+          asyncParams: {
+            'adhesionGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
+          },
+          builder: (context, params) => AdhesionGroupWidget(
+            adhesionGroup: params.getParam(
+              'adhesionGroup',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

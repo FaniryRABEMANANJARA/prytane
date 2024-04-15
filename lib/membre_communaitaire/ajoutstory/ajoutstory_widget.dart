@@ -190,7 +190,7 @@ class _AjoutstoryWidgetState extends State<AjoutstoryWidget> {
                                   24.0, 0.0, 24.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).accent1,
+                              color: FlutterFlowTheme.of(context).secondaryText,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
@@ -222,7 +222,7 @@ class _AjoutstoryWidgetState extends State<AjoutstoryWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Creation Date',
+                            'Création ',
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(

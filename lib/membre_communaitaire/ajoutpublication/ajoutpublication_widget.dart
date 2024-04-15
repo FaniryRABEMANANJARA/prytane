@@ -207,91 +207,11 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                 ),
                               ),
                               child: FlutterFlowDropDown<String>(
-                                controller: _model.typeValueController1 ??=
+                                controller: _model.typeValueController ??=
                                     FormFieldController<String>(null),
                                 options: ['Image', 'Vidéo', 'Text'],
                                 onChanged: (val) =>
-                                    setState(() => _model.typeValue1 = val),
-                                width: 300.0,
-                                height: 56.0,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      fontSize: 10.0,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                                hintText: 'Veuillez sélectionner...',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isOverButton: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Rôle',
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.0, 16.0, 8.0, 16.0),
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.44,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: FlutterFlowDropDown<String>(
-                                controller: _model.typeValueController2 ??=
-                                    FormFieldController<String>(null),
-                                options: ['Administrateur', 'Membre'],
-                                onChanged: (val) =>
-                                    setState(() => _model.typeValue2 = val),
+                                    setState(() => _model.typeValue = val),
                                 width: 300.0,
                                 height: 56.0,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -641,12 +561,12 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                           .doc()
                           .set(createPublicationsRecordData(
                             content: _model.contenuController.text,
-                            type: _model.typeValue1,
+                            type: _model.typeValue,
                             userId:
                                 valueOrDefault(currentUserDocument?.nom, ''),
                             date: _model.datePicked,
                             fichier: _model.uploadedFileUrl,
-                            role: _model.typeValue2,
+                            role: 'membre',
                           ));
 
                       context.pushNamed('Accueil');

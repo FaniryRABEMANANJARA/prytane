@@ -45,3 +45,7 @@ export '/membre_communaitaire/details_group/details_group_widget.dart'
     show DetailsGroupWidget;
 export '/membre_communaitaire/liste_video_call/liste_video_call_widget.dart'
     show ListeVideoCallWidget;
+export '/membre_communaitaire/leverde_dons/leverde_dons_widget.dart'
+    show LeverdeDonsWidget;
+export '/membre_communaitaire/adhesion_group/adhesion_group_widget.dart'
+    show AdhesionGroupWidget;

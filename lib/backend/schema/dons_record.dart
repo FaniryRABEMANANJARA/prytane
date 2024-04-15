@@ -31,10 +31,34 @@ class DonsRecord extends FirestoreRecord {
   DateTime? get dateHeure => _dateHeure;
   bool hasDateHeure() => _dateHeure != null;
 
+  // "nomCarte" field.
+  String? _nomCarte;
+  String get nomCarte => _nomCarte ?? '';
+  bool hasNomCarte() => _nomCarte != null;
+
+  // "zipCode" field.
+  String? _zipCode;
+  String get zipCode => _zipCode ?? '';
+  bool hasZipCode() => _zipCode != null;
+
+  // "numeroCarte" field.
+  String? _numeroCarte;
+  String get numeroCarte => _numeroCarte ?? '';
+  bool hasNumeroCarte() => _numeroCarte != null;
+
+  // "proprioCarte" field.
+  String? _proprioCarte;
+  String get proprioCarte => _proprioCarte ?? '';
+  bool hasProprioCarte() => _proprioCarte != null;
+
   void _initializeFields() {
     _montant = castToType<double>(snapshotData['montant']);
     _userId = snapshotData['userId'] as String?;
     _dateHeure = snapshotData['dateHeure'] as DateTime?;
+    _nomCarte = snapshotData['nomCarte'] as String?;
+    _zipCode = snapshotData['zipCode'] as String?;
+    _numeroCarte = snapshotData['numeroCarte'] as String?;
+    _proprioCarte = snapshotData['proprioCarte'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -74,12 +98,20 @@ Map<String, dynamic> createDonsRecordData({
   double? montant,
   String? userId,
   DateTime? dateHeure,
+  String? nomCarte,
+  String? zipCode,
+  String? numeroCarte,
+  String? proprioCarte,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'montant': montant,
       'userId': userId,
       'dateHeure': dateHeure,
+      'nomCarte': nomCarte,
+      'zipCode': zipCode,
+      'numeroCarte': numeroCarte,
+      'proprioCarte': proprioCarte,
     }.withoutNulls,
   );
 
@@ -93,12 +125,23 @@ class DonsRecordDocumentEquality implements Equality<DonsRecord> {
   bool equals(DonsRecord? e1, DonsRecord? e2) {
     return e1?.montant == e2?.montant &&
         e1?.userId == e2?.userId &&
-        e1?.dateHeure == e2?.dateHeure;
+        e1?.dateHeure == e2?.dateHeure &&
+        e1?.nomCarte == e2?.nomCarte &&
+        e1?.zipCode == e2?.zipCode &&
+        e1?.numeroCarte == e2?.numeroCarte &&
+        e1?.proprioCarte == e2?.proprioCarte;
   }
 
   @override
-  int hash(DonsRecord? e) =>
-      const ListEquality().hash([e?.montant, e?.userId, e?.dateHeure]);
+  int hash(DonsRecord? e) => const ListEquality().hash([
+        e?.montant,
+        e?.userId,
+        e?.dateHeure,
+        e?.nomCarte,
+        e?.zipCode,
+        e?.numeroCarte,
+        e?.proprioCarte
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is DonsRecord;
