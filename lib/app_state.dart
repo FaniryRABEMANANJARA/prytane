@@ -31,6 +31,10 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _zipCode = prefs.getString('ff_zipCode') ?? _zipCode;
     });
+    _safeInit(() {
+      _recentSearches =
+          prefs.getStringList('ff_recentSearches') ?? _recentSearches;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -66,6 +70,53 @@ class FFAppState extends ChangeNotifier {
   set zipCode(String _value) {
     _zipCode = _value;
     prefs.setString('ff_zipCode', _value);
+  }
+
+  bool _searchActive = false;
+  bool get searchActive => _searchActive;
+  set searchActive(bool _value) {
+    _searchActive = _value;
+  }
+
+  bool _searchActive2 = false;
+  bool get searchActive2 => _searchActive2;
+  set searchActive2(bool _value) {
+    _searchActive2 = _value;
+  }
+
+  List<String> _recentSearches = [];
+  List<String> get recentSearches => _recentSearches;
+  set recentSearches(List<String> _value) {
+    _recentSearches = _value;
+    prefs.setStringList('ff_recentSearches', _value);
+  }
+
+  void addToRecentSearches(String _value) {
+    _recentSearches.add(_value);
+    prefs.setStringList('ff_recentSearches', _recentSearches);
+  }
+
+  void removeFromRecentSearches(String _value) {
+    _recentSearches.remove(_value);
+    prefs.setStringList('ff_recentSearches', _recentSearches);
+  }
+
+  void removeAtIndexFromRecentSearches(int _index) {
+    _recentSearches.removeAt(_index);
+    prefs.setStringList('ff_recentSearches', _recentSearches);
+  }
+
+  void updateRecentSearchesAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _recentSearches[_index] = updateFn(_recentSearches[_index]);
+    prefs.setStringList('ff_recentSearches', _recentSearches);
+  }
+
+  void insertAtIndexInRecentSearches(int _index, String _value) {
+    _recentSearches.insert(_index, _value);
+    prefs.setStringList('ff_recentSearches', _recentSearches);
   }
 
   final _userDocQueryManager = FutureRequestManager<UsersRecord>();

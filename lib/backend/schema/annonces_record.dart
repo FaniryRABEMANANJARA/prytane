@@ -16,43 +16,49 @@ class AnnoncesRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "contenu" field.
-  String? _contenu;
-  String get contenu => _contenu ?? '';
-  bool hasContenu() => _contenu != null;
-
   // "type" field.
   String? _type;
   String get type => _type ?? '';
   bool hasType() => _type != null;
 
-  // "userId" field.
-  String? _userId;
-  String get userId => _userId ?? '';
-  bool hasUserId() => _userId != null;
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
 
-  // "createdAt" field.
-  DateTime? _createdAt;
-  DateTime? get createdAt => _createdAt;
-  bool hasCreatedAt() => _createdAt != null;
+  // "auteur" field.
+  String? _auteur;
+  String get auteur => _auteur ?? '';
+  bool hasAuteur() => _auteur != null;
 
-  // "likes" field.
-  int? _likes;
-  int get likes => _likes ?? 0;
-  bool hasLikes() => _likes != null;
+  // "date_creation" field.
+  String? _dateCreation;
+  String get dateCreation => _dateCreation ?? '';
+  bool hasDateCreation() => _dateCreation != null;
 
-  // "comments" field.
-  List<String>? _comments;
-  List<String> get comments => _comments ?? const [];
-  bool hasComments() => _comments != null;
+  // "localisation" field.
+  String? _localisation;
+  String get localisation => _localisation ?? '';
+  bool hasLocalisation() => _localisation != null;
+
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
+  // "titre" field.
+  String? _titre;
+  String get titre => _titre ?? '';
+  bool hasTitre() => _titre != null;
 
   void _initializeFields() {
-    _contenu = snapshotData['contenu'] as String?;
     _type = snapshotData['type'] as String?;
-    _userId = snapshotData['userId'] as String?;
-    _createdAt = snapshotData['createdAt'] as DateTime?;
-    _likes = castToType<int>(snapshotData['likes']);
-    _comments = getDataList(snapshotData['comments']);
+    _description = snapshotData['description'] as String?;
+    _auteur = snapshotData['auteur'] as String?;
+    _dateCreation = snapshotData['date_creation'] as String?;
+    _localisation = snapshotData['localisation'] as String?;
+    _image = snapshotData['image'] as String?;
+    _titre = snapshotData['titre'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -90,19 +96,23 @@ class AnnoncesRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createAnnoncesRecordData({
-  String? contenu,
   String? type,
-  String? userId,
-  DateTime? createdAt,
-  int? likes,
+  String? description,
+  String? auteur,
+  String? dateCreation,
+  String? localisation,
+  String? image,
+  String? titre,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'contenu': contenu,
       'type': type,
-      'userId': userId,
-      'createdAt': createdAt,
-      'likes': likes,
+      'description': description,
+      'auteur': auteur,
+      'date_creation': dateCreation,
+      'localisation': localisation,
+      'image': image,
+      'titre': titre,
     }.withoutNulls,
   );
 
@@ -114,18 +124,25 @@ class AnnoncesRecordDocumentEquality implements Equality<AnnoncesRecord> {
 
   @override
   bool equals(AnnoncesRecord? e1, AnnoncesRecord? e2) {
-    const listEquality = ListEquality();
-    return e1?.contenu == e2?.contenu &&
-        e1?.type == e2?.type &&
-        e1?.userId == e2?.userId &&
-        e1?.createdAt == e2?.createdAt &&
-        e1?.likes == e2?.likes &&
-        listEquality.equals(e1?.comments, e2?.comments);
+    return e1?.type == e2?.type &&
+        e1?.description == e2?.description &&
+        e1?.auteur == e2?.auteur &&
+        e1?.dateCreation == e2?.dateCreation &&
+        e1?.localisation == e2?.localisation &&
+        e1?.image == e2?.image &&
+        e1?.titre == e2?.titre;
   }
 
   @override
-  int hash(AnnoncesRecord? e) => const ListEquality().hash(
-      [e?.contenu, e?.type, e?.userId, e?.createdAt, e?.likes, e?.comments]);
+  int hash(AnnoncesRecord? e) => const ListEquality().hash([
+        e?.type,
+        e?.description,
+        e?.auteur,
+        e?.dateCreation,
+        e?.localisation,
+        e?.image,
+        e?.titre
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is AnnoncesRecord;

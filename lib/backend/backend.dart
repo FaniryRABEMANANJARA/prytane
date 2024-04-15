@@ -18,7 +18,7 @@ import 'schema/results_record.dart';
 import 'schema/dons_record.dart';
 import 'schema/story_record.dart';
 import 'schema/membres_groupe_record.dart';
-import 'schema/commentaire_record.dart';
+import 'schema/comments_record.dart';
 import 'dart:async';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -41,7 +41,7 @@ export 'schema/results_record.dart';
 export 'schema/dons_record.dart';
 export 'schema/story_record.dart';
 export 'schema/membres_groupe_record.dart';
-export 'schema/commentaire_record.dart';
+export 'schema/comments_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -1065,53 +1065,57 @@ Future<FFFirestorePage<MembresGroupeRecord>> queryMembresGroupeRecordPage({
       return page;
     });
 
-/// Functions to query CommentaireRecords (as a Stream and as a Future).
-Future<int> queryCommentaireRecordCount({
+/// Functions to query CommentsRecords (as a Stream and as a Future).
+Future<int> queryCommentsRecordCount({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      CommentaireRecord.collection,
+      CommentsRecord.collection(parent),
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<CommentaireRecord>> queryCommentaireRecord({
+Stream<List<CommentsRecord>> queryCommentsRecord({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      CommentaireRecord.collection,
-      CommentaireRecord.fromSnapshot,
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<CommentaireRecord>> queryCommentaireRecordOnce({
+Future<List<CommentsRecord>> queryCommentsRecordOnce({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      CommentaireRecord.collection,
-      CommentaireRecord.fromSnapshot,
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
-Future<FFFirestorePage<CommentaireRecord>> queryCommentaireRecordPage({
+Future<FFFirestorePage<CommentsRecord>> queryCommentsRecordPage({
+  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   DocumentSnapshot? nextPageMarker,
   required int pageSize,
   required bool isStream,
-  required PagingController<DocumentSnapshot?, CommentaireRecord> controller,
+  required PagingController<DocumentSnapshot?, CommentsRecord> controller,
   List<StreamSubscription?>? streamSubscriptions,
 }) =>
     queryCollectionPage(
-      CommentaireRecord.collection,
-      CommentaireRecord.fromSnapshot,
+      CommentsRecord.collection(parent),
+      CommentsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
@@ -1123,7 +1127,7 @@ Future<FFFirestorePage<CommentaireRecord>> queryCommentaireRecordPage({
       );
       if (isStream) {
         final streamSubscription =
-            (page.dataStream)?.listen((List<CommentaireRecord> data) {
+            (page.dataStream)?.listen((List<CommentsRecord> data) {
           data.forEach((item) {
             final itemIndexes = controller.itemList!
                 .asMap()

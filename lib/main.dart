@@ -16,6 +16,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
+import '/backend/firebase_dynamic_links/firebase_dynamic_links.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
@@ -98,6 +100,10 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: _themeMode,
       routerConfig: _router,
+      builder: (_, child) => DynamicLinksHandler(
+        router: _router,
+        child: child!,
+      ),
     );
   }
 }
@@ -128,6 +134,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Accueil': AccueilWidget(),
+      'Listannonces': ListannoncesWidget(),
       'chat_2_main': Chat2MainWidget(),
       'Listegroupe': ListegroupeWidget(),
       'ListeEvenement': ListeEvenementWidget(),
@@ -155,6 +162,14 @@ class _NavBarPageState extends State<NavBarPage> {
               FontAwesomeIcons.solidNewspaper,
             ),
             label: 'Actualités',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.ad,
+              size: 24.0,
+            ),
+            label: 'Annonces',
             tooltip: '',
           ),
           BottomNavigationBarItem(

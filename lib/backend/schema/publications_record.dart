@@ -26,20 +26,10 @@ class PublicationsRecord extends FirestoreRecord {
   String get type => _type ?? '';
   bool hasType() => _type != null;
 
-  // "userId" field.
-  String? _userId;
-  String get userId => _userId ?? '';
-  bool hasUserId() => _userId != null;
-
   // "date" field.
   DateTime? _date;
   DateTime? get date => _date;
   bool hasDate() => _date != null;
-
-  // "likes" field.
-  int? _likes;
-  int get likes => _likes ?? 0;
-  bool hasLikes() => _likes != null;
 
   // "comments" field.
   List<String>? _comments;
@@ -56,15 +46,25 @@ class PublicationsRecord extends FirestoreRecord {
   String get role => _role ?? '';
   bool hasRole() => _role != null;
 
+  // "userID" field.
+  String? _userID;
+  String get userID => _userID ?? '';
+  bool hasUserID() => _userID != null;
+
+  // "liked_by" field.
+  List<DocumentReference>? _likedBy;
+  List<DocumentReference> get likedBy => _likedBy ?? const [];
+  bool hasLikedBy() => _likedBy != null;
+
   void _initializeFields() {
     _content = snapshotData['content'] as String?;
     _type = snapshotData['type'] as String?;
-    _userId = snapshotData['userId'] as String?;
     _date = snapshotData['date'] as DateTime?;
-    _likes = castToType<int>(snapshotData['likes']);
     _comments = getDataList(snapshotData['comments']);
     _fichier = snapshotData['fichier'] as String?;
     _role = snapshotData['role'] as String?;
+    _userID = snapshotData['userID'] as String?;
+    _likedBy = getDataList(snapshotData['liked_by']);
   }
 
   static CollectionReference get collection =>
@@ -104,21 +104,19 @@ class PublicationsRecord extends FirestoreRecord {
 Map<String, dynamic> createPublicationsRecordData({
   String? content,
   String? type,
-  String? userId,
   DateTime? date,
-  int? likes,
   String? fichier,
   String? role,
+  String? userID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'content': content,
       'type': type,
-      'userId': userId,
       'date': date,
-      'likes': likes,
       'fichier': fichier,
       'role': role,
+      'userID': userID,
     }.withoutNulls,
   );
 
@@ -134,24 +132,24 @@ class PublicationsRecordDocumentEquality
     const listEquality = ListEquality();
     return e1?.content == e2?.content &&
         e1?.type == e2?.type &&
-        e1?.userId == e2?.userId &&
         e1?.date == e2?.date &&
-        e1?.likes == e2?.likes &&
         listEquality.equals(e1?.comments, e2?.comments) &&
         e1?.fichier == e2?.fichier &&
-        e1?.role == e2?.role;
+        e1?.role == e2?.role &&
+        e1?.userID == e2?.userID &&
+        listEquality.equals(e1?.likedBy, e2?.likedBy);
   }
 
   @override
   int hash(PublicationsRecord? e) => const ListEquality().hash([
         e?.content,
         e?.type,
-        e?.userId,
         e?.date,
-        e?.likes,
         e?.comments,
         e?.fichier,
-        e?.role
+        e?.role,
+        e?.userID,
+        e?.likedBy
       ]);
 
   @override

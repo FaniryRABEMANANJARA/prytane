@@ -295,8 +295,8 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
                                   borderRadius: BorderRadius.circular(12.0),
                                   child: Image.network(
                                     'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHVzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60',
-                                    width: 80.0,
-                                    height: 80.0,
+                                    width: 50.0,
+                                    height: 50.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -332,8 +332,8 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
                                 'https://picsum.photos/seed/896/600',
-                                width: 80.0,
-                                height: 80.0,
+                                width: 50.0,
+                                height: 50.0,
                                 fit: BoxFit.cover,
                               ),
                             ),

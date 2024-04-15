@@ -562,11 +562,11 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                           .set(createPublicationsRecordData(
                             content: _model.contenuController.text,
                             type: _model.typeValue,
-                            userId:
-                                valueOrDefault(currentUserDocument?.nom, ''),
                             date: _model.datePicked,
                             fichier: _model.uploadedFileUrl,
                             role: 'membre',
+                            userID:
+                                valueOrDefault(currentUserDocument?.prenom, ''),
                           ));
 
                       context.pushNamed('Accueil');

@@ -29,27 +29,7 @@ class _ProfilMembreCommunautairreWidgetState
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = {
-    'buttonOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 400.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 60.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'buttonOnPageLoadAnimation2': AnimationInfo(
+    'buttonOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         VisibilityEffect(duration: 400.ms),
@@ -737,7 +717,7 @@ class _ProfilMembreCommunautairreWidgetState
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          color: FlutterFlowTheme.of(context).error,
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -757,54 +737,7 @@ class _ProfilMembreCommunautairreWidgetState
                           borderRadius: BorderRadius.circular(38.0),
                         ),
                       ).animateOnPageLoad(
-                          animationsMap['buttonOnPageLoadAnimation1']!),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          GoRouter.of(context).prepareAuthEvent();
-                          await authManager.signOut();
-                          GoRouter.of(context).clearRedirectLocation();
-
-                          context.goNamedAuth('login', context.mounted);
-                        },
-                        text: 'Parametres',
-                        icon: Icon(
-                          Icons.settings_sharp,
-                          size: 15.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: 150.0,
-                          height: 44.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).accent4,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(38.0),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['buttonOnPageLoadAnimation2']!),
+                          animationsMap['buttonOnPageLoadAnimation']!),
                     ),
                   ),
                 ],

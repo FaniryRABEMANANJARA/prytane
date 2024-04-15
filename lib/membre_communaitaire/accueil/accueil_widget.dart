@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/membre_communaitaire/commentaire/commentaire_widget.dart';
@@ -314,13 +315,12 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              formatNumber(
-                                                columnPublicationsRecord.likes,
-                                                formatType: FormatType.compact,
-                                              ),
+                                              columnPublicationsRecord
+                                                  .likedBy.length
+                                                  .toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -342,6 +342,48 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                         context)
                                                                     .bodyMediumFamily),
                                                       ),
+                                            ),
+                                            ToggleIcon(
+                                              onPressed: () async {
+                                                final likedByElement =
+                                                    currentUserReference;
+                                                final likedByUpdate =
+                                                    columnPublicationsRecord
+                                                            .likedBy
+                                                            .contains(
+                                                                likedByElement)
+                                                        ? FieldValue
+                                                            .arrayRemove([
+                                                            likedByElement
+                                                          ])
+                                                        : FieldValue.arrayUnion(
+                                                            [likedByElement]);
+                                                await columnPublicationsRecord
+                                                    .reference
+                                                    .update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'liked_by': likedByUpdate,
+                                                    },
+                                                  ),
+                                                });
+                                              },
+                                              value: columnPublicationsRecord
+                                                  .likedBy
+                                                  .contains(
+                                                      currentUserReference),
+                                              onIcon: Icon(
+                                                Icons.check_box,
+                                                color: Color(0xFF0A1DF9),
+                                                size: 25.0,
+                                              ),
+                                              offIcon: Icon(
+                                                Icons.thumb_up_off_alt,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 25.0,
+                                              ),
                                             ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -386,49 +428,6 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                     .labelSmallFamily),
                                                       ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          6.0, 0.0, 6.0, 0.0),
-                                                  child: Text(
-                                                    '•',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelSmallFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelSmallFamily),
-                                                        ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '10 partages',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelSmallFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmallFamily),
-                                                      ),
-                                                ),
                                               ],
                                             ),
                                           ],
@@ -439,46 +438,6 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                         thickness: 1.0,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Icon(
-                                                  Icons.thumb_up_off_alt,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 18.0,
-                                                ),
-                                                Text(
-                                                  'J\'aime',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelSmallFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmallFamily),
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                       CommentaireWidget(
                                         key: Key(

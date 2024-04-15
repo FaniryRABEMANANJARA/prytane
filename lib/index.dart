@@ -49,3 +49,11 @@ export '/membre_communaitaire/leverde_dons/leverde_dons_widget.dart'
     show LeverdeDonsWidget;
 export '/membre_communaitaire/adhesion_group/adhesion_group_widget.dart'
     show AdhesionGroupWidget;
+export '/membre_communaitaire/ajout_annonce/ajout_annonce_widget.dart'
+    show AjoutAnnonceWidget;
+export '/membre_communaitaire/listannonces/listannonces_widget.dart'
+    show ListannoncesWidget;
+export '/membre_communaitaire/details_annonce/details_annonce_widget.dart'
+    show DetailsAnnonceWidget;
+export '/admin_groupe/details_group_admin/details_group_admin_widget.dart'
+    show DetailsGroupAdminWidget;

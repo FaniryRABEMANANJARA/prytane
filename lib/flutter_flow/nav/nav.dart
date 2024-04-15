@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
+export '/backend/firebase_dynamic_links/firebase_dynamic_links.dart'
+    show generateCurrentPageLink;
 
 const kTransitionInfoKey = '__transition_info__';
 
@@ -78,8 +81,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+      errorBuilder: (context, state) => _RouteErrorBuilder(
+        state: state,
+        child: appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+      ),
       routes: [
         FFRoute(
           name: '_initialize',
@@ -283,7 +288,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LeverdeDonsWidget(),
         ),
         FFRoute(
-          name: 'adhesionGroup',
+          name: 'AdhesionGroup',
           path: '/adhesionGroup',
           asyncParams: {
             'adhesionGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
@@ -291,6 +296,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AdhesionGroupWidget(
             adhesionGroup: params.getParam(
               'adhesionGroup',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AjoutAnnonce',
+          path: '/ajoutAnnonce',
+          builder: (context, params) => AjoutAnnonceWidget(),
+        ),
+        FFRoute(
+          name: 'Listannonces',
+          path: '/listannonces',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Listannonces')
+              : ListannoncesWidget(),
+        ),
+        FFRoute(
+          name: 'DetailsAnnonce',
+          path: '/detailsAnnonce',
+          asyncParams: {
+            'detailAnnonce': getDoc(['annonces'], AnnoncesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsAnnonceWidget(
+            detailAnnonce: params.getParam(
+              'detailAnnonce',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'DetailsGroup_Admin',
+          path: '/detailsGroupAdmin',
+          asyncParams: {
+            'detailGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsGroupAdminWidget(
+            detailGroup: params.getParam(
+              'detailGroup',
               ParamType.Document,
             ),
           ),
@@ -533,6 +576,35 @@ class TransitionInfo {
   final Alignment? alignment;
 
   static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+}
+
+class _RouteErrorBuilder extends StatefulWidget {
+  const _RouteErrorBuilder({
+    Key? key,
+    required this.state,
+    required this.child,
+  }) : super(key: key);
+
+  final GoRouterState state;
+  final Widget child;
+
+  @override
+  State<_RouteErrorBuilder> createState() => _RouteErrorBuilderState();
+}
+
+class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
+  @override
+  void initState() {
+    super.initState();
+    // Handle erroneous links from Firebase Dynamic Links.
+    if (widget.state.location.startsWith('/link') &&
+        widget.state.location.contains('request_ip_version')) {
+      SchedulerBinding.instance.addPostFrameCallback((_) => context.go('/'));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
 
 class RootPageContext {

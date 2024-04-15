@@ -562,9 +562,10 @@ class _AjoutpublicationAdminCWidgetState
                           .set(createPublicationsRecordData(
                             content: _model.contenuController.text,
                             type: _model.typeValue,
-                            userId: currentUserReference?.id,
                             date: _model.datePicked,
                             fichier: _model.uploadedFileUrl,
+                            userID:
+                                valueOrDefault(currentUserDocument?.prenom, ''),
                           ));
                     },
                     text: 'Publier',
