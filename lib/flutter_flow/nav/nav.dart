@@ -128,36 +128,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AjoutpublicationWidget(),
         ),
         FFRoute(
-          name: 'Ajoutevenement',
-          path: '/ajoutevenement',
-          builder: (context, params) => AjoutevenementWidget(),
-        ),
-        FFRoute(
-          name: 'Ajoutpublication_AdminC',
-          path: '/ajoutpublicationAdminC',
-          builder: (context, params) => AjoutpublicationAdminCWidget(),
-        ),
-        FFRoute(
-          name: 'Ajoutpublication_AdminG',
-          path: '/ajoutpublicationAdminG',
-          builder: (context, params) => AjoutpublicationAdminGWidget(),
-        ),
-        FFRoute(
-          name: 'AjoutGroup',
-          path: '/ajoutGroup',
-          builder: (context, params) => AjoutGroupWidget(),
-        ),
-        FFRoute(
-          name: 'AccueilGroup',
-          path: '/accueilGroup',
-          builder: (context, params) => AccueilGroupWidget(),
-        ),
-        FFRoute(
-          name: 'AjoutevenementGroup',
-          path: '/ajoutevenementGroup',
-          builder: (context, params) => AjoutevenementGroupWidget(),
-        ),
-        FFRoute(
           name: 'DetailEvenement',
           path: '/detailEvenement',
           asyncParams: {
@@ -177,16 +147,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'ListeEvenement')
               : ListeEvenementWidget(),
-        ),
-        FFRoute(
-          name: 'ListegroupeAdmin',
-          path: '/listegroupeAdmin',
-          builder: (context, params) => ListegroupeAdminWidget(),
-        ),
-        FFRoute(
-          name: 'ListeEvenementCommunautaire',
-          path: '/listeEvenementCommunautaire',
-          builder: (context, params) => ListeEvenementCommunautaireWidget(),
         ),
         FFRoute(
           name: 'chat_2_Details',
@@ -253,11 +213,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ModifierProfilWidget(),
         ),
         FFRoute(
-          name: 'profilAdminCommunautairre',
-          path: '/profilAdminCommunautairre',
-          builder: (context, params) => ProfilAdminCommunautairreWidget(),
-        ),
-        FFRoute(
           name: 'profilMembreCommunautairre',
           path: '/profilMembreCommunautairre',
           builder: (context, params) => params.isEmpty
@@ -321,19 +276,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DetailsAnnonceWidget(
             detailAnnonce: params.getParam(
               'detailAnnonce',
-              ParamType.Document,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'DetailsGroup_Admin',
-          path: '/detailsGroupAdmin',
-          asyncParams: {
-            'detailGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
-          },
-          builder: (context, params) => DetailsGroupAdminWidget(
-            detailGroup: params.getParam(
-              'detailGroup',
               ParamType.Document,
             ),
           ),
@@ -414,7 +356,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -507,7 +449,7 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
             return '/login';
           }
           return null;
@@ -597,8 +539,8 @@ class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
   void initState() {
     super.initState();
     // Handle erroneous links from Firebase Dynamic Links.
-    if (widget.state.location.startsWith('/link') &&
-        widget.state.location.contains('request_ip_version')) {
+    if (widget.state.uri.toString().startsWith('/link') &&
+        widget.state.uri.toString().contains('request_ip_version')) {
       SchedulerBinding.instance.addPostFrameCallback((_) => context.go('/'));
     }
   }
@@ -615,7 +557,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;

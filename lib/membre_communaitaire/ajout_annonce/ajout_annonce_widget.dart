@@ -33,102 +33,103 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => AjoutAnnonceModel());
 
-    _model.titreController ??= TextEditingController();
+    _model.titreTextController ??= TextEditingController();
     _model.titreFocusNode ??= FocusNode();
 
-    _model.auteurController ??= TextEditingController();
+    _model.auteurTextController ??= TextEditingController();
     _model.auteurFocusNode ??= FocusNode();
 
-    _model.descriptionController ??= TextEditingController();
+    _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
 
-    _model.localisationController ??= TextEditingController();
+    _model.localisationTextController ??= TextEditingController();
     _model.localisationFocusNode ??= FocusNode();
 
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -211,7 +212,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       TextFormField(
-                        controller: _model.titreController,
+                        controller: _model.titreTextController,
                         focusNode: _model.titreFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -282,11 +283,11 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                           .headlineSmallFamily),
                                 ),
                         cursorColor: FlutterFlowTheme.of(context).primary,
-                        validator: _model.titreControllerValidator
+                        validator: _model.titreTextControllerValidator
                             .asValidator(context),
                       ),
                       TextFormField(
-                        controller: _model.auteurController,
+                        controller: _model.auteurTextController,
                         focusNode: _model.auteurFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -358,11 +359,11 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                           .headlineSmallFamily),
                                 ),
                         cursorColor: FlutterFlowTheme.of(context).primary,
-                        validator: _model.auteurControllerValidator
+                        validator: _model.auteurTextControllerValidator
                             .asValidator(context),
                       ),
                       TextFormField(
-                        controller: _model.descriptionController,
+                        controller: _model.descriptionTextController,
                         focusNode: _model.descriptionFocusNode,
                         autofocus: true,
                         obscureText: false,
@@ -430,7 +431,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                         maxLines: 16,
                         minLines: 6,
                         cursorColor: FlutterFlowTheme.of(context).primary,
-                        validator: _model.descriptionControllerValidator
+                        validator: _model.descriptionTextControllerValidator
                             .asValidator(context),
                       ),
                     ]
@@ -895,7 +896,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                           8.0, 0.0, 8.0, 0.0),
                                       child: TextFormField(
                                         controller:
-                                            _model.localisationController,
+                                            _model.localisationTextController,
                                         focusNode: _model.localisationFocusNode,
                                         autofocus: true,
                                         obscureText: false,
@@ -988,7 +989,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                                           .bodyMediumFamily),
                                             ),
                                         validator: _model
-                                            .localisationControllerValidator
+                                            .localisationTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -1024,13 +1025,15 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                             .doc()
                             .set(createAnnoncesRecordData(
                               type: _model.typeValue,
-                              description: _model.descriptionController.text,
-                              auteur: _model.titreController.text,
+                              description:
+                                  _model.descriptionTextController.text,
+                              auteur: _model.titreTextController.text,
                               dateCreation: dateTimeFormat(
                                   'MMMMEEEEd', _model.datePicked),
-                              localisation: _model.localisationController.text,
+                              localisation:
+                                  _model.localisationTextController.text,
                               image: _model.uploadedFileUrl,
-                              titre: _model.titreController.text,
+                              titre: _model.titreTextController.text,
                             ));
                       },
                       text: 'Ajouter',

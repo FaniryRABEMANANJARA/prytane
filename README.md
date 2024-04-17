@@ -1,4 +1,4 @@
-# Prytane
+# Prytane-Membre
 
 A new Flutter project.
 

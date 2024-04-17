@@ -19,9 +19,9 @@ class AdhesionGroupModel extends FlutterFlowModel<AdhesionGroupWidget> {
   final formKey = GlobalKey<FormState>();
   // State field(s) for fullName widget.
   FocusNode? fullNameFocusNode;
-  TextEditingController? fullNameController;
-  String? Function(BuildContext, String?)? fullNameControllerValidator;
-  String? _fullNameControllerValidator(BuildContext context, String? val) {
+  TextEditingController? fullNameTextController;
+  String? Function(BuildContext, String?)? fullNameTextControllerValidator;
+  String? _fullNameTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Please enter the patients full name.';
     }
@@ -31,9 +31,9 @@ class AdhesionGroupModel extends FlutterFlowModel<AdhesionGroupWidget> {
 
   // State field(s) for age widget.
   FocusNode? ageFocusNode;
-  TextEditingController? ageController;
-  String? Function(BuildContext, String?)? ageControllerValidator;
-  String? _ageControllerValidator(BuildContext context, String? val) {
+  TextEditingController? ageTextController;
+  String? Function(BuildContext, String?)? ageTextControllerValidator;
+  String? _ageTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Please enter an age for the patient.';
     }
@@ -49,25 +49,25 @@ class AdhesionGroupModel extends FlutterFlowModel<AdhesionGroupWidget> {
       choiceChipsValueController?.value = val != null ? [val] : [];
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode;
-  TextEditingController? descriptionController;
-  String? Function(BuildContext, String?)? descriptionControllerValidator;
+  TextEditingController? descriptionTextController;
+  String? Function(BuildContext, String?)? descriptionTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
-    fullNameControllerValidator = _fullNameControllerValidator;
-    ageControllerValidator = _ageControllerValidator;
+    fullNameTextControllerValidator = _fullNameTextControllerValidator;
+    ageTextControllerValidator = _ageTextControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
     fullNameFocusNode?.dispose();
-    fullNameController?.dispose();
+    fullNameTextController?.dispose();
 
     ageFocusNode?.dispose();
-    ageController?.dispose();
+    ageTextController?.dispose();
 
     descriptionFocusNode?.dispose();
-    descriptionController?.dispose();
+    descriptionTextController?.dispose();
   }
 }

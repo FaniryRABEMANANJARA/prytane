@@ -32,7 +32,8 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
     super.initState();
     _model = createModel(context, () => DetailsGroupModel());
 
-    _model.expandableController = ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController =
+        ExpandableController(initialExpanded: false);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -169,7 +170,7 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                           child: ExpandableNotifier(
-                            controller: _model.expandableController,
+                            controller: _model.expandableExpandableController,
                             child: ExpandablePanel(
                               header: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -346,41 +347,61 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 12.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4.0,
-                        color: Color(0x33000000),
-                        offset: Offset(
-                          0.0,
-                          2.0,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed(
+                      'AdhesionGroup',
+                      queryParameters: {
+                        'adhesionGroup': serializeParam(
+                          widget.detailsGroup,
+                          ParamType.Document,
                         ),
-                      )
-                    ],
-                    gradient: LinearGradient(
-                      colors: [
-                        FlutterFlowTheme.of(context).primary,
-                        FlutterFlowTheme.of(context).accent1
+                      }.withoutNulls,
+                      extra: <String, dynamic>{
+                        'adhesionGroup': widget.detailsGroup,
+                      },
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4.0,
+                          color: Color(0x33000000),
+                          offset: Offset(
+                            0.0,
+                            2.0,
+                          ),
+                        )
                       ],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(-1.0, 0.0),
-                      end: AlignmentDirectional(1.0, 0),
+                      gradient: LinearGradient(
+                        colors: [
+                          FlutterFlowTheme.of(context).primary,
+                          FlutterFlowTheme.of(context).accent1
+                        ],
+                        stops: [0.0, 1.0],
+                        begin: AlignmentDirectional(-1.0, 0.0),
+                        end: AlignmentDirectional(1.0, 0),
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Text(
-                    'Rejoindre',
-                    style: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Text(
+                      'Rejoindre',
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).titleSmallFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleSmallFamily),
+                          ),
+                    ),
                   ),
                 ),
               ),

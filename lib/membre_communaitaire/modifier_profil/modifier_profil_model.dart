@@ -24,32 +24,32 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
 
   // State field(s) for nom widget.
   FocusNode? nomFocusNode;
-  TextEditingController? nomController;
-  String? Function(BuildContext, String?)? nomControllerValidator;
+  TextEditingController? nomTextController;
+  String? Function(BuildContext, String?)? nomTextControllerValidator;
   // State field(s) for prenom widget.
   FocusNode? prenomFocusNode;
-  TextEditingController? prenomController;
-  String? Function(BuildContext, String?)? prenomControllerValidator;
+  TextEditingController? prenomTextController;
+  String? Function(BuildContext, String?)? prenomTextControllerValidator;
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
-  TextEditingController? emailController;
-  String? Function(BuildContext, String?)? emailControllerValidator;
+  TextEditingController? emailTextController;
+  String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for city widget.
   FocusNode? cityFocusNode;
-  TextEditingController? cityController;
-  String? Function(BuildContext, String?)? cityControllerValidator;
+  TextEditingController? cityTextController;
+  String? Function(BuildContext, String?)? cityTextControllerValidator;
   // State field(s) for telephone widget.
   FocusNode? telephoneFocusNode;
-  TextEditingController? telephoneController;
-  String? Function(BuildContext, String?)? telephoneControllerValidator;
+  TextEditingController? telephoneTextController;
+  String? Function(BuildContext, String?)? telephoneTextControllerValidator;
   // State field(s) for lien widget.
   FocusNode? lienFocusNode;
-  TextEditingController? lienController;
-  String? Function(BuildContext, String?)? lienControllerValidator;
+  TextEditingController? lienTextController;
+  String? Function(BuildContext, String?)? lienTextControllerValidator;
   // State field(s) for myBio widget.
   FocusNode? myBioFocusNode;
-  TextEditingController? myBioController;
-  String? Function(BuildContext, String?)? myBioControllerValidator;
+  TextEditingController? myBioTextController;
+  String? Function(BuildContext, String?)? myBioTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -57,24 +57,24 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   @override
   void dispose() {
     nomFocusNode?.dispose();
-    nomController?.dispose();
+    nomTextController?.dispose();
 
     prenomFocusNode?.dispose();
-    prenomController?.dispose();
+    prenomTextController?.dispose();
 
     emailFocusNode?.dispose();
-    emailController?.dispose();
+    emailTextController?.dispose();
 
     cityFocusNode?.dispose();
-    cityController?.dispose();
+    cityTextController?.dispose();
 
     telephoneFocusNode?.dispose();
-    telephoneController?.dispose();
+    telephoneTextController?.dispose();
 
     lienFocusNode?.dispose();
-    lienController?.dispose();
+    lienTextController?.dispose();
 
     myBioFocusNode?.dispose();
-    myBioController?.dispose();
+    myBioTextController?.dispose();
   }
 }

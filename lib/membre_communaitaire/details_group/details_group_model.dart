@@ -14,7 +14,7 @@ class DetailsGroupModel extends FlutterFlowModel<DetailsGroupWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController;
+  late ExpandableController expandableExpandableController;
 
   @override
   void initState(BuildContext context) {}
@@ -22,6 +22,6 @@ class DetailsGroupModel extends FlutterFlowModel<DetailsGroupWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    expandableController.dispose();
+    expandableExpandableController.dispose();
   }
 }

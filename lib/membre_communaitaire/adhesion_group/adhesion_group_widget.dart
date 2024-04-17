@@ -35,13 +35,13 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
     super.initState();
     _model = createModel(context, () => AdhesionGroupModel());
 
-    _model.fullNameController ??= TextEditingController();
+    _model.fullNameTextController ??= TextEditingController();
     _model.fullNameFocusNode ??= FocusNode();
     _model.fullNameFocusNode!.addListener(() => setState(() {}));
-    _model.ageController ??= TextEditingController();
+    _model.ageTextController ??= TextEditingController();
     _model.ageFocusNode ??= FocusNode();
     _model.ageFocusNode!.addListener(() => setState(() {}));
-    _model.descriptionController ??= TextEditingController();
+    _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
     _model.descriptionFocusNode!.addListener(() => setState(() {}));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -177,7 +177,8 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFormField(
-                                        controller: _model.fullNameController,
+                                        controller:
+                                            _model.fullNameTextController,
                                         focusNode: _model.fullNameFocusNode,
                                         autofocus: true,
                                         textCapitalization:
@@ -306,11 +307,11 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .primary,
                                         validator: _model
-                                            .fullNameControllerValidator
+                                            .fullNameTextControllerValidator
                                             .asValidator(context),
                                       ),
                                       TextFormField(
-                                        controller: _model.ageController,
+                                        controller: _model.ageTextController,
                                         focusNode: _model.ageFocusNode,
                                         autofocus: true,
                                         textCapitalization:
@@ -437,7 +438,8 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primary,
-                                        validator: _model.ageControllerValidator
+                                        validator: _model
+                                            .ageTextControllerValidator
                                             .asValidator(context),
                                       ),
                                       Text(
@@ -547,7 +549,7 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                                       ),
                                       TextFormField(
                                         controller:
-                                            _model.descriptionController,
+                                            _model.descriptionTextController,
                                         focusNode: _model.descriptionFocusNode,
                                         autofocus: true,
                                         textCapitalization:
@@ -680,7 +682,7 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .primary,
                                         validator: _model
-                                            .descriptionControllerValidator
+                                            .descriptionTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ]
@@ -707,11 +709,11 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget> {
                             await MembresGroupeRecord.collection
                                 .doc()
                                 .set(createMembresGroupeRecordData(
-                                  fullname: _model.fullNameController.text,
+                                  fullname: _model.fullNameTextController.text,
                                   idUser: currentUserReference,
-                                  age: _model.ageController.text,
+                                  age: _model.ageTextController.text,
                                   description:
-                                      _model.descriptionController.text,
+                                      _model.descriptionTextController.text,
                                   idGroup:
                                       adhesionGroupGroupesRecord?.reference,
                                   sexe: _model.choiceChipsValue,

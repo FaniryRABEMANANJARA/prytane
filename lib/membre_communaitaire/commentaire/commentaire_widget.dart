@@ -1,5 +1,8 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +11,12 @@ import 'commentaire_model.dart';
 export 'commentaire_model.dart';
 
 class CommentaireWidget extends StatefulWidget {
-  const CommentaireWidget({super.key});
+  const CommentaireWidget({
+    super.key,
+    required this.postID,
+  });
+
+  final DocumentReference? postID;
 
   @override
   State<CommentaireWidget> createState() => _CommentaireWidgetState();
@@ -152,10 +160,34 @@ class _CommentaireWidgetState extends State<CommentaireWidget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                    child: Icon(
-                      Icons.send_rounded,
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 24.0,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await CommentsRecord.createDoc(widget.postID!)
+                            .set(createCommentsRecordData(
+                          createdBy: currentUserReference,
+                          comment: _model.textController.text,
+                          createdAt:
+                              dateTimeFormat('relative', getCurrentTimestamp),
+                        ));
+
+                        await widget.postID!.update({
+                          ...mapToFirestore(
+                            {
+                              'comments': FieldValue.increment(1),
+                            },
+                          ),
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.send_rounded,
+                        color: FlutterFlowTheme.of(context).primary,
+                        size: 24.0,
+                      ),
                     ),
                   ),
                 ],

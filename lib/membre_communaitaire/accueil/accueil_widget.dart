@@ -1,10 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/membre_communaitaire/commentaire/commentaire_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,8 +61,8 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: StreamBuilder<List<PublicationsRecord>>(
                     stream: queryPublicationsRecord(
-                      queryBuilder: (publicationsRecord) =>
-                          publicationsRecord.orderBy('date', descending: true),
+                      queryBuilder: (publicationsRecord) => publicationsRecord
+                          .orderBy('dateCreation', descending: true),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -248,7 +248,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                         dateTimeFormat(
                                                             'relative',
                                                             columnPublicationsRecord
-                                                                .date!),
+                                                                .dateCreation!),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -278,7 +278,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 0.0),
                                         child: Text(
-                                          columnPublicationsRecord.content,
+                                          columnPublicationsRecord.postText,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -302,7 +302,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           child: Image.network(
-                                            columnPublicationsRecord.fichier,
+                                            columnPublicationsRecord.postImage,
                                             width: double.infinity,
                                             height: 200.0,
                                             fit: BoxFit.cover,
@@ -319,7 +319,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                           children: [
                                             Text(
                                               columnPublicationsRecord
-                                                  .likedBy.length
+                                                  .usersLikes.length
                                                   .toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -343,90 +343,207 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                             ),
-                                            ToggleIcon(
-                                              onPressed: () async {
-                                                final likedByElement =
-                                                    currentUserReference;
-                                                final likedByUpdate =
-                                                    columnPublicationsRecord
-                                                            .likedBy
-                                                            .contains(
-                                                                likedByElement)
-                                                        ? FieldValue
-                                                            .arrayRemove([
-                                                            likedByElement
-                                                          ])
-                                                        : FieldValue.arrayUnion(
-                                                            [likedByElement]);
-                                                await columnPublicationsRecord
-                                                    .reference
-                                                    .update({
-                                                  ...mapToFirestore(
-                                                    {
-                                                      'liked_by': likedByUpdate,
+                                            Stack(
+                                              children: [
+                                                if (columnPublicationsRecord
+                                                        .usersLikes
+                                                        .contains(
+                                                            currentUserReference) ==
+                                                    true)
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      if (columnPublicationsRecord
+                                                              .usersLikes
+                                                              .contains(
+                                                                  currentUserReference) ==
+                                                          true) {
+                                                        await columnPublicationsRecord
+                                                            .reference
+                                                            .update({
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'usersLikes':
+                                                                  FieldValue
+                                                                      .arrayRemove([
+                                                                currentUserReference
+                                                              ]),
+                                                            },
+                                                          ),
+                                                        });
+                                                      } else {
+                                                        await columnPublicationsRecord
+                                                            .reference
+                                                            .update({
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'usersLikes':
+                                                                  FieldValue
+                                                                      .arrayUnion([
+                                                                currentUserReference
+                                                              ]),
+                                                            },
+                                                          ),
+                                                        });
+                                                      }
                                                     },
+                                                    child: Icon(
+                                                      Icons.thumb_up,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
                                                   ),
-                                                });
-                                              },
-                                              value: columnPublicationsRecord
-                                                  .likedBy
-                                                  .contains(
-                                                      currentUserReference),
-                                              onIcon: Icon(
-                                                Icons.check_box,
-                                                color: Color(0xFF0A1DF9),
-                                                size: 25.0,
-                                              ),
-                                              offIcon: Icon(
-                                                Icons.thumb_up_off_alt,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 25.0,
-                                              ),
+                                                if (columnPublicationsRecord
+                                                        .usersLikes
+                                                        .contains(
+                                                            currentUserReference) ==
+                                                    false)
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      if (columnPublicationsRecord
+                                                              .usersLikes
+                                                              .contains(
+                                                                  currentUserReference) ==
+                                                          true) {
+                                                        await columnPublicationsRecord
+                                                            .reference
+                                                            .update({
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'usersLikes':
+                                                                  FieldValue
+                                                                      .arrayRemove([
+                                                                currentUserReference
+                                                              ]),
+                                                            },
+                                                          ),
+                                                        });
+                                                      } else {
+                                                        await columnPublicationsRecord
+                                                            .reference
+                                                            .update({
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'usersLikes':
+                                                                  FieldValue
+                                                                      .arrayUnion([
+                                                                currentUserReference
+                                                              ]),
+                                                            },
+                                                          ),
+                                                        });
+                                                      }
+                                                    },
+                                                    child: Icon(
+                                                      Icons.thumb_up_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                              ],
                                             ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Text(
-                                                  columnPublicationsRecord
-                                                      .comments.length
-                                                      .toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelSmallFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmallFamily),
-                                                      ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          10.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    columnPublicationsRecord
+                                                        .comments
+                                                        .toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelSmallFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelSmallFamily),
+                                                        ),
+                                                  ),
                                                 ),
-                                                Text(
-                                                  ' commentaires',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelSmallFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmallFamily),
-                                                      ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                CommentaireWidget(
+                                                              postID:
+                                                                  columnPublicationsRecord
+                                                                      .reference,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+                                                  },
+                                                  child: Icon(
+                                                    Icons.comment_sharp,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -438,10 +555,6 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                         thickness: 1.0,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
-                                      ),
-                                      CommentaireWidget(
-                                        key: Key(
-                                            'Keybi6_${columnIndex}_of_${columnPublicationsRecordList.length}'),
                                       ),
                                     ],
                                   ),

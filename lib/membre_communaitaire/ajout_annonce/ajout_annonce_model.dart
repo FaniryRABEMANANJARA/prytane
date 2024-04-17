@@ -25,16 +25,16 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for titre widget.
   FocusNode? titreFocusNode;
-  TextEditingController? titreController;
-  String? Function(BuildContext, String?)? titreControllerValidator;
+  TextEditingController? titreTextController;
+  String? Function(BuildContext, String?)? titreTextControllerValidator;
   // State field(s) for auteur widget.
   FocusNode? auteurFocusNode;
-  TextEditingController? auteurController;
-  String? Function(BuildContext, String?)? auteurControllerValidator;
+  TextEditingController? auteurTextController;
+  String? Function(BuildContext, String?)? auteurTextControllerValidator;
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode;
-  TextEditingController? descriptionController;
-  String? Function(BuildContext, String?)? descriptionControllerValidator;
+  TextEditingController? descriptionTextController;
+  String? Function(BuildContext, String?)? descriptionTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -46,8 +46,8 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
   DateTime? datePicked;
   // State field(s) for localisation widget.
   FocusNode? localisationFocusNode;
-  TextEditingController? localisationController;
-  String? Function(BuildContext, String?)? localisationControllerValidator;
+  TextEditingController? localisationTextController;
+  String? Function(BuildContext, String?)? localisationTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -56,15 +56,15 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
   void dispose() {
     unfocusNode.dispose();
     titreFocusNode?.dispose();
-    titreController?.dispose();
+    titreTextController?.dispose();
 
     auteurFocusNode?.dispose();
-    auteurController?.dispose();
+    auteurTextController?.dispose();
 
     descriptionFocusNode?.dispose();
-    descriptionController?.dispose();
+    descriptionTextController?.dispose();
 
     localisationFocusNode?.dispose();
-    localisationController?.dispose();
+    localisationTextController?.dispose();
   }
 }

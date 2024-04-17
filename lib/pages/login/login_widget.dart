@@ -26,10 +26,10 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
     _model = createModel(context, () => LoginModel());
 
-    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -157,7 +157,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           children: [
                             Expanded(
                               child: TextFormField(
-                                controller: _model.emailAddressController,
+                                controller: _model.emailAddressTextController,
                                 focusNode: _model.emailAddressFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -232,7 +232,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   .bodySmallFamily),
                                     ),
                                 validator: _model
-                                    .emailAddressControllerValidator
+                                    .emailAddressTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -248,7 +248,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           children: [
                             Expanded(
                               child: TextFormField(
-                                controller: _model.passwordController,
+                                controller: _model.passwordTextController,
                                 focusNode: _model.passwordFocusNode,
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(
@@ -336,7 +336,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodySmallFamily),
                                     ),
-                                validator: _model.passwordControllerValidator
+                                validator: _model
+                                    .passwordTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -406,8 +407,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   final user =
                                       await authManager.signInWithEmail(
                                     context,
-                                    _model.emailAddressController.text,
-                                    _model.passwordController.text,
+                                    _model.emailAddressTextController.text,
+                                    _model.passwordTextController.text,
                                   );
                                   if (user == null) {
                                     return;

@@ -23,8 +23,8 @@ class AjoutpublicationModel extends FlutterFlowModel<AjoutpublicationWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for contenu widget.
   FocusNode? contenuFocusNode;
-  TextEditingController? contenuController;
-  String? Function(BuildContext, String?)? contenuControllerValidator;
+  TextEditingController? contenuTextController;
+  String? Function(BuildContext, String?)? contenuTextControllerValidator;
   // State field(s) for type widget.
   String? typeValue;
   FormFieldController<String>? typeValueController;
@@ -41,6 +41,6 @@ class AjoutpublicationModel extends FlutterFlowModel<AjoutpublicationWidget> {
   void dispose() {
     unfocusNode.dispose();
     contenuFocusNode?.dispose();
-    contenuController?.dispose();
+    contenuTextController?.dispose();
   }
 }

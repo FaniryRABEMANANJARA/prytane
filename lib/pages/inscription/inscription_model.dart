@@ -16,21 +16,21 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
 
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
+  TextEditingController? emailAddressTextController;
+  String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
   // State field(s) for prenom widget.
   FocusNode? prenomFocusNode;
-  TextEditingController? prenomController;
-  String? Function(BuildContext, String?)? prenomControllerValidator;
+  TextEditingController? prenomTextController;
+  String? Function(BuildContext, String?)? prenomTextControllerValidator;
   // State field(s) for nom widget.
   FocusNode? nomFocusNode;
-  TextEditingController? nomController;
-  String? Function(BuildContext, String?)? nomControllerValidator;
+  TextEditingController? nomTextController;
+  String? Function(BuildContext, String?)? nomTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
-  TextEditingController? passwordController;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController;
 
@@ -42,16 +42,16 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
   @override
   void dispose() {
     emailAddressFocusNode?.dispose();
-    emailAddressController?.dispose();
+    emailAddressTextController?.dispose();
 
     prenomFocusNode?.dispose();
-    prenomController?.dispose();
+    prenomTextController?.dispose();
 
     nomFocusNode?.dispose();
-    nomController?.dispose();
+    nomTextController?.dispose();
 
     passwordFocusNode?.dispose();
-    passwordController?.dispose();
+    passwordTextController?.dispose();
   }
 
   /// Additional helper methods.

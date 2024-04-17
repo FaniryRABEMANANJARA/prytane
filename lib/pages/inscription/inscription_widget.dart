@@ -29,16 +29,16 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
     super.initState();
     _model = createModel(context, () => InscriptionModel());
 
-    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.prenomController ??= TextEditingController();
+    _model.prenomTextController ??= TextEditingController();
     _model.prenomFocusNode ??= FocusNode();
 
-    _model.nomController ??= TextEditingController();
+    _model.nomTextController ??= TextEditingController();
     _model.nomFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -298,7 +298,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            controller: _model.emailAddressController,
+                            controller: _model.emailAddressTextController,
                             focusNode: _model.emailAddressFocusNode,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -371,7 +371,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            validator: _model.emailAddressControllerValidator
+                            validator: _model
+                                .emailAddressTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -387,7 +388,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            controller: _model.prenomController,
+                            controller: _model.prenomTextController,
                             focusNode: _model.prenomFocusNode,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -460,13 +461,13 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            validator: _model.prenomControllerValidator
+                            validator: _model.prenomTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
                         Expanded(
                           child: TextFormField(
-                            controller: _model.nomController,
+                            controller: _model.nomTextController,
                             focusNode: _model.nomFocusNode,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -539,7 +540,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            validator: _model.nomControllerValidator
+                            validator: _model.nomTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -555,7 +556,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            controller: _model.passwordController,
+                            controller: _model.passwordTextController,
                             focusNode: _model.passwordFocusNode,
                             obscureText: !_model.passwordVisibility,
                             decoration: InputDecoration(
@@ -643,7 +644,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodySmallFamily),
                                 ),
-                            validator: _model.passwordControllerValidator
+                            validator: _model.passwordTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -751,8 +752,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                             final user =
                                 await authManager.createAccountWithEmail(
                               context,
-                              _model.emailAddressController.text,
-                              _model.passwordController.text,
+                              _model.emailAddressTextController.text,
+                              _model.passwordTextController.text,
                             );
                             if (user == null) {
                               return;
@@ -761,9 +762,9 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                             await UsersRecord.collection
                                 .doc(user.uid)
                                 .update(createUsersRecordData(
-                                  email: _model.emailAddressController.text,
-                                  nom: _model.nomController.text,
-                                  prenom: _model.prenomController.text,
+                                  email: _model.emailAddressTextController.text,
+                                  nom: _model.nomTextController.text,
+                                  prenom: _model.prenomTextController.text,
                                   newsletter: _model.radioButtonValue != null &&
                                       _model.radioButtonValue != '',
                                 ));

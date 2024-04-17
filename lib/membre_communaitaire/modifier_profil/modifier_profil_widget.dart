@@ -32,25 +32,25 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
     super.initState();
     _model = createModel(context, () => ModifierProfilModel());
 
-    _model.nomController ??= TextEditingController();
+    _model.nomTextController ??= TextEditingController();
     _model.nomFocusNode ??= FocusNode();
 
-    _model.prenomController ??= TextEditingController();
+    _model.prenomTextController ??= TextEditingController();
     _model.prenomFocusNode ??= FocusNode();
 
-    _model.emailController ??= TextEditingController();
+    _model.emailTextController ??= TextEditingController();
     _model.emailFocusNode ??= FocusNode();
 
-    _model.cityController ??= TextEditingController();
+    _model.cityTextController ??= TextEditingController();
     _model.cityFocusNode ??= FocusNode();
 
-    _model.telephoneController ??= TextEditingController();
+    _model.telephoneTextController ??= TextEditingController();
     _model.telephoneFocusNode ??= FocusNode();
 
-    _model.lienController ??= TextEditingController();
+    _model.lienTextController ??= TextEditingController();
     _model.lienFocusNode ??= FocusNode();
 
-    _model.myBioController ??= TextEditingController();
+    _model.myBioTextController ??= TextEditingController();
     _model.myBioFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -251,7 +251,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.nomController,
+                        controller: _model.nomTextController,
                         focusNode: _model.nomFocusNode,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
@@ -323,8 +323,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                   FlutterFlowTheme.of(context)
                                       .bodyMediumFamily),
                             ),
-                        validator:
-                            _model.nomControllerValidator.asValidator(context),
+                        validator: _model.nomTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ),
@@ -333,7 +333,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.prenomController,
+                        controller: _model.prenomTextController,
                         focusNode: _model.prenomFocusNode,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
@@ -402,7 +402,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                   FlutterFlowTheme.of(context)
                                       .bodyMediumFamily),
                             ),
-                        validator: _model.prenomControllerValidator
+                        validator: _model.prenomTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -411,7 +411,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: TextFormField(
-                      controller: _model.emailController,
+                      controller: _model.emailTextController,
                       focusNode: _model.emailFocusNode,
                       textCapitalization: TextCapitalization.words,
                       obscureText: false,
@@ -480,8 +480,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       keyboardType: TextInputType.emailAddress,
-                      validator:
-                          _model.emailControllerValidator.asValidator(context),
+                      validator: _model.emailTextControllerValidator
+                          .asValidator(context),
                     ),
                   ),
                   Padding(
@@ -489,7 +489,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.cityController,
+                        controller: _model.cityTextController,
                         focusNode: _model.cityFocusNode,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
@@ -561,8 +561,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                   FlutterFlowTheme.of(context)
                                       .bodyMediumFamily),
                             ),
-                        validator:
-                            _model.cityControllerValidator.asValidator(context),
+                        validator: _model.cityTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ),
@@ -571,7 +571,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.telephoneController,
+                        controller: _model.telephoneTextController,
                         focusNode: _model.telephoneFocusNode,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
@@ -642,7 +642,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                   FlutterFlowTheme.of(context)
                                       .bodyMediumFamily),
                             ),
-                        validator: _model.telephoneControllerValidator
+                        validator: _model.telephoneTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -652,7 +652,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.lienController,
+                        controller: _model.lienTextController,
                         focusNode: _model.lienFocusNode,
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
@@ -724,8 +724,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                   FlutterFlowTheme.of(context)
                                       .bodyMediumFamily),
                             ),
-                        validator:
-                            _model.lienControllerValidator.asValidator(context),
+                        validator: _model.lienTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ),
@@ -734,7 +734,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 12.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => TextFormField(
-                        controller: _model.myBioController,
+                        controller: _model.myBioTextController,
                         focusNode: _model.myBioFocusNode,
                         textCapitalization: TextCapitalization.sentences,
                         obscureText: false,
@@ -805,7 +805,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                             ),
                         textAlign: TextAlign.start,
                         maxLines: 2,
-                        validator: _model.myBioControllerValidator
+                        validator: _model.myBioTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -819,14 +819,14 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         onPressed: () async {
                           await modifierProfilUsersRecord!.reference
                               .update(createUsersRecordData(
-                            email: _model.emailController.text,
+                            email: _model.emailTextController.text,
                             photoUrl: _model.uploadedFileUrl,
-                            phoneNumber: _model.telephoneController.text,
-                            bio: _model.myBioController.text,
-                            nom: _model.nomController.text,
-                            prenom: _model.prenomController.text,
-                            province: _model.cityController.text,
-                            link: _model.lienController.text,
+                            phoneNumber: _model.telephoneTextController.text,
+                            bio: _model.myBioTextController.text,
+                            nom: _model.nomTextController.text,
+                            prenom: _model.prenomTextController.text,
+                            province: _model.cityTextController.text,
+                            link: _model.lienTextController.text,
                           ));
 
                           context.pushNamed('profilMembreCommunautairre');

@@ -35,7 +35,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
     super.initState();
     _model = createModel(context, () => AjoutpublicationModel());
 
-    _model.contenuController ??= TextEditingController();
+    _model.contenuTextController ??= TextEditingController();
     _model.contenuFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -113,7 +113,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                               ),
                     ),
                     TextFormField(
-                      controller: _model.contenuController,
+                      controller: _model.contenuTextController,
                       focusNode: _model.contenuFocusNode,
                       autofocus: false,
                       obscureText: false,
@@ -169,7 +169,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       maxLines: 5,
-                      validator: _model.contenuControllerValidator
+                      validator: _model.contenuTextControllerValidator
                           .asValidator(context),
                     ),
                     Padding(
@@ -560,13 +560,14 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                       await PublicationsRecord.collection
                           .doc()
                           .set(createPublicationsRecordData(
-                            content: _model.contenuController.text,
-                            type: _model.typeValue,
-                            date: _model.datePicked,
-                            fichier: _model.uploadedFileUrl,
-                            role: 'membre',
-                            userID:
+                            postImage: _model.uploadedFileUrl,
+                            postUser: currentUserReference,
+                            postText: _model.contenuTextController.text,
+                            postUsername:
                                 valueOrDefault(currentUserDocument?.prenom, ''),
+                            postUserimage: currentUserPhoto,
+                            dateCreation: _model.datePicked,
+                            type: _model.typeValue,
                           ));
 
                       context.pushNamed('Accueil');

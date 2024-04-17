@@ -16,55 +16,67 @@ class PublicationsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "content" field.
-  String? _content;
-  String get content => _content ?? '';
-  bool hasContent() => _content != null;
+  // "postImage" field.
+  String? _postImage;
+  String get postImage => _postImage ?? '';
+  bool hasPostImage() => _postImage != null;
+
+  // "postUser" field.
+  DocumentReference? _postUser;
+  DocumentReference? get postUser => _postUser;
+  bool hasPostUser() => _postUser != null;
+
+  // "postText" field.
+  String? _postText;
+  String get postText => _postText ?? '';
+  bool hasPostText() => _postText != null;
+
+  // "postUsername" field.
+  String? _postUsername;
+  String get postUsername => _postUsername ?? '';
+  bool hasPostUsername() => _postUsername != null;
+
+  // "postUserimage" field.
+  String? _postUserimage;
+  String get postUserimage => _postUserimage ?? '';
+  bool hasPostUserimage() => _postUserimage != null;
+
+  // "usersLikes" field.
+  List<DocumentReference>? _usersLikes;
+  List<DocumentReference> get usersLikes => _usersLikes ?? const [];
+  bool hasUsersLikes() => _usersLikes != null;
+
+  // "userBookmarks" field.
+  List<DocumentReference>? _userBookmarks;
+  List<DocumentReference> get userBookmarks => _userBookmarks ?? const [];
+  bool hasUserBookmarks() => _userBookmarks != null;
+
+  // "dateCreation" field.
+  DateTime? _dateCreation;
+  DateTime? get dateCreation => _dateCreation;
+  bool hasDateCreation() => _dateCreation != null;
 
   // "type" field.
   String? _type;
   String get type => _type ?? '';
   bool hasType() => _type != null;
 
-  // "date" field.
-  DateTime? _date;
-  DateTime? get date => _date;
-  bool hasDate() => _date != null;
-
   // "comments" field.
-  List<String>? _comments;
-  List<String> get comments => _comments ?? const [];
+  int? _comments;
+  int get comments => _comments ?? 0;
   bool hasComments() => _comments != null;
 
-  // "fichier" field.
-  String? _fichier;
-  String get fichier => _fichier ?? '';
-  bool hasFichier() => _fichier != null;
-
-  // "role" field.
-  String? _role;
-  String get role => _role ?? '';
-  bool hasRole() => _role != null;
-
-  // "userID" field.
-  String? _userID;
-  String get userID => _userID ?? '';
-  bool hasUserID() => _userID != null;
-
-  // "liked_by" field.
-  List<DocumentReference>? _likedBy;
-  List<DocumentReference> get likedBy => _likedBy ?? const [];
-  bool hasLikedBy() => _likedBy != null;
-
   void _initializeFields() {
-    _content = snapshotData['content'] as String?;
+    _postImage = snapshotData['postImage'] as String?;
+    _postUser = snapshotData['postUser'] as DocumentReference?;
+    _postText = snapshotData['postText'] as String?;
+    _postUsername = snapshotData['postUsername'] as String?;
+    _postUserimage = snapshotData['postUserimage'] as String?;
+    _usersLikes = getDataList(snapshotData['usersLikes']);
+    _userBookmarks = getDataList(snapshotData['userBookmarks']);
+    _dateCreation = snapshotData['dateCreation'] as DateTime?;
     _type = snapshotData['type'] as String?;
-    _date = snapshotData['date'] as DateTime?;
-    _comments = getDataList(snapshotData['comments']);
-    _fichier = snapshotData['fichier'] as String?;
-    _role = snapshotData['role'] as String?;
-    _userID = snapshotData['userID'] as String?;
-    _likedBy = getDataList(snapshotData['liked_by']);
+    _comments = castToType<int>(snapshotData['comments']);
   }
 
   static CollectionReference get collection =>
@@ -102,21 +114,25 @@ class PublicationsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createPublicationsRecordData({
-  String? content,
+  String? postImage,
+  DocumentReference? postUser,
+  String? postText,
+  String? postUsername,
+  String? postUserimage,
+  DateTime? dateCreation,
   String? type,
-  DateTime? date,
-  String? fichier,
-  String? role,
-  String? userID,
+  int? comments,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'content': content,
+      'postImage': postImage,
+      'postUser': postUser,
+      'postText': postText,
+      'postUsername': postUsername,
+      'postUserimage': postUserimage,
+      'dateCreation': dateCreation,
       'type': type,
-      'date': date,
-      'fichier': fichier,
-      'role': role,
-      'userID': userID,
+      'comments': comments,
     }.withoutNulls,
   );
 
@@ -130,26 +146,30 @@ class PublicationsRecordDocumentEquality
   @override
   bool equals(PublicationsRecord? e1, PublicationsRecord? e2) {
     const listEquality = ListEquality();
-    return e1?.content == e2?.content &&
+    return e1?.postImage == e2?.postImage &&
+        e1?.postUser == e2?.postUser &&
+        e1?.postText == e2?.postText &&
+        e1?.postUsername == e2?.postUsername &&
+        e1?.postUserimage == e2?.postUserimage &&
+        listEquality.equals(e1?.usersLikes, e2?.usersLikes) &&
+        listEquality.equals(e1?.userBookmarks, e2?.userBookmarks) &&
+        e1?.dateCreation == e2?.dateCreation &&
         e1?.type == e2?.type &&
-        e1?.date == e2?.date &&
-        listEquality.equals(e1?.comments, e2?.comments) &&
-        e1?.fichier == e2?.fichier &&
-        e1?.role == e2?.role &&
-        e1?.userID == e2?.userID &&
-        listEquality.equals(e1?.likedBy, e2?.likedBy);
+        e1?.comments == e2?.comments;
   }
 
   @override
   int hash(PublicationsRecord? e) => const ListEquality().hash([
-        e?.content,
+        e?.postImage,
+        e?.postUser,
+        e?.postText,
+        e?.postUsername,
+        e?.postUserimage,
+        e?.usersLikes,
+        e?.userBookmarks,
+        e?.dateCreation,
         e?.type,
-        e?.date,
-        e?.comments,
-        e?.fichier,
-        e?.role,
-        e?.userID,
-        e?.likedBy
+        e?.comments
       ]);
 
   @override

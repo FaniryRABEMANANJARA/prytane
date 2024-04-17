@@ -32,7 +32,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
     super.initState();
     _model = createModel(context, () => ChangePasswordModel());
 
-    _model.emailAddressController ??=
+    _model.emailAddressTextController ??=
         TextEditingController(text: widget.userProfile?.email);
     _model.emailAddressFocusNode ??= FocusNode();
 
@@ -113,7 +113,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 12.0),
                   child: TextFormField(
-                    controller: _model.emailAddressController,
+                    controller: _model.emailAddressTextController,
                     focusNode: _model.emailAddressFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -179,7 +179,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).titleSmallFamily),
                         ),
-                    validator: _model.emailAddressControllerValidator
+                    validator: _model.emailAddressTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -213,7 +213,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (_model.emailAddressController.text.isEmpty) {
+                        if (_model.emailAddressTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -224,7 +224,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           return;
                         }
                         await authManager.resetPassword(
-                          email: _model.emailAddressController.text,
+                          email: _model.emailAddressTextController.text,
                           context: context,
                         );
                         context.pop();
