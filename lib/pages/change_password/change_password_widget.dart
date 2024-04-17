@@ -90,7 +90,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               },
             ),
             title: Text(
-              'Modifier le mot de passe',
+              'Mot de passe oublié',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily:
                         FlutterFlowTheme.of(context).headlineMediumFamily,
@@ -127,7 +127,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
-                      hintText: 'Your email..',
+                      hintText: 'Entrez votre email..',
                       hintStyle: FlutterFlowTheme.of(context)
                           .bodyMedium
                           .override(
@@ -171,6 +171,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           FlutterFlowTheme.of(context).secondaryBackground,
                       contentPadding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                      prefixIcon: Icon(
+                        Icons.email,
+                      ),
                     ),
                     style: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily:
