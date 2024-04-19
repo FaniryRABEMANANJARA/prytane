@@ -566,7 +566,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                             postUsername:
                                 valueOrDefault(currentUserDocument?.prenom, ''),
                             postUserimage: currentUserPhoto,
-                            dateCreation: _model.datePicked,
+                            dateCreation: _model.datePicked?.toString(),
                             type: _model.typeValue,
                           ));
 

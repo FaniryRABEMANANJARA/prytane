@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644115233622:android:d3aa2cd88bce68630374f7",
+        "android_client_info": {
+          "package_name": "com.mycompany.prytaneadministrateur"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644115233622:android:4d32e811050c55630374f7",
+        "android_client_info": {
+          "package_name": "com.mycompany.prytanegroupe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

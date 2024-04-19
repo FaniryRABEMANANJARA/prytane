@@ -34,6 +34,7 @@ dependencies:
   collection: 1.18.0
   dropdown_button2: 2.3.9
   easy_debounce: 2.0.1
+  equatable: 2.0.5
   expandable: 5.0.1
   file_picker: 6.1.1
   firebase_auth: 4.17.7
@@ -52,6 +53,7 @@ dependencies:
   firebase_storage_web: 3.7.2
   flutter_animate: 4.1.1+1
   flutter_cache_manager: 3.3.1
+  flutter_card_swiper: 6.0.0
   flutter_datetime_picker_plus: 2.0.1
   flutter_plugin_android_lifecycle: 2.0.17
   font_awesome_flutter: 10.6.0
@@ -63,6 +65,7 @@ dependencies:
   google_sign_in_ios: 5.6.4
   google_sign_in_platform_interface: 2.4.2
   google_sign_in_web: 0.12.1
+  http: 1.2.0
   image_picker: 1.0.4
   image_picker_android: 0.8.8
   image_picker_for_web: 3.0.1

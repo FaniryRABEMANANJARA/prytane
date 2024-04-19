@@ -575,8 +575,9 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
 
                       setState(() {});
                     },
-                    text:
-                        widget.chatRef != null ? 'Add to Chat' : 'Send Invites',
+                    text: widget.chatRef != null
+                        ? 'Ajouter à la discussion'
+                        : 'Envoi d\'invitations',
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 50.0,

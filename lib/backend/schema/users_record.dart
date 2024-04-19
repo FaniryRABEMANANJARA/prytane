@@ -51,11 +51,6 @@ class UsersRecord extends FirestoreRecord {
   String get bio => _bio ?? '';
   bool hasBio() => _bio != null;
 
-  // "isHost" field.
-  bool? _isHost;
-  bool get isHost => _isHost ?? false;
-  bool hasIsHost() => _isHost != null;
-
   // "nom" field.
   String? _nom;
   String get nom => _nom ?? '';
@@ -109,7 +104,6 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _bio = snapshotData['bio'] as String?;
-    _isHost = snapshotData['isHost'] as bool?;
     _nom = snapshotData['nom'] as String?;
     _prenom = snapshotData['prenom'] as String?;
     _newsletter = snapshotData['newsletter'] as bool?;
@@ -162,7 +156,6 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? createdTime,
   String? phoneNumber,
   String? bio,
-  bool? isHost,
   String? nom,
   String? prenom,
   bool? newsletter,
@@ -182,7 +175,6 @@ Map<String, dynamic> createUsersRecordData({
       'created_time': createdTime,
       'phone_number': phoneNumber,
       'bio': bio,
-      'isHost': isHost,
       'nom': nom,
       'prenom': prenom,
       'newsletter': newsletter,
@@ -210,7 +202,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.bio == e2?.bio &&
-        e1?.isHost == e2?.isHost &&
         e1?.nom == e2?.nom &&
         e1?.prenom == e2?.prenom &&
         e1?.newsletter == e2?.newsletter &&
@@ -231,7 +222,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.bio,
-        e?.isHost,
         e?.nom,
         e?.prenom,
         e?.newsletter,

@@ -54,8 +54,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
 
     return StreamBuilder<List<GroupesRecord>>(
       stream: queryGroupesRecord(
-        queryBuilder: (groupesRecord) =>
-            groupesRecord.orderBy('type', descending: true),
+        queryBuilder: (groupesRecord) => groupesRecord.orderBy('nom'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -209,7 +208,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                                         context)
                                                                     .labelMediumFamily),
                                                       ),
-                                              hintText: 'Recherch',
+                                              hintText: 'Recherche',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -303,6 +302,9 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                           setState(() {
                                             _model.textController?.clear();
                                           });
+                                          setState(() {
+                                            FFAppState().searchActive = false;
+                                          });
                                         },
                                         child: Icon(
                                           Icons.clear,
@@ -369,10 +371,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                   ),
                                 ),
                               ),
-                              if (valueOrDefault<bool>(
-                                FFAppState().searchActive,
-                                true,
-                              ))
+                              if (!FFAppState().searchActive)
                                 Builder(
                                   builder: (context) {
                                     final searchGroup =
@@ -739,7 +738,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                 ),
                               if (valueOrDefault<bool>(
                                 FFAppState().searchActive,
-                                false,
+                                true,
                               ))
                                 Builder(
                                   builder: (context) {

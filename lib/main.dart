@@ -186,7 +186,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.groups,
               size: 24.0,
             ),
-            label: 'Groupe',
+            label: 'Groupes',
             tooltip: '',
           ),
           BottomNavigationBarItem(

@@ -132,8 +132,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                     ],
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 4.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -147,7 +146,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                     .titleLargeFamily,
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                fontSize: 14.0,
+                                fontSize: 12.0,
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
@@ -250,8 +249,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 4.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -260,7 +258,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SizedBox(
-                              width: 370.0,
+                              width: 320.0,
                               child: Divider(
                                 color: FlutterFlowTheme.of(context).accent1,
                               ),
@@ -290,8 +288,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                     ],
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -769,7 +766,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                       _model.radioButtonValue != '',
                                 ));
 
-                            context.goNamedAuth('Accueil', context.mounted);
+                            context.pushNamedAuth('Accueil', context.mounted);
                           },
                           text: 'Créer un compte',
                           options: FFButtonOptions(

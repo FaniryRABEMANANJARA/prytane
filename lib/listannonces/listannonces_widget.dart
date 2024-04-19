@@ -397,10 +397,7 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                         ],
                       ),
                     ),
-                    if (valueOrDefault<bool>(
-                      FFAppState().searchActive,
-                      true,
-                    ))
+                    if (!FFAppState().searchActiveannonce)
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
@@ -603,8 +600,8 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                         ),
                       ),
                     if (valueOrDefault<bool>(
-                      FFAppState().searchActive,
-                      false,
+                      FFAppState().searchActiveannonce,
+                      true,
                     ))
                       Padding(
                         padding:

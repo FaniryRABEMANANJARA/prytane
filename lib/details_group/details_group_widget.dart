@@ -230,7 +230,10 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 8.0, 0.0, 12.0),
                                     child: Text(
-                                      'By protecting and preserving our oceans, we can effectively reduce global warming as healthy oceans absorb a significant amount of atmospheric carbon dioxide. Implementing measures to prevent overfishing, reducing plastic pollution, and conserving marine habitats will contribute to a balanced ocean ecosystem, ultimately mitigating global warming.',
+                                      valueOrDefault<String>(
+                                        widget.detailsGroup?.description,
+                                        'desrciption',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(

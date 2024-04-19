@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
 import '/backend/backend.dart';
+import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -34,6 +35,16 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _recentSearches =
           prefs.getStringList('ff_recentSearches') ?? _recentSearches;
+    });
+    _safeInit(() {
+      _recentSearchesevenement =
+          prefs.getStringList('ff_recentSearchesevenement') ??
+              _recentSearchesevenement;
+    });
+    _safeInit(() {
+      _recentSearchesannonce =
+          prefs.getStringList('ff_recentSearchesannonce') ??
+              _recentSearchesannonce;
     });
   }
 
@@ -117,6 +128,101 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInRecentSearches(int _index, String _value) {
     _recentSearches.insert(_index, _value);
     prefs.setStringList('ff_recentSearches', _recentSearches);
+  }
+
+  List<String> _recentSearchesevenement = [];
+  List<String> get recentSearchesevenement => _recentSearchesevenement;
+  set recentSearchesevenement(List<String> _value) {
+    _recentSearchesevenement = _value;
+    prefs.setStringList('ff_recentSearchesevenement', _value);
+  }
+
+  void addToRecentSearchesevenement(String _value) {
+    _recentSearchesevenement.add(_value);
+    prefs.setStringList('ff_recentSearchesevenement', _recentSearchesevenement);
+  }
+
+  void removeFromRecentSearchesevenement(String _value) {
+    _recentSearchesevenement.remove(_value);
+    prefs.setStringList('ff_recentSearchesevenement', _recentSearchesevenement);
+  }
+
+  void removeAtIndexFromRecentSearchesevenement(int _index) {
+    _recentSearchesevenement.removeAt(_index);
+    prefs.setStringList('ff_recentSearchesevenement', _recentSearchesevenement);
+  }
+
+  void updateRecentSearchesevenementAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _recentSearchesevenement[_index] =
+        updateFn(_recentSearchesevenement[_index]);
+    prefs.setStringList('ff_recentSearchesevenement', _recentSearchesevenement);
+  }
+
+  void insertAtIndexInRecentSearchesevenement(int _index, String _value) {
+    _recentSearchesevenement.insert(_index, _value);
+    prefs.setStringList('ff_recentSearchesevenement', _recentSearchesevenement);
+  }
+
+  bool _searchActiveEvenement = false;
+  bool get searchActiveEvenement => _searchActiveEvenement;
+  set searchActiveEvenement(bool _value) {
+    _searchActiveEvenement = _value;
+  }
+
+  bool _searchActiveEvenement2 = false;
+  bool get searchActiveEvenement2 => _searchActiveEvenement2;
+  set searchActiveEvenement2(bool _value) {
+    _searchActiveEvenement2 = _value;
+  }
+
+  bool _searchActiveannonce = false;
+  bool get searchActiveannonce => _searchActiveannonce;
+  set searchActiveannonce(bool _value) {
+    _searchActiveannonce = _value;
+  }
+
+  bool _searchActiveannonce2 = false;
+  bool get searchActiveannonce2 => _searchActiveannonce2;
+  set searchActiveannonce2(bool _value) {
+    _searchActiveannonce2 = _value;
+  }
+
+  List<String> _recentSearchesannonce = [];
+  List<String> get recentSearchesannonce => _recentSearchesannonce;
+  set recentSearchesannonce(List<String> _value) {
+    _recentSearchesannonce = _value;
+    prefs.setStringList('ff_recentSearchesannonce', _value);
+  }
+
+  void addToRecentSearchesannonce(String _value) {
+    _recentSearchesannonce.add(_value);
+    prefs.setStringList('ff_recentSearchesannonce', _recentSearchesannonce);
+  }
+
+  void removeFromRecentSearchesannonce(String _value) {
+    _recentSearchesannonce.remove(_value);
+    prefs.setStringList('ff_recentSearchesannonce', _recentSearchesannonce);
+  }
+
+  void removeAtIndexFromRecentSearchesannonce(int _index) {
+    _recentSearchesannonce.removeAt(_index);
+    prefs.setStringList('ff_recentSearchesannonce', _recentSearchesannonce);
+  }
+
+  void updateRecentSearchesannonceAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _recentSearchesannonce[_index] = updateFn(_recentSearchesannonce[_index]);
+    prefs.setStringList('ff_recentSearchesannonce', _recentSearchesannonce);
+  }
+
+  void insertAtIndexInRecentSearchesannonce(int _index, String _value) {
+    _recentSearchesannonce.insert(_index, _value);
+    prefs.setStringList('ff_recentSearchesannonce', _recentSearchesannonce);
   }
 
   final _userDocQueryManager = FutureRequestManager<UsersRecord>();

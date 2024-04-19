@@ -51,11 +51,6 @@ class PublicationsRecord extends FirestoreRecord {
   List<DocumentReference> get userBookmarks => _userBookmarks ?? const [];
   bool hasUserBookmarks() => _userBookmarks != null;
 
-  // "dateCreation" field.
-  DateTime? _dateCreation;
-  DateTime? get dateCreation => _dateCreation;
-  bool hasDateCreation() => _dateCreation != null;
-
   // "type" field.
   String? _type;
   String get type => _type ?? '';
@@ -66,6 +61,11 @@ class PublicationsRecord extends FirestoreRecord {
   int get comments => _comments ?? 0;
   bool hasComments() => _comments != null;
 
+  // "dateCreation" field.
+  String? _dateCreation;
+  String get dateCreation => _dateCreation ?? '';
+  bool hasDateCreation() => _dateCreation != null;
+
   void _initializeFields() {
     _postImage = snapshotData['postImage'] as String?;
     _postUser = snapshotData['postUser'] as DocumentReference?;
@@ -74,9 +74,9 @@ class PublicationsRecord extends FirestoreRecord {
     _postUserimage = snapshotData['postUserimage'] as String?;
     _usersLikes = getDataList(snapshotData['usersLikes']);
     _userBookmarks = getDataList(snapshotData['userBookmarks']);
-    _dateCreation = snapshotData['dateCreation'] as DateTime?;
     _type = snapshotData['type'] as String?;
     _comments = castToType<int>(snapshotData['comments']);
+    _dateCreation = snapshotData['dateCreation'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -119,9 +119,9 @@ Map<String, dynamic> createPublicationsRecordData({
   String? postText,
   String? postUsername,
   String? postUserimage,
-  DateTime? dateCreation,
   String? type,
   int? comments,
+  String? dateCreation,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -130,9 +130,9 @@ Map<String, dynamic> createPublicationsRecordData({
       'postText': postText,
       'postUsername': postUsername,
       'postUserimage': postUserimage,
-      'dateCreation': dateCreation,
       'type': type,
       'comments': comments,
+      'dateCreation': dateCreation,
     }.withoutNulls,
   );
 
@@ -153,9 +153,9 @@ class PublicationsRecordDocumentEquality
         e1?.postUserimage == e2?.postUserimage &&
         listEquality.equals(e1?.usersLikes, e2?.usersLikes) &&
         listEquality.equals(e1?.userBookmarks, e2?.userBookmarks) &&
-        e1?.dateCreation == e2?.dateCreation &&
         e1?.type == e2?.type &&
-        e1?.comments == e2?.comments;
+        e1?.comments == e2?.comments &&
+        e1?.dateCreation == e2?.dateCreation;
   }
 
   @override
@@ -167,9 +167,9 @@ class PublicationsRecordDocumentEquality
         e?.postUserimage,
         e?.usersLikes,
         e?.userBookmarks,
-        e?.dateCreation,
         e?.type,
-        e?.comments
+        e?.comments,
+        e?.dateCreation
       ]);
 
   @override

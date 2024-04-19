@@ -32,7 +32,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
-        FFAppState().searchActive = false;
+        FFAppState().searchActiveEvenement = false;
       });
     });
 
@@ -171,7 +171,8 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                         ;
                                       });
                                       setState(() {
-                                        FFAppState().searchActive = true;
+                                        FFAppState().searchActiveEvenement =
+                                            true;
                                       });
                                     },
                                   ),
@@ -264,6 +265,9 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                 setState(() {
                                   _model.textController?.clear();
                                 });
+                                setState(() {
+                                  FFAppState().searchActiveEvenement = false;
+                                });
                               },
                               child: Icon(
                                 Icons.clear,
@@ -312,9 +316,9 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                         ],
                       ),
                     ),
-                    if (valueOrDefault<bool>(
-                      FFAppState().searchActive,
-                      true,
+                    if (!valueOrDefault<bool>(
+                      FFAppState().searchActiveEvenement,
+                      false,
                     ))
                       Padding(
                         padding:
@@ -512,8 +516,8 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                         ),
                       ),
                     if (valueOrDefault<bool>(
-                      FFAppState().searchActive,
-                      false,
+                      FFAppState().searchActiveEvenement,
+                      true,
                     ))
                       Padding(
                         padding:
