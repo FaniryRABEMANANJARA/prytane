@@ -560,9 +560,23 @@ class _ListSondageWidgetState extends State<ListSondageWidget> {
                                                         ),
                                                       ),
                                                       child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
+                                                        onPressed: () async {
+                                                          context.pushNamed(
+                                                            'Sondage',
+                                                            queryParameters: {
+                                                              'detailSondage':
+                                                                  serializeParam(
+                                                                listViewSondageRecord,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'detailSondage':
+                                                                  listViewSondageRecord,
+                                                            },
+                                                          );
                                                         },
                                                         text: 'Voir',
                                                         options:
