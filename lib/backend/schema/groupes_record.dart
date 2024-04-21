@@ -46,6 +46,11 @@ class GroupesRecord extends FirestoreRecord {
   String get photo => _photo ?? '';
   bool hasPhoto() => _photo != null;
 
+  // "permission" field.
+  List<String>? _permission;
+  List<String> get permission => _permission ?? const [];
+  bool hasPermission() => _permission != null;
+
   void _initializeFields() {
     _nom = snapshotData['nom'] as String?;
     _description = snapshotData['description'] as String?;
@@ -53,6 +58,7 @@ class GroupesRecord extends FirestoreRecord {
     _membres = getDataList(snapshotData['membres']);
     _administrateurs = getDataList(snapshotData['administrateurs']);
     _photo = snapshotData['photo'] as String?;
+    _permission = getDataList(snapshotData['permission']);
   }
 
   static CollectionReference get collection =>
@@ -118,7 +124,8 @@ class GroupesRecordDocumentEquality implements Equality<GroupesRecord> {
         e1?.type == e2?.type &&
         listEquality.equals(e1?.membres, e2?.membres) &&
         listEquality.equals(e1?.administrateurs, e2?.administrateurs) &&
-        e1?.photo == e2?.photo;
+        e1?.photo == e2?.photo &&
+        listEquality.equals(e1?.permission, e2?.permission);
   }
 
   @override
@@ -128,7 +135,8 @@ class GroupesRecordDocumentEquality implements Equality<GroupesRecord> {
         e?.type,
         e?.membres,
         e?.administrateurs,
-        e?.photo
+        e?.photo,
+        e?.permission
       ]);
 
   @override

@@ -333,6 +333,37 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ],
               ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                    child: Icon(
+                      Icons.security_sharp,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(3.0, 4.0, 0.0, 4.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        valueOrDefault(currentUserDocument?.role, ''),
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .labelMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .labelMediumFamily),
+                                ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
                 child: Text(
@@ -611,7 +642,7 @@ class _ProfilMembreCommunautairreWidgetState
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('LeverdeDons');
+                                context.pushNamed('ListdesDons');
                               },
                               child: Icon(
                                 Icons.arrow_forward_ios,
@@ -683,7 +714,7 @@ class _ProfilMembreCommunautairreWidgetState
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('sondage');
+                                context.pushNamed('ListSondage');
                               },
                               child: Icon(
                                 Icons.arrow_forward_ios,

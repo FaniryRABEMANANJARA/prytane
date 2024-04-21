@@ -39,11 +39,11 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
     _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
-    _model.textFieldFocusNode4 ??= FocusNode();
+    _model.montantTextController ??= TextEditingController();
+    _model.montantFocusNode ??= FocusNode();
 
     _model.textController5 ??= TextEditingController();
-    _model.textFieldFocusNode5 ??= FocusNode();
+    _model.textFieldFocusNode4 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -296,8 +296,8 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 0.0),
                   child: TextFormField(
-                    controller: _model.textController4,
-                    focusNode: _model.textFieldFocusNode4,
+                    controller: _model.montantTextController,
+                    focusNode: _model.montantFocusNode,
                     autofocus: false,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -351,8 +351,8 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
-                    validator:
-                        _model.textController4Validator.asValidator(context),
+                    validator: _model.montantTextControllerValidator
+                        .asValidator(context),
                   ),
                 ),
                 Padding(
@@ -547,7 +547,7 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 0.0),
                   child: TextFormField(
                     controller: _model.textController5,
-                    focusNode: _model.textFieldFocusNode5,
+                    focusNode: _model.textFieldFocusNode4,
                     autofocus: false,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -612,8 +612,8 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
                       await DonsRecord.collection
                           .doc()
                           .set(createDonsRecordData(
-                            montant:
-                                double.tryParse(_model.textController4.text),
+                            montant: double.tryParse(
+                                _model.montantTextController.text),
                             userId:
                                 valueOrDefault(currentUserDocument?.prenom, ''),
                             dateHeure: _model.datePicked,
@@ -635,6 +635,8 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget> {
                               FlutterFlowTheme.of(context).secondary,
                         ),
                       );
+
+                      context.pushNamed('ListdesDons');
                     },
                     text: 'Soumettre un don',
                     options: FFButtonOptions(

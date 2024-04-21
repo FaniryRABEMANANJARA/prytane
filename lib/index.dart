@@ -22,8 +22,11 @@ export '/details_group/details_group_widget.dart' show DetailsGroupWidget;
 export '/liste_video_call/liste_video_call_widget.dart'
     show ListeVideoCallWidget;
 export '/leverde_dons/leverde_dons_widget.dart' show LeverdeDonsWidget;
-export '/adhesion_group/adhesion_group_widget.dart' show AdhesionGroupWidget;
 export '/ajout_annonce/ajout_annonce_widget.dart' show AjoutAnnonceWidget;
 export '/listannonces/listannonces_widget.dart' show ListannoncesWidget;
 export '/details_annonce/details_annonce_widget.dart' show DetailsAnnonceWidget;
+export '/rejoindre_group/rejoindre_group_widget.dart' show RejoindreGroupWidget;
+export '/listdes_dons/listdes_dons_widget.dart' show ListdesDonsWidget;
+export '/ajout_sondage/ajout_sondage_widget.dart' show AjoutSondageWidget;
+export '/list_sondage/list_sondage_widget.dart' show ListSondageWidget;
 export '/sondage/sondage_widget.dart' show SondageWidget;

@@ -1,21 +1,18 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'details_group_widget.dart' show DetailsGroupWidget;
-import 'package:expandable/expandable.dart';
+import 'list_sondage_widget.dart' show ListSondageWidget;
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class DetailsGroupModel extends FlutterFlowModel<DetailsGroupWidget> {
+class ListSondageModel extends FlutterFlowModel<ListSondageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableExpandableController;
 
   @override
   void initState(BuildContext context) {}
@@ -23,6 +20,5 @@ class DetailsGroupModel extends FlutterFlowModel<DetailsGroupWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    expandableExpandableController.dispose();
   }
 }

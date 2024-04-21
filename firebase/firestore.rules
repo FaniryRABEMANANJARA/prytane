@@ -50,37 +50,6 @@ service cloud.firestore {
       allow delete: if true;
     }
 
-    match /sondages/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if true;
-    }
-
-    match /sondages/{parent}/question/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if true;
-    }
-
-    match /{path=**}/question/{document} {
-      allow read: if true;
-    }
-
-
-    match /sondages/{parent}/results/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if true;
-    }
-
-    match /{path=**}/results/{document} {
-      allow read: if true;
-    }
-
-
     match /dons/{document} {
       allow create: if true;
       allow read: if true;
@@ -113,5 +82,26 @@ service cloud.firestore {
       allow read: if true;
     }
 
+
+    match /type_group/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /role/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /sondage/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
   }
 }

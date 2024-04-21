@@ -243,19 +243,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LeverdeDonsWidget(),
         ),
         FFRoute(
-          name: 'AdhesionGroup',
-          path: '/adhesionGroup',
-          asyncParams: {
-            'adhesionGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
-          },
-          builder: (context, params) => AdhesionGroupWidget(
-            adhesionGroup: params.getParam(
-              'adhesionGroup',
-              ParamType.Document,
-            ),
-          ),
-        ),
-        FFRoute(
           name: 'AjoutAnnonce',
           path: '/ajoutAnnonce',
           builder: (context, params) => AjoutAnnonceWidget(),
@@ -281,9 +268,45 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'sondage',
+          name: 'RejoindreGroup',
+          path: '/rejoindreGroup',
+          asyncParams: {
+            'adhesionGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
+          },
+          builder: (context, params) => RejoindreGroupWidget(
+            adhesionGroup: params.getParam(
+              'adhesionGroup',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListdesDons',
+          path: '/listdesDons',
+          builder: (context, params) => ListdesDonsWidget(),
+        ),
+        FFRoute(
+          name: 'ajoutSondage',
+          path: '/ajoutSondage',
+          builder: (context, params) => AjoutSondageWidget(),
+        ),
+        FFRoute(
+          name: 'ListSondage',
+          path: '/listSondage',
+          builder: (context, params) => ListSondageWidget(),
+        ),
+        FFRoute(
+          name: 'Sondage',
           path: '/sondage',
-          builder: (context, params) => SondageWidget(),
+          asyncParams: {
+            'detailSondage': getDoc(['sondage'], SondageRecord.fromSnapshot),
+          },
+          builder: (context, params) => SondageWidget(
+            detailSondage: params.getParam(
+              'detailSondage',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

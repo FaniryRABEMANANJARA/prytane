@@ -764,6 +764,9 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                   prenom: _model.prenomTextController.text,
                                   newsletter: _model.radioButtonValue != null &&
                                       _model.radioButtonValue != '',
+                                  displayName: '',
+                                  photoUrl: '',
+                                  role: 'membre',
                                 ));
 
                             context.pushNamedAuth('Accueil', context.mounted);

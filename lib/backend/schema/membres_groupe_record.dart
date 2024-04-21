@@ -46,6 +46,16 @@ class MembresGroupeRecord extends FirestoreRecord {
   String get sexe => _sexe ?? '';
   bool hasSexe() => _sexe != null;
 
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
+  // "type" field.
+  String? _type;
+  String get type => _type ?? '';
+  bool hasType() => _type != null;
+
   void _initializeFields() {
     _fullname = snapshotData['fullname'] as String?;
     _idUser = snapshotData['idUser'] as DocumentReference?;
@@ -53,6 +63,8 @@ class MembresGroupeRecord extends FirestoreRecord {
     _description = snapshotData['description'] as String?;
     _idGroup = snapshotData['idGroup'] as DocumentReference?;
     _sexe = snapshotData['sexe'] as String?;
+    _image = snapshotData['image'] as String?;
+    _type = snapshotData['type'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -96,6 +108,8 @@ Map<String, dynamic> createMembresGroupeRecordData({
   String? description,
   DocumentReference? idGroup,
   String? sexe,
+  String? image,
+  String? type,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -105,6 +119,8 @@ Map<String, dynamic> createMembresGroupeRecordData({
       'description': description,
       'idGroup': idGroup,
       'sexe': sexe,
+      'image': image,
+      'type': type,
     }.withoutNulls,
   );
 
@@ -122,12 +138,22 @@ class MembresGroupeRecordDocumentEquality
         e1?.age == e2?.age &&
         e1?.description == e2?.description &&
         e1?.idGroup == e2?.idGroup &&
-        e1?.sexe == e2?.sexe;
+        e1?.sexe == e2?.sexe &&
+        e1?.image == e2?.image &&
+        e1?.type == e2?.type;
   }
 
   @override
-  int hash(MembresGroupeRecord? e) => const ListEquality().hash(
-      [e?.fullname, e?.idUser, e?.age, e?.description, e?.idGroup, e?.sexe]);
+  int hash(MembresGroupeRecord? e) => const ListEquality().hash([
+        e?.fullname,
+        e?.idUser,
+        e?.age,
+        e?.description,
+        e?.idGroup,
+        e?.sexe,
+        e?.image,
+        e?.type
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is MembresGroupeRecord;
