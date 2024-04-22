@@ -30,3 +30,5 @@ export '/listdes_dons/listdes_dons_widget.dart' show ListdesDonsWidget;
 export '/ajout_sondage/ajout_sondage_widget.dart' show AjoutSondageWidget;
 export '/list_sondage/list_sondage_widget.dart' show ListSondageWidget;
 export '/sondage/sondage_widget.dart' show SondageWidget;
+export '/faire_appel/faire_appel_widget.dart' show FaireAppelWidget;
+export '/appel/appel_widget.dart' show AppelWidget;

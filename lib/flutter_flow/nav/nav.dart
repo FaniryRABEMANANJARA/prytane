@@ -307,6 +307,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'FaireAppel',
+          path: '/faireAppel',
+          builder: (context, params) => FaireAppelWidget(),
+        ),
+        FFRoute(
+          name: 'Appel',
+          path: '/appel',
+          builder: (context, params) => AppelWidget(
+            callID: params.getParam(
+              'callID',
+              ParamType.String,
+            ),
+            userID: params.getParam(
+              'userID',
+              ParamType.String,
+            ),
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
