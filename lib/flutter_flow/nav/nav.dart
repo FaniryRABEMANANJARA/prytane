@@ -307,6 +307,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'Modifierpublication',
+          path: '/modifierpublication',
+          asyncParams: {
+            'modifierPost':
+                getDoc(['publications'], PublicationsRecord.fromSnapshot),
+          },
+          builder: (context, params) => ModifierpublicationWidget(
+            modifierPost: params.getParam(
+              'modifierPost',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

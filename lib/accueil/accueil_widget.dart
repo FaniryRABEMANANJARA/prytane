@@ -58,7 +58,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 5.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -204,16 +204,22 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                   columnPublicationsRecordList[columnIndex];
                               return Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                    16.0, 0.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(16.0),
+                                    ),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 16.0, 16.0, 16.0),
+                                        16.0, 5.0, 16.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -686,8 +692,71 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 5.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'Modifierpublication',
+                                                      queryParameters: {
+                                                        'modifierPost':
+                                                            serializeParam(
+                                                          columnPublicationsRecord,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'modifierPost':
+                                                            columnPublicationsRecord,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    'Modifier',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .warning,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (columnPublicationsRecord
+                                                    .postUser ==
+                                                currentUserReference)
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await columnPublicationsRecord
+                                                      .reference
+                                                      .delete();
+                                                },
                                                 child: Text(
-                                                  'Modifier',
+                                                  'Supprimer',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -699,7 +768,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .warning,
+                                                                .error,
                                                         letterSpacing: 0.0,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
@@ -709,31 +778,6 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                                 ),
-                                              ),
-                                            if (columnPublicationsRecord
-                                                    .postUser ==
-                                                currentUserReference)
-                                              Text(
-                                                'Supprimer',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .error,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
                                               ),
                                           ],
                                         ),
