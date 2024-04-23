@@ -62,8 +62,8 @@ class PublicationsRecord extends FirestoreRecord {
   bool hasComments() => _comments != null;
 
   // "dateCreation" field.
-  String? _dateCreation;
-  String get dateCreation => _dateCreation ?? '';
+  DateTime? _dateCreation;
+  DateTime? get dateCreation => _dateCreation;
   bool hasDateCreation() => _dateCreation != null;
 
   void _initializeFields() {
@@ -76,7 +76,7 @@ class PublicationsRecord extends FirestoreRecord {
     _userBookmarks = getDataList(snapshotData['userBookmarks']);
     _type = snapshotData['type'] as String?;
     _comments = castToType<int>(snapshotData['comments']);
-    _dateCreation = snapshotData['dateCreation'] as String?;
+    _dateCreation = snapshotData['dateCreation'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -121,7 +121,7 @@ Map<String, dynamic> createPublicationsRecordData({
   String? postUserimage,
   String? type,
   int? comments,
-  String? dateCreation,
+  DateTime? dateCreation,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{

@@ -55,6 +55,7 @@ class _CommentaireWidgetState extends State<CommentaireWidget> {
       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 24.0),
       child: Container(
         width: double.infinity,
+        height: 150.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [

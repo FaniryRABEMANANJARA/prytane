@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'detail_evenement_model.dart';
@@ -309,8 +308,8 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.user,
+                                  Icon(
+                                    Icons.groups_2,
                                     color: FlutterFlowTheme.of(context).primary,
                                     size: 24.0,
                                   ),
@@ -318,12 +317,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      valueOrDefault<String>(
-                                        columnEvenementsRecord
-                                            ?.organizers?.length
-                                            ?.toString(),
-                                        'description',
-                                      ),
+                                      'Nombres des participants',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -337,20 +331,6 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                                         .bodyMediumFamily),
                                           ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 3.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.groups_2,
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 24.0,
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -369,6 +349,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMediumFamily,
                                             letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)

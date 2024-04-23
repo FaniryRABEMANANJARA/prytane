@@ -10,9 +10,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'ajoutpublication_widget.dart' show AjoutpublicationWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +26,6 @@ class AjoutpublicationModel extends FlutterFlowModel<AjoutpublicationWidget> {
   // State field(s) for type widget.
   String? typeValue;
   FormFieldController<String>? typeValueController;
-  DateTime? datePicked;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

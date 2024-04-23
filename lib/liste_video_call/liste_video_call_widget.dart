@@ -104,8 +104,8 @@ class _ListeVideoCallWidgetState extends State<ListeVideoCallWidget> {
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () async {
-                          context.pushNamed('FaireAppel');
+                        onPressed: () {
+                          print('IconButton pressed ...');
                         },
                       ),
                     ],
@@ -227,20 +227,10 @@ class _ListeVideoCallWidgetState extends State<ListeVideoCallWidget> {
                                       ),
                                     ],
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed('FaireAppel');
-                                    },
-                                    child: Icon(
-                                      Icons.phone_in_talk,
-                                      color:
-                                          FlutterFlowTheme.of(context).success,
-                                      size: 24.0,
-                                    ),
+                                  Icon(
+                                    Icons.phone_in_talk,
+                                    color: FlutterFlowTheme.of(context).success,
+                                    size: 24.0,
                                   ),
                                 ],
                               ),
