@@ -31,16 +31,6 @@ class EvenementsRecord extends FirestoreRecord {
   String get location => _location ?? '';
   bool hasLocation() => _location != null;
 
-  // "organizers" field.
-  List<DocumentReference>? _organizers;
-  List<DocumentReference> get organizers => _organizers ?? const [];
-  bool hasOrganizers() => _organizers != null;
-
-  // "participants" field.
-  List<DocumentReference>? _participants;
-  List<DocumentReference> get participants => _participants ?? const [];
-  bool hasParticipants() => _participants != null;
-
   // "date_debut" field.
   String? _dateDebut;
   String get dateDebut => _dateDebut ?? '';
@@ -56,15 +46,37 @@ class EvenementsRecord extends FirestoreRecord {
   String get image => _image ?? '';
   bool hasImage() => _image != null;
 
+  // "organizers" field.
+  String? _organizers;
+  String get organizers => _organizers ?? '';
+  bool hasOrganizers() => _organizers != null;
+
+  // "participants" field.
+  String? _participants;
+  String get participants => _participants ?? '';
+  bool hasParticipants() => _participants != null;
+
+  // "type" field.
+  String? _type;
+  String get type => _type ?? '';
+  bool hasType() => _type != null;
+
+  // "id_users" field.
+  DocumentReference? _idUsers;
+  DocumentReference? get idUsers => _idUsers;
+  bool hasIdUsers() => _idUsers != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _description = snapshotData['description'] as String?;
     _location = snapshotData['location'] as String?;
-    _organizers = getDataList(snapshotData['organizers']);
-    _participants = getDataList(snapshotData['participants']);
     _dateDebut = snapshotData['date_debut'] as String?;
     _dateFin = snapshotData['date_fin'] as String?;
     _image = snapshotData['image'] as String?;
+    _organizers = snapshotData['organizers'] as String?;
+    _participants = snapshotData['participants'] as String?;
+    _type = snapshotData['type'] as String?;
+    _idUsers = snapshotData['id_users'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -108,6 +120,10 @@ Map<String, dynamic> createEvenementsRecordData({
   String? dateDebut,
   String? dateFin,
   String? image,
+  String? organizers,
+  String? participants,
+  String? type,
+  DocumentReference? idUsers,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -117,6 +133,10 @@ Map<String, dynamic> createEvenementsRecordData({
       'date_debut': dateDebut,
       'date_fin': dateFin,
       'image': image,
+      'organizers': organizers,
+      'participants': participants,
+      'type': type,
+      'id_users': idUsers,
     }.withoutNulls,
   );
 
@@ -128,15 +148,16 @@ class EvenementsRecordDocumentEquality implements Equality<EvenementsRecord> {
 
   @override
   bool equals(EvenementsRecord? e1, EvenementsRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.title == e2?.title &&
         e1?.description == e2?.description &&
         e1?.location == e2?.location &&
-        listEquality.equals(e1?.organizers, e2?.organizers) &&
-        listEquality.equals(e1?.participants, e2?.participants) &&
         e1?.dateDebut == e2?.dateDebut &&
         e1?.dateFin == e2?.dateFin &&
-        e1?.image == e2?.image;
+        e1?.image == e2?.image &&
+        e1?.organizers == e2?.organizers &&
+        e1?.participants == e2?.participants &&
+        e1?.type == e2?.type &&
+        e1?.idUsers == e2?.idUsers;
   }
 
   @override
@@ -144,11 +165,13 @@ class EvenementsRecordDocumentEquality implements Equality<EvenementsRecord> {
         e?.title,
         e?.description,
         e?.location,
-        e?.organizers,
-        e?.participants,
         e?.dateDebut,
         e?.dateFin,
-        e?.image
+        e?.image,
+        e?.organizers,
+        e?.participants,
+        e?.type,
+        e?.idUsers
       ]);
 
   @override

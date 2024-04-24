@@ -153,7 +153,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                               child: Image.network(
                                 columnEvenementsRecord!.image,
                                 width: double.infinity,
-                                height: 180.0,
+                                height: 400.0,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -172,6 +172,38 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                     valueOrDefault<String>(
                                       columnEvenementsRecord?.location,
                                       'localisation',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 3.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.church_sharp,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
+                                  ),
+                                  Text(
+                                    valueOrDefault<String>(
+                                      columnEvenementsRecord?.type,
+                                      'type',
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -246,7 +278,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord?.dateDebut,
+                                        columnEvenementsRecord?.dateFin,
                                         'date_debut',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -309,7 +341,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Icon(
-                                    Icons.groups_2,
+                                    Icons.person_4,
                                     color: FlutterFlowTheme.of(context).primary,
                                     size: 24.0,
                                   ),
@@ -317,7 +349,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'Nombres des participants',
+                                      'L\'organisateur :',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -337,9 +369,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord
-                                            ?.participants?.length
-                                            ?.toString(),
+                                        columnEvenementsRecord?.organizers,
                                         'description',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -349,7 +379,61 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMediumFamily,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 3.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.groups_2,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        3.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Les participants : ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        3.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        widget.detailsEvenement?.participants,
+                                        'participants',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)

@@ -159,8 +159,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                                     TextSearchItem.fromTerms(
                                                         record, [
                                                   record.title!,
-                                                  record.dateDebut!,
-                                                  record.dateFin!
+                                                  record.type!
                                                 ]),
                                               )
                                               .toList(),
@@ -389,6 +388,32 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                                                     .titleMediumFamily),
                                                       ),
                                                 ),
+                                                Text(
+                                                  serachEvenementItem.type,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMediumFamily),
+                                                      ),
+                                                ),
                                                 Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -564,6 +589,32 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                               children: [
                                                 Text(
                                                   serachEvenementItem.title,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleMediumFamily),
+                                                      ),
+                                                ),
+                                                Text(
+                                                  serachEvenementItem.type,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .titleMedium

@@ -101,24 +101,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 56.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/pry_logo_hor_blanc.png',
-                              width: 200.0,
-                              height: 60.0,
-                              fit: BoxFit.fitWidth,
-                            ),
-                            if (Theme.of(context).brightness == Brightness.dark)
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
                               Image.asset(
-                                'assets/images/logoUpHome@3x.png',
+                                'assets/images/pry_logo_hor_blanc.png',
                                 width: 200.0,
                                 height: 60.0,
                                 fit: BoxFit.fitWidth,
                               ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
