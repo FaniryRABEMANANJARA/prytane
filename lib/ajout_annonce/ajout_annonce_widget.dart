@@ -189,7 +189,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 10.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -556,7 +556,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 20.0, 0.0, 0.0),
+                              0.0, 20.0, 1.0, 0.0),
                           child: Container(
                             width: double.infinity,
                             constraints: BoxConstraints(
@@ -648,7 +648,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 20.0, 0.0, 0.0),
+                              0.0, 20.0, 1.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -852,13 +852,12 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                     child: Stack(
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 32.0, 0.0, 0.0),
+                              0.0, 20.0, 1.0, 0.0),
                           child: Container(
                             width: double.infinity,
                             constraints: BoxConstraints(
@@ -880,17 +879,11 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(
-                                    Icons.location_pin,
+                                    Icons.location_on,
                                     color: FlutterFlowTheme.of(context).primary,
                                     size: 32.0,
                                   ),
-                                  Container(
-                                    width: 300.0,
-                                    height: 30.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                  Expanded(
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 0.0),
@@ -901,7 +894,6 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Localisation',
                                           labelStyle: FlutterFlowTheme.of(
                                                   context)
                                               .labelMedium
@@ -917,6 +909,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                                                 context)
                                                             .labelMediumFamily),
                                               ),
+                                          hintText: 'Localisation ',
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)
                                               .labelMedium
@@ -1001,7 +994,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                               animationsMap['containerOnPageLoadAnimation4']!),
                         ),
                         Text(
-                          'Coordonnées géographiques de l\'emplacement de l\'annonce',
+                          'Localisation',
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -1018,7 +1011,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 12.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await AnnoncesRecord.collection
@@ -1035,6 +1028,8 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                               image: _model.uploadedFileUrl,
                               titre: _model.titreTextController.text,
                             ));
+
+                        context.pushNamed('Listannonces');
                       },
                       text: 'Ajouter',
                       options: FFButtonOptions(
