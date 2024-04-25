@@ -144,9 +144,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ListeEvenement',
           path: '/listeEvenement',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'ListeEvenement')
-              : ListeEvenementWidget(),
+          builder: (context, params) => ListeEvenementWidget(),
         ),
         FFRoute(
           name: 'chat_2_Details',

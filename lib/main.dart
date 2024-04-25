@@ -131,7 +131,6 @@ class _NavBarPageState extends State<NavBarPage> {
       'Listannonces': ListannoncesWidget(),
       'chat_2_main': Chat2MainWidget(),
       'Listegroupe': ListegroupeWidget(),
-      'ListeEvenement': ListeEvenementWidget(),
       'profilMembreCommunautairre': ProfilMembreCommunautairreWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -180,13 +179,6 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             label: 'Groupes',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.event_note,
-            ),
-            label: 'Evenements',
             tooltip: '',
           ),
           BottomNavigationBarItem(

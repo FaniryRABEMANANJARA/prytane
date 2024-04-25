@@ -64,6 +64,30 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 5.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('ListeEvenement');
+                          },
+                          child: Icon(
+                            Icons.notifications_active,
+                            color: FlutterFlowTheme.of(context).error,
+                            size: 35.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 5.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         AuthUserStreamWidget(
                           builder: (context) => ClipRRect(
@@ -83,6 +107,9 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                             child: TextFormField(
                               controller: _model.textController,
                               focusNode: _model.textFieldFocusNode,
+                              onFieldSubmitted: (_) async {
+                                context.pushNamed('Ajoutpublication');
+                              },
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(

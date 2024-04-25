@@ -677,50 +677,77 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                           ),
                                                         ),
                                                       ),
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent1,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                          border: Border.all(
+                                                      InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                              'chat_2_main');
+                                                        },
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .primaryBackground,
-                                                          ),
-                                                        ),
-                                                        child: Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        8.0,
-                                                                        4.0,
-                                                                        8.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              'Message',
-                                                              style: FlutterFlowTheme
+                                                                .accent1,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodySmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodySmallFamily,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                  ),
+                                                                  .primaryBackground,
+                                                            ),
+                                                          ),
+                                                          child: Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0.0, 0.0),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  context.pushNamed(
+                                                                      'chat_2_main');
+                                                                },
+                                                                child: Text(
+                                                                  'Message',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                      ),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
