@@ -67,17 +67,18 @@ class _AjoutSondageWidgetState extends State<AjoutSondageWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              context.safePop();
             },
           ),
           title: Text(
-            'Vote',
-            style: FlutterFlowTheme.of(context).titleMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).titleMediumFamily,
+            'Création d\'un sondage',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
+                  fontSize: 25.0,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).titleMediumFamily),
+                      FlutterFlowTheme.of(context).titleLargeFamily),
                 ),
           ),
           actions: [],
@@ -91,20 +92,6 @@ class _AjoutSondageWidgetState extends State<AjoutSondageWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: Text(
-                    'Création d\'un sondage',
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).headlineLargeFamily,
-                          fontSize: 25.0,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).headlineLargeFamily),
-                        ),
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                   child: TextFormField(
