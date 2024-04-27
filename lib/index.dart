@@ -32,3 +32,4 @@ export '/list_sondage/list_sondage_widget.dart' show ListSondageWidget;
 export '/sondage/sondage_widget.dart' show SondageWidget;
 export '/modifierpublication/modifierpublication_widget.dart'
     show ModifierpublicationWidget;
+export '/ajout_video/ajout_video_widget.dart' show AjoutVideoWidget;
