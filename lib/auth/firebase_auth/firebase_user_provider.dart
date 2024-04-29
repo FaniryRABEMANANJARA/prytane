@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class PrytaneMembreFirebaseUser extends BaseAuthUser {
-  PrytaneMembreFirebaseUser(this.user);
+class PrytaneFirebaseUser extends BaseAuthUser {
+  PrytaneFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -53,18 +53,17 @@ class PrytaneMembreFirebaseUser extends BaseAuthUser {
 
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
-  static BaseAuthUser fromFirebaseUser(User? user) =>
-      PrytaneMembreFirebaseUser(user);
+  static BaseAuthUser fromFirebaseUser(User? user) => PrytaneFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> prytaneMembreFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> prytaneFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = PrytaneMembreFirebaseUser(user);
+        currentUser = PrytaneFirebaseUser(user);
         return currentUser!;
       },
     );

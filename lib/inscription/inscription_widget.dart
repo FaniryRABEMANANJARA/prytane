@@ -163,8 +163,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         FFButtonWidget(
-                          onPressed: () async {
-                            await launchURL('https://web.facebook.com/');
+                          onPressed: () {
+                            print('Button pressed ...');
                           },
                           text: 'Avec Facebook',
                           icon: Icon(
