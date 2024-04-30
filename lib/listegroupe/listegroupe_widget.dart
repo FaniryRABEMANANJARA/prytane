@@ -616,16 +616,12 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                             queryParameters: {
                                                               'detailsGroup':
                                                                   serializeParam(
-                                                                searchGroupItem,
+                                                                searchGroupItem
+                                                                    .reference,
                                                                 ParamType
-                                                                    .Document,
+                                                                    .DocumentReference,
                                                               ),
                                                             }.withoutNulls,
-                                                            extra: <String,
-                                                                dynamic>{
-                                                              'detailsGroup':
-                                                                  searchGroupItem,
-                                                            },
                                                           );
                                                         },
                                                         child: Container(
@@ -1011,16 +1007,12 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                             queryParameters: {
                                                               'detailsGroup':
                                                                   serializeParam(
-                                                                searchGroupItem,
+                                                                searchGroupItem
+                                                                    .reference,
                                                                 ParamType
-                                                                    .Document,
+                                                                    .DocumentReference,
                                                               ),
                                                             }.withoutNulls,
-                                                            extra: <String,
-                                                                dynamic>{
-                                                              'detailsGroup':
-                                                                  searchGroupItem,
-                                                            },
                                                           );
                                                         },
                                                         child: Container(

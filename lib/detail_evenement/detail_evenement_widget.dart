@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class DetailEvenementWidget extends StatefulWidget {
     required this.detailsEvenement,
   });
 
-  final EvenementsRecord? detailsEvenement;
+  final DocumentReference? detailsEvenement;
 
   @override
   State<DetailEvenementWidget> createState() => _DetailEvenementWidgetState();
@@ -79,10 +80,8 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: StreamBuilder<List<EvenementsRecord>>(
-            stream: queryEvenementsRecord(
-              singleRecord: true,
-            ),
+          child: StreamBuilder<EvenementsRecord>(
+            stream: EvenementsRecord.getDocument(widget.detailsEvenement!),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
@@ -98,16 +97,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                   ),
                 );
               }
-              List<EvenementsRecord> columnEvenementsRecordList =
-                  snapshot.data!;
-              // Return an empty Container when the item does not exist.
-              if (snapshot.data!.isEmpty) {
-                return Container();
-              }
-              final columnEvenementsRecord =
-                  columnEvenementsRecordList.isNotEmpty
-                      ? columnEvenementsRecordList.first
-                      : null;
+              final columnEvenementsRecord = snapshot.data!;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -129,7 +119,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                       8.0, 0.0, 0.0, 3.0),
                                   child: Text(
                                     valueOrDefault<String>(
-                                      columnEvenementsRecord?.title,
+                                      columnEvenementsRecord.title,
                                       'title',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -151,7 +141,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12.0),
                               child: Image.network(
-                                columnEvenementsRecord!.image,
+                                columnEvenementsRecord.image,
                                 width: double.infinity,
                                 height: 400.0,
                                 fit: BoxFit.cover,
@@ -170,7 +160,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      columnEvenementsRecord?.location,
+                                      columnEvenementsRecord.location,
                                       'localisation',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -202,7 +192,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      columnEvenementsRecord?.type,
+                                      columnEvenementsRecord.type,
                                       'type',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -237,7 +227,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord?.dateDebut,
+                                        columnEvenementsRecord.dateDebut,
                                         'date_debut',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -278,7 +268,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord?.dateFin,
+                                        columnEvenementsRecord.dateFin,
                                         'date_debut',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -314,7 +304,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord?.description,
+                                        columnEvenementsRecord.description,
                                         'description',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -369,7 +359,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        columnEvenementsRecord?.organizers,
+                                        columnEvenementsRecord.organizers,
                                         'description',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -423,10 +413,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         3.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      valueOrDefault<String>(
-                                        widget.detailsEvenement?.participants,
-                                        'participants',
-                                      ),
+                                      columnEvenementsRecord.participants,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(

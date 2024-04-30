@@ -130,14 +130,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DetailEvenement',
           path: '/detailEvenement',
-          asyncParams: {
-            'detailsEvenement':
-                getDoc(['evenements'], EvenementsRecord.fromSnapshot),
-          },
           builder: (context, params) => DetailEvenementWidget(
             detailsEvenement: params.getParam(
               'detailsEvenement',
-              ParamType.Document,
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['evenements'],
             ),
           ),
         ),
@@ -220,13 +218,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DetailsGroup',
           path: '/detailsGroup',
-          asyncParams: {
-            'detailsGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
-          },
           builder: (context, params) => DetailsGroupWidget(
             detailsGroup: params.getParam(
               'detailsGroup',
-              ParamType.Document,
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['groupes'],
             ),
           ),
         ),
@@ -255,13 +252,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DetailsAnnonce',
           path: '/detailsAnnonce',
-          asyncParams: {
-            'detailAnnonce': getDoc(['annonces'], AnnoncesRecord.fromSnapshot),
-          },
           builder: (context, params) => DetailsAnnonceWidget(
             detailAnnonce: params.getParam(
               'detailAnnonce',
-              ParamType.Document,
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['annonces'],
             ),
           ),
         ),

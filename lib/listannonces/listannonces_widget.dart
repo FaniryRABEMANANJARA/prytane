@@ -571,14 +571,10 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                                                 queryParameters: {
                                                   'detailAnnonce':
                                                       serializeParam(
-                                                    listSearchItem,
-                                                    ParamType.Document,
+                                                    listSearchItem.reference,
+                                                    ParamType.DocumentReference,
                                                   ),
                                                 }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'detailAnnonce':
-                                                      listSearchItem,
-                                                },
                                               );
                                             },
                                             child: Icon(
@@ -776,14 +772,10 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                                                 queryParameters: {
                                                   'detailAnnonce':
                                                       serializeParam(
-                                                    listSearchItem,
-                                                    ParamType.Document,
+                                                    listSearchItem.reference,
+                                                    ParamType.DocumentReference,
                                                   ),
                                                 }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'detailAnnonce':
-                                                      listSearchItem,
-                                                },
                                               );
                                             },
                                             child: Icon(

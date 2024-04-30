@@ -299,7 +299,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 4.0),
                                     child: Text(
-                                      'Confirm Delete',
+                                      'Confirmation Supprimer',
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
@@ -319,7 +319,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'You can\'t undo this action.',
+                                      'Vous ne pouvez pas revenir sur cette action.',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -340,21 +340,33 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Delete',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      color: FlutterFlowTheme.of(context).error,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await widget.chatList!.reference.delete();
+
+                                  context.pushNamed('chat_2_main');
+                                },
+                                child: Text(
+                                  'Supprimer',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                ),
                               ),
                             ),
                           ],

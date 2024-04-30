@@ -530,14 +530,12 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                                   queryParameters: {
                                                     'detailsEvenement':
                                                         serializeParam(
-                                                      serachEvenementItem,
-                                                      ParamType.Document,
+                                                      serachEvenementItem
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
                                                     ),
                                                   }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'detailsEvenement':
-                                                        serachEvenementItem,
-                                                  },
                                                 );
                                               },
                                               child: FaIcon(
@@ -755,14 +753,12 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                                   queryParameters: {
                                                     'detailsEvenement':
                                                         serializeParam(
-                                                      serachEvenementItem,
-                                                      ParamType.Document,
+                                                      serachEvenementItem
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
                                                     ),
                                                   }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'detailsEvenement':
-                                                        serachEvenementItem,
-                                                  },
                                                 );
                                               },
                                               child: FaIcon(
