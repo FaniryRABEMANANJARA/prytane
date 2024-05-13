@@ -12,7 +12,20 @@
           "package_name": "com.flutterflow.prytane"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "644115233622-2c0vfhdqrustheahi7cg635hno453k5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.prytane",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
@@ -20,7 +33,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.prytane"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644115233622:android:5fd06c48b58d27f20374f7",
+        "android_client_info": {
+          "package_name": "com.flutterflow.prytanes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644115233622-l9cl3rdqentv5mo029r7p1cohbcr45g8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.prytanes",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.prytane"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +100,20 @@
           "package_name": "com.mycompany.prytaneadministrateur"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "644115233622-i81munkcun8jv9pm7kmi5qmh6hlnj73n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.prytaneadministrateur",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
@@ -39,7 +121,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.prytane"
+              }
+            }
+          ]
         }
       }
     },
@@ -50,7 +144,20 @@
           "package_name": "com.mycompany.prytanegroupe"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "644115233622-kg52tdmt948bsvce47j40uersa1n7ftj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.prytanegroupe",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCt__-XqfEeYUHRXiGyBhjvWQBWqrrQ3ec"
@@ -58,7 +165,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644115233622-t32n15p2e9tfqdp1ai5b8obnc8nm1jq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.prytane"
+              }
+            }
+          ]
         }
       }
     }

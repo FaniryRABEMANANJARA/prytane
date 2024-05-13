@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -460,6 +461,78 @@ class _ProfilMembreCommunautairreWidgetState
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).labelMediumFamily),
                       ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 60.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3.0,
+                        color: Color(0x33000000),
+                        offset: Offset(
+                          0.0,
+                          1.0,
+                        ),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(8.0),
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.ad,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Annonces',
+                            style: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .labelLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .labelLargeFamily),
+                                ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(0.9, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('Listannonces');
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Padding(

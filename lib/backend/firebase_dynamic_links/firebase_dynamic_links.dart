@@ -5,7 +5,8 @@ import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 
 const _kDynamicLinksUrl = 'https://prytane.page.link';
-const _kAppBundleId = 'com.flutterflow.prytane';
+const _kAppBundleId = 'com.flutterflow.prytanes';
+const _kIosAppId = '6502392283';
 
 Future<String> generateCurrentPageLink(
   BuildContext context, {
@@ -22,6 +23,7 @@ Future<String> generateCurrentPageLink(
     androidParameters: const AndroidParameters(packageName: _kAppBundleId),
     iosParameters: const IOSParameters(
       bundleId: _kAppBundleId,
+      appStoreId: _kIosAppId,
     ),
     socialMetaTagParameters: SocialMetaTagParameters(
       title: title,
@@ -76,7 +78,7 @@ class _DynamicLinksHandlerState extends State<DynamicLinksHandler> {
     final link = linkData.link.toString();
     final host = linkData.link.host;
     final location = link.split(host).last;
-    if (GoRouterState.of(context).uri.toString() != location) {
+    if (widget.router.getCurrentLocation() != location) {
       widget.router.push(location);
     }
   }

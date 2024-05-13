@@ -135,7 +135,6 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Accueil': AccueilWidget(),
-      'Listannonces': ListannoncesWidget(),
       'chat_2_main': Chat2MainWidget(),
       'Listegroupe': ListegroupeWidget(),
       'profilMembreCommunautairre': ProfilMembreCommunautairreWidget(),
@@ -162,14 +161,6 @@ class _NavBarPageState extends State<NavBarPage> {
               FontAwesomeIcons.solidNewspaper,
             ),
             label: 'Actualités',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.ad,
-              size: 24.0,
-            ),
-            label: 'Annonces',
             tooltip: '',
           ),
           BottomNavigationBarItem(

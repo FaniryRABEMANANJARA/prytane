@@ -88,37 +88,54 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
             appBar: AppBar(
               backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
               automaticallyImplyLeading: false,
-              title: Text(
-                'Les annonces',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineMediumFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineMediumFamily),
-                    ),
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pushNamed('profilMembreCommunautairre');
+                },
               ),
-              actions: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                  child: FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30.0,
-                    borderWidth: 1.0,
-                    buttonSize: 60.0,
-                    icon: Icon(
-                      Icons.add_circle_outline_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 32.0,
-                    ),
-                    onPressed: () async {
+              title: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Les annonces',
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).headlineMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context)
+                                  .headlineMediumFamily),
+                        ),
+                  ),
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
                       context.pushNamed('AjoutAnnonce');
                     },
+                    child: Icon(
+                      Icons.add_circle,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 30.0,
+                    ),
                   ),
-                ),
-              ],
-              centerTitle: false,
-              elevation: 0.0,
+                ],
+              ),
+              actions: [],
+              centerTitle: true,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,

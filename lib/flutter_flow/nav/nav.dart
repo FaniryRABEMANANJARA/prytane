@@ -245,9 +245,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Listannonces',
           path: '/listannonces',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Listannonces')
-              : ListannoncesWidget(),
+          builder: (context, params) => ListannoncesWidget(),
         ),
         FFRoute(
           name: 'DetailsAnnonce',
@@ -608,4 +606,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

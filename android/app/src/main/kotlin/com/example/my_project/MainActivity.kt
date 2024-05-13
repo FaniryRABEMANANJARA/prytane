@@ -1,4 +1,4 @@
-package com.flutterflow.prytane
+package com.flutterflow.prytanes
 
 import io.flutter.embedding.android.FlutterActivity
 

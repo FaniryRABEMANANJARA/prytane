@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <!--FF_REVERSED_CLIENT_ID-->
+                <string>com.googleusercontent.apps.644115233622-i0d89cs2q9fbai0kepkratnp25suidjs</string>
                 
             </array>
         </dict>
@@ -40,7 +40,7 @@
         <string>prytane</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>com.flutterflow.prytane</string>
+        <string>com.flutterflow.prytanes</string>
         </array>
         </dict>
     </array>

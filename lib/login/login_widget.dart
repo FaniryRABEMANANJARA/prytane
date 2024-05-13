@@ -415,8 +415,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 },
                                 text: 'Se connecter',
                                 options: FFButtonOptions(
-                                  width: 130.0,
-                                  height: 40.0,
+                                  width: 150.0,
+                                  height: 45.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -451,8 +451,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 },
                                 text: 'S\'inscrire',
                                 options: FFButtonOptions(
-                                  width: 130.0,
-                                  height: 40.0,
+                                  width: 150.0,
+                                  height: 45.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
