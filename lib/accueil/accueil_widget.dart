@@ -303,7 +303,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                     columnPublicationsRecordList[columnIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
+                                      16.0, 5.0, 16.0, 16.0),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -314,6 +314,10 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                         bottomRight: Radius.circular(16.0),
                                         topLeft: Radius.circular(16.0),
                                         topRight: Radius.circular(16.0),
+                                      ),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                       ),
                                     ),
                                     child: Padding(
