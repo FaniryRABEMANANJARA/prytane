@@ -780,7 +780,15 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                 ));
 
                             context.pushNamedAuth(
-                                'CompleteProfile', context.mounted);
+                              'CompleteProfile',
+                              context.mounted,
+                              queryParameters: {
+                                'completeUsers': serializeParam(
+                                  currentUserReference,
+                                  ParamType.DocumentReference,
+                                ),
+                              }.withoutNulls,
+                            );
                           },
                           text: 'Créer un compte',
                           options: FFButtonOptions(

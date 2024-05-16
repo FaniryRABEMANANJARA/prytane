@@ -13,7 +13,12 @@ import 'complete_profile_model.dart';
 export 'complete_profile_model.dart';
 
 class CompleteProfileWidget extends StatefulWidget {
-  const CompleteProfileWidget({super.key});
+  const CompleteProfileWidget({
+    super.key,
+    required this.completeUsers,
+  });
+
+  final DocumentReference? completeUsers;
 
   @override
   State<CompleteProfileWidget> createState() => _CompleteProfileWidgetState();
@@ -56,10 +61,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<UsersRecord>>(
-      stream: queryUsersRecord(
-        singleRecord: true,
-      ),
+    return StreamBuilder<UsersRecord>(
+      stream: UsersRecord.getDocument(widget.completeUsers!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -78,15 +81,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
             ),
           );
         }
-        List<UsersRecord> completeProfileUsersRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
-        final completeProfileUsersRecord =
-            completeProfileUsersRecordList.isNotEmpty
-                ? completeProfileUsersRecordList.first
-                : null;
+        final completeProfileUsersRecord = snapshot.data!;
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -116,13 +111,32 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                                         .headlineMediumFamily),
                               ),
                     ),
-                    AuthUserStreamWidget(
-                      builder: (context) => InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
+                    Container(
+                      width: 100.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => Container(
+                          width: 120.0,
+                          height: 120.0,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            currentUserPhoto,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
                           final selectedMedia =
                               await selectMediaWithSourceBottomSheet(
                             context: context,
@@ -182,17 +196,31 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                             }
                           }
                         },
-                        child: Container(
-                          width: 120.0,
-                          height: 120.0,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                        text: 'Sélectionner une photo de profil',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
                           ),
-                          child: Image.network(
-                            currentUserPhoto,
-                            fit: BoxFit.cover,
-                          ),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),
@@ -511,9 +539,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          await completeProfileUsersRecord!.reference
+                          await completeProfileUsersRecord.reference
                               .update(createUsersRecordData(
-                            email: '',
                             displayName: _model.textController1.text,
                             photoUrl: _model.uploadedFileUrl,
                             phoneNumber: _model.textController3.text,

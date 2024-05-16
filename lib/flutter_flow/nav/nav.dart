@@ -329,7 +329,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'CompleteProfile',
           path: '/completeProfile',
-          builder: (context, params) => CompleteProfileWidget(),
+          builder: (context, params) => CompleteProfileWidget(
+            completeUsers: params.getParam(
+              'completeUsers',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

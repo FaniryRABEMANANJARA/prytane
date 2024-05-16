@@ -40,9 +40,6 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
     _model.nomTextController ??= TextEditingController();
     _model.nomFocusNode ??= FocusNode();
 
-    _model.prenomTextController ??= TextEditingController();
-    _model.prenomFocusNode ??= FocusNode();
-
     _model.emailTextController ??= TextEditingController();
     _model.emailFocusNode ??= FocusNode();
 
@@ -189,6 +186,11 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
 
                                     var downloadUrls = <String>[];
                                     try {
+                                      showUploadMessage(
+                                        context,
+                                        'Uploading file...',
+                                        showLoading: true,
+                                      );
                                       selectedUploadedFiles = selectedMedia
                                           .map((m) => FFUploadedFile(
                                                 name: m.storagePath
@@ -211,6 +213,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                           .map((u) => u!)
                                           .toList();
                                     } finally {
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
                                       _model.isDataUploading = false;
                                     }
                                     if (selectedUploadedFiles.length ==
@@ -223,8 +227,11 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                         _model.uploadedFileUrl =
                                             downloadUrls.first;
                                       });
+                                      showUploadMessage(context, 'Success!');
                                     } else {
                                       setState(() {});
+                                      showUploadMessage(
+                                          context, 'Failed to upload data');
                                       return;
                                     }
                                   }
@@ -261,8 +268,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText:
-                              valueOrDefault(currentUserDocument?.nom, ''),
+                          labelText: currentUserDisplayName,
                           labelStyle: FlutterFlowTheme.of(context)
                               .labelMedium
                               .override(
@@ -329,85 +335,6 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                       .bodyMediumFamily),
                             ),
                         validator: _model.nomTextControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-                    child: AuthUserStreamWidget(
-                      builder: (context) => TextFormField(
-                        controller: _model.prenomTextController,
-                        focusNode: _model.prenomFocusNode,
-                        textCapitalization: TextCapitalization.words,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText:
-                              valueOrDefault(currentUserDocument?.prenom, ''),
-                          labelStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
-                              ),
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
-                              ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 24.0, 0.0, 24.0),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
-                        validator: _model.prenomTextControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -828,10 +755,9 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                             photoUrl: _model.uploadedFileUrl,
                             phoneNumber: _model.telephoneTextController.text,
                             bio: _model.myBioTextController.text,
-                            nom: _model.nomTextController.text,
-                            prenom: _model.prenomTextController.text,
                             province: _model.cityTextController.text,
                             link: _model.lienTextController.text,
+                            displayName: _model.nomTextController.text,
                           ));
 
                           context.pushNamed('profilMembreCommunautairre');

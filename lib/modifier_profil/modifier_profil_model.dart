@@ -26,10 +26,6 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   FocusNode? nomFocusNode;
   TextEditingController? nomTextController;
   String? Function(BuildContext, String?)? nomTextControllerValidator;
-  // State field(s) for prenom widget.
-  FocusNode? prenomFocusNode;
-  TextEditingController? prenomTextController;
-  String? Function(BuildContext, String?)? prenomTextControllerValidator;
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
@@ -58,9 +54,6 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   void dispose() {
     nomFocusNode?.dispose();
     nomTextController?.dispose();
-
-    prenomFocusNode?.dispose();
-    prenomTextController?.dispose();
 
     emailFocusNode?.dispose();
     emailTextController?.dispose();
