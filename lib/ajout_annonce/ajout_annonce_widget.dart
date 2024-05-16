@@ -811,8 +811,8 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 0.0, 0.0),
                                       child: Text(
-                                        dateTimeFormat(
-                                            'MMMMEEEEd', getCurrentTimestamp),
+                                        dateTimeFormat('d/M/y h:mm a',
+                                            getCurrentTimestamp),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(

@@ -146,7 +146,7 @@ class _UserListSmallWidgetState extends State<UserListSmallWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            widget.userRef!.prenom,
+                            widget.userRef!.displayName,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -158,25 +158,6 @@ class _UserListSmallWidgetState extends State<UserListSmallWidget> {
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .bodyMediumFamily),
                                 ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                3.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              widget.userRef!.nom,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                            ),
                           ),
                         ],
                       ),

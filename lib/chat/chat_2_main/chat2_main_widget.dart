@@ -809,7 +809,7 @@ class _Chat2MainWidgetState extends State<Chat2MainWidget> {
                                                                             0.0),
                                                                 child: Text(
                                                                   rowUsersRecord
-                                                                      .prenom,
+                                                                      .displayName,
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,

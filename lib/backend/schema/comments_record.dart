@@ -26,9 +26,19 @@ class CommentsRecord extends FirestoreRecord {
   String get comment => _comment ?? '';
   bool hasComment() => _comment != null;
 
+  // "post_type" field.
+  DocumentReference? _postType;
+  DocumentReference? get postType => _postType;
+  bool hasPostType() => _postType != null;
+
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
   // "created_at" field.
-  String? _createdAt;
-  String get createdAt => _createdAt ?? '';
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
   bool hasCreatedAt() => _createdAt != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
@@ -36,7 +46,9 @@ class CommentsRecord extends FirestoreRecord {
   void _initializeFields() {
     _createdBy = snapshotData['created_by'] as DocumentReference?;
     _comment = snapshotData['comment'] as String?;
-    _createdAt = snapshotData['created_at'] as String?;
+    _postType = snapshotData['post_type'] as DocumentReference?;
+    _image = snapshotData['image'] as String?;
+    _createdAt = snapshotData['created_at'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -81,12 +93,16 @@ class CommentsRecord extends FirestoreRecord {
 Map<String, dynamic> createCommentsRecordData({
   DocumentReference? createdBy,
   String? comment,
-  String? createdAt,
+  DocumentReference? postType,
+  String? image,
+  DateTime? createdAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'created_by': createdBy,
       'comment': comment,
+      'post_type': postType,
+      'image': image,
       'created_at': createdAt,
     }.withoutNulls,
   );
@@ -101,12 +117,14 @@ class CommentsRecordDocumentEquality implements Equality<CommentsRecord> {
   bool equals(CommentsRecord? e1, CommentsRecord? e2) {
     return e1?.createdBy == e2?.createdBy &&
         e1?.comment == e2?.comment &&
+        e1?.postType == e2?.postType &&
+        e1?.image == e2?.image &&
         e1?.createdAt == e2?.createdAt;
   }
 
   @override
-  int hash(CommentsRecord? e) =>
-      const ListEquality().hash([e?.createdBy, e?.comment, e?.createdAt]);
+  int hash(CommentsRecord? e) => const ListEquality()
+      .hash([e?.createdBy, e?.comment, e?.postType, e?.image, e?.createdAt]);
 
   @override
   bool isValidKey(Object? o) => o is CommentsRecord;

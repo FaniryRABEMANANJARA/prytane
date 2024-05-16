@@ -206,7 +206,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ModifierProfil',
           path: '/modifierProfil',
-          builder: (context, params) => ModifierProfilWidget(),
+          builder: (context, params) => ModifierProfilWidget(
+            editProfil: params.getParam(
+              'editProfil',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'profilMembreCommunautairre',
@@ -318,6 +325,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AjoutVideo',
           path: '/ajoutVideo',
           builder: (context, params) => AjoutVideoWidget(),
+        ),
+        FFRoute(
+          name: 'CompleteProfile',
+          path: '/completeProfile',
+          builder: (context, params) => CompleteProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

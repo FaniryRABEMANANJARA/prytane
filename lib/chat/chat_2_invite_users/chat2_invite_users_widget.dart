@@ -363,7 +363,7 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
                                           },
                                           title: Text(
                                             valueOrDefault<String>(
-                                              listViewUsersRecord.nom,
+                                              listViewUsersRecord.displayName,
                                               'Ghost User',
                                             ),
                                             style: FlutterFlowTheme.of(context)

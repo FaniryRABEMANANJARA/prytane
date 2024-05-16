@@ -706,13 +706,51 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      child: Text(
-                                                        columnPublicationsRecord
-                                                            .comments
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                      child: StreamBuilder<
+                                                          List<CommentsRecord>>(
+                                                        stream:
+                                                            queryCommentsRecord(
+                                                          queryBuilder:
+                                                              (commentsRecord) =>
+                                                                  commentsRecord
+                                                                      .where(
+                                                            'post_type',
+                                                            isEqualTo:
+                                                                columnPublicationsRecord
+                                                                    .reference,
+                                                          ),
+                                                        ),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  valueColor:
+                                                                      AlwaysStoppedAnimation<
+                                                                          Color>(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          List<CommentsRecord>
+                                                              textCommentsRecordList =
+                                                              snapshot.data!;
+                                                          return Text(
+                                                            textCommentsRecordList
+                                                                .length
+                                                                .toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .labelSmall
                                                                 .override(
                                                                   fontFamily: FlutterFlowTheme.of(
@@ -726,6 +764,8 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                           FlutterFlowTheme.of(context)
                                                                               .labelSmallFamily),
                                                                 ),
+                                                          );
+                                                        },
                                                       ),
                                                     ),
                                                     InkWell(
@@ -765,8 +805,8 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                         context),
                                                                 child:
                                                                     CommentaireWidget(
-                                                                  postID: columnPublicationsRecord
-                                                                      .reference,
+                                                                  postID:
+                                                                      columnPublicationsRecord,
                                                                 ),
                                                               ),
                                                             );

@@ -457,7 +457,7 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                conditionalBuilderUsersRecord.prenom,
+                                conditionalBuilderUsersRecord.displayName,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(

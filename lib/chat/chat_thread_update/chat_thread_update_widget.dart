@@ -184,7 +184,7 @@ class _ChatThreadUpdateWidgetState extends State<ChatThreadUpdateWidget> {
                                   children: [
                                     SelectionArea(
                                         child: AutoSizeText(
-                                      otherUserUsersRecord.prenom,
+                                      otherUserUsersRecord.displayName,
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .labelSmall

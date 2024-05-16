@@ -160,7 +160,7 @@ class _AjoutSondageWidgetState extends State<AjoutSondageWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Option 1',
-                      hintText: 'Entrer l\'option 1...',
+                      hintText: 'Saisissez l\'option 1...',
                       hintStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
@@ -219,7 +219,7 @@ class _AjoutSondageWidgetState extends State<AjoutSondageWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Option 2',
-                      hintText: 'Entrer l\'option 2...',
+                      hintText: 'Saisissez l\'option 2...',
                       hintStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(

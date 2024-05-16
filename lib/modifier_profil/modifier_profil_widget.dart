@@ -16,7 +16,12 @@ import 'modifier_profil_model.dart';
 export 'modifier_profil_model.dart';
 
 class ModifierProfilWidget extends StatefulWidget {
-  const ModifierProfilWidget({super.key});
+  const ModifierProfilWidget({
+    super.key,
+    required this.editProfil,
+  });
+
+  final DocumentReference? editProfil;
 
   @override
   State<ModifierProfilWidget> createState() => _ModifierProfilWidgetState();
