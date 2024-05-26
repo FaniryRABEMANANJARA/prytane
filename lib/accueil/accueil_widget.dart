@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/commentaire_widget.dart';
+import '/flutter_flow/flutter_flow_media_display.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,9 +32,6 @@ class _AccueilWidgetState extends State<AccueilWidget> {
     super.initState();
     _model = createModel(context, () => AccueilModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -51,7 +50,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
           top: true,
           child: Padding(
@@ -67,69 +66,31 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        StreamBuilder<List<EvenementsRecord>>(
-                          stream: queryEvenementsRecord(),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            List<EvenementsRecord> badgeEvenementsRecordList =
-                                snapshot.data!;
-                            return InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed('ListeEvenement');
-                              },
-                              child: badges.Badge(
-                                badgeContent: Text(
-                                  valueOrDefault<String>(
-                                    formatNumber(
-                                      badgeEvenementsRecordList.length,
-                                      formatType: FormatType.custom,
-                                      format: '',
-                                      locale: '',
-                                    ),
-                                    '0',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .titleSmallFamily,
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                        if (valueOrDefault(currentUserDocument?.role, '') ==
+                            'membre')
+                          AuthUserStreamWidget(
+                            builder: (context) =>
+                                StreamBuilder<List<EvenementsRecord>>(
+                              stream: queryEvenementsRecord(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
                                       ),
-                                ),
-                                showBadge: true,
-                                shape: badges.BadgeShape.circle,
-                                badgeColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                elevation: 4.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 8.0, 8.0),
-                                position: badges.BadgePosition.topEnd(),
-                                animationType: badges.BadgeAnimationType.scale,
-                                toAnimate: true,
-                                child: InkWell(
+                                    ),
+                                  );
+                                }
+                                List<EvenementsRecord>
+                                    badgeEvenementsRecordList = snapshot.data!;
+                                return InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
@@ -137,16 +98,68 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                   onTap: () async {
                                     context.pushNamed('ListeEvenement');
                                   },
-                                  child: Icon(
-                                    Icons.notifications_sharp,
-                                    color: FlutterFlowTheme.of(context).error,
-                                    size: 35.0,
+                                  child: badges.Badge(
+                                    badgeContent: Text(
+                                      valueOrDefault<String>(
+                                        formatNumber(
+                                          badgeEvenementsRecordList.length,
+                                          formatType: FormatType.custom,
+                                          format: '',
+                                          locale: '',
+                                        ),
+                                        '0',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily,
+                                            color: Colors.white,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmallFamily),
+                                          ),
+                                    ),
+                                    showBadge: true,
+                                    shape: badges.BadgeShape.circle,
+                                    badgeColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    elevation: 4.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 8.0, 8.0, 8.0),
+                                    position: badges.BadgePosition.topEnd(),
+                                    animationType:
+                                        badges.BadgeAnimationType.scale,
+                                    toAnimate: true,
+                                    child: Visibility(
+                                      visible: valueOrDefault(
+                                              currentUserDocument?.role, '') ==
+                                          'membre',
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed('ListeEvenement');
+                                        },
+                                        child: Icon(
+                                          Icons.notifications_sharp,
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          size: 35.0,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                                );
+                              },
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -171,81 +184,46 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 0.0, 8.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.textController,
-                              focusNode: _model.textFieldFocusNode,
-                              onFieldSubmitted: (_) async {
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
                                 context.pushNamed('Ajoutpublication');
                               },
-                              autofocus: true,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Quoi de neuf?',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
-                                    ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                              child: Container(
+                                height: 50.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(16.0),
+                                    bottomRight: Radius.circular(16.0),
+                                    topLeft: Radius.circular(16.0),
+                                    topRight: Radius.circular(16.0),
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  border: Border.all(
                                     color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
+                                    'Quoi de neuf?',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMediumFamily),
+                                        ),
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              validator: _model.textControllerValidator
-                                  .asValidator(context),
                             ),
                           ),
                         ),
@@ -524,20 +502,28 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                       ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 12.0, 0.0, 0.0),
-                                            child: ClipRRect(
+                                          FlutterFlowMediaDisplay(
+                                            path: columnPublicationsRecord
+                                                .postImage,
+                                            imageBuilder: (path) => ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(12.0),
+                                                  BorderRadius.circular(8.0),
                                               child: Image.network(
-                                                columnPublicationsRecord
-                                                    .postImage,
-                                                width: double.infinity,
-                                                height: 200.0,
+                                                path,
+                                                width: 300.0,
+                                                height: 300.0,
                                                 fit: BoxFit.cover,
                                               ),
+                                            ),
+                                            videoPlayerBuilder: (path) =>
+                                                FlutterFlowVideoPlayer(
+                                              path: path,
+                                              width: 300.0,
+                                              autoPlay: false,
+                                              looping: true,
+                                              showControls: true,
+                                              allowFullScreen: true,
+                                              allowPlaybackSpeedMenu: false,
                                             ),
                                           ),
                                           Padding(
@@ -856,15 +842,12 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                         queryParameters: {
                                                           'modifierPost':
                                                               serializeParam(
-                                                            columnPublicationsRecord,
-                                                            ParamType.Document,
+                                                            columnPublicationsRecord
+                                                                .reference,
+                                                            ParamType
+                                                                .DocumentReference,
                                                           ),
                                                         }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'modifierPost':
-                                                              columnPublicationsRecord,
-                                                        },
                                                       );
                                                     },
                                                     child: Text(

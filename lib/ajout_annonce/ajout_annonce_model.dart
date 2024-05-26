@@ -28,10 +28,6 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
   FocusNode? titreFocusNode;
   TextEditingController? titreTextController;
   String? Function(BuildContext, String?)? titreTextControllerValidator;
-  // State field(s) for auteur widget.
-  FocusNode? auteurFocusNode;
-  TextEditingController? auteurTextController;
-  String? Function(BuildContext, String?)? auteurTextControllerValidator;
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionTextController;
@@ -58,9 +54,6 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
     unfocusNode.dispose();
     titreFocusNode?.dispose();
     titreTextController?.dispose();
-
-    auteurFocusNode?.dispose();
-    auteurTextController?.dispose();
 
     descriptionFocusNode?.dispose();
     descriptionTextController?.dispose();

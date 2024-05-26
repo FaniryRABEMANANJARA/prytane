@@ -257,12 +257,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DetailsAnnonce',
           path: '/detailsAnnonce',
+          asyncParams: {
+            'detailAnnonce': getDoc(['annonces'], AnnoncesRecord.fromSnapshot),
+          },
           builder: (context, params) => DetailsAnnonceWidget(
             detailAnnonce: params.getParam(
               'detailAnnonce',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['annonces'],
+              ParamType.Document,
             ),
           ),
         ),
@@ -310,14 +311,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Modifierpublication',
           path: '/modifierpublication',
-          asyncParams: {
-            'modifierPost':
-                getDoc(['publications'], PublicationsRecord.fromSnapshot),
-          },
           builder: (context, params) => ModifierpublicationWidget(
             modifierPost: params.getParam(
               'modifierPost',
-              ParamType.Document,
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['publications'],
             ),
           ),
         ),
@@ -337,6 +336,98 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               collectionNamePath: ['users'],
             ),
           ),
+        ),
+        FFRoute(
+          name: 'Ajoutevenement',
+          path: '/ajoutevenement',
+          builder: (context, params) => AjoutevenementWidget(),
+        ),
+        FFRoute(
+          name: 'ListUserMemberGroupe',
+          path: '/listUserMemberGroupe',
+          builder: (context, params) => ListUserMemberGroupeWidget(),
+        ),
+        FFRoute(
+          name: 'modifierGroup',
+          path: '/modifierGroup',
+          builder: (context, params) => ModifierGroupWidget(
+            detailGroup: params.getParam(
+              'detailGroup',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['groupes'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ModifierEvenement',
+          path: '/modifierEvenement',
+          builder: (context, params) => ModifierEvenementWidget(
+            modifEvent: params.getParam(
+              'modifEvent',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['evenements'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ModifierAnnonce',
+          path: '/modifierAnnonce',
+          builder: (context, params) => ModifierAnnonceWidget(
+            modifAnnonce: params.getParam(
+              'modifAnnonce',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['annonces'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'modifierSondage',
+          path: '/modifierSondage',
+          builder: (context, params) => ModifierSondageWidget(
+            modificationSondage: params.getParam(
+              'modificationSondage',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['sondage'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AdhesionGroup',
+          path: '/adhesionGroup',
+          builder: (context, params) => AdhesionGroupWidget(
+            adhesionGroup: params.getParam(
+              'adhesionGroup',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['groupes'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AjoutGroup',
+          path: '/ajoutGroup',
+          builder: (context, params) => AjoutGroupWidget(),
+        ),
+        FFRoute(
+          name: 'modifierRole',
+          path: '/modifierRole',
+          builder: (context, params) => ModifierRoleWidget(
+            modifierProfil: params.getParam(
+              'modifierProfil',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListUsers',
+          path: '/listUsers',
+          builder: (context, params) => ListUsersWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

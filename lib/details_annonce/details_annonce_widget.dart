@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ class DetailsAnnonceWidget extends StatefulWidget {
     required this.detailAnnonce,
   });
 
-  final DocumentReference? detailAnnonce;
+  final AnnoncesRecord? detailAnnonce;
 
   @override
   State<DetailsAnnonceWidget> createState() => _DetailsAnnonceWidgetState();
@@ -99,9 +98,19 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget> {
                   context.pop();
                 },
               ),
+              title: Text(
+                'Détails annonce',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily:
+                          FlutterFlowTheme.of(context).headlineMediumFamily,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).headlineMediumFamily),
+                    ),
+              ),
               actions: [],
               centerTitle: true,
-              elevation: 0.0,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
@@ -361,9 +370,13 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 12.0),
+                                                        0.0, 0.0, 0.0, 4.0),
                                                 child: Text(
-                                                  'Auteur',
+                                                  valueOrDefault<String>(
+                                                    detailsAnnonceAnnoncesRecord
+                                                        ?.localisation,
+                                                    'localisation',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelMedium
@@ -385,35 +398,28 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 12.0),
+                                                        0.0, 0.0, 0.0, 4.0),
                                                 child: Text(
                                                   valueOrDefault<String>(
                                                     detailsAnnonceAnnoncesRecord
                                                         ?.auteur,
-                                                    'auteur',
+                                                    'localisation',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .labelMedium
+                                                      .titleLarge
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 18.0,
+                                                                .titleLargeFamily,
                                                         letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMediumFamily),
+                                                                    .titleLargeFamily),
                                                       ),
                                                 ),
                                               ),

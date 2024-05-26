@@ -139,8 +139,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primary,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),

@@ -160,8 +160,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
                           },
                           child: Icon(
                             Icons.arrow_back,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             size: 35.0,
                           ),
                         ),
@@ -175,8 +174,8 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
                                       .titleLargeFamily,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)

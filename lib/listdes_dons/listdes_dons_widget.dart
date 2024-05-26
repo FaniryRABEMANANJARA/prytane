@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -71,26 +72,29 @@ class _ListdesDonsWidgetState extends State<ListdesDonsWidget> {
                 'Les dons',
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                      fontSize: 22.0,
+                      fontSize: 36.0,
                       letterSpacing: 0.0,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).bodyLargeFamily),
                     ),
               ),
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('LeverdeDons');
-                },
-                child: FaIcon(
-                  FontAwesomeIcons.donate,
-                  color: FlutterFlowTheme.of(context).primary,
-                  size: 30.0,
+              if (valueOrDefault(currentUserDocument?.role, '') == 'membre')
+                AuthUserStreamWidget(
+                  builder: (context) => InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('LeverdeDons');
+                    },
+                    child: FaIcon(
+                      FontAwesomeIcons.donate,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 30.0,
+                    ),
+                  ),
                 ),
-              ),
             ],
           ),
           actions: [],

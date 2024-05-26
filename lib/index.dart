@@ -35,3 +35,17 @@ export '/modifierpublication/modifierpublication_widget.dart'
 export '/ajout_video/ajout_video_widget.dart' show AjoutVideoWidget;
 export '/complete_profile/complete_profile_widget.dart'
     show CompleteProfileWidget;
+export '/ajoutevenement/ajoutevenement_widget.dart' show AjoutevenementWidget;
+export '/list_user_member_groupe/list_user_member_groupe_widget.dart'
+    show ListUserMemberGroupeWidget;
+export '/modifier_group/modifier_group_widget.dart' show ModifierGroupWidget;
+export '/modifier_evenement/modifier_evenement_widget.dart'
+    show ModifierEvenementWidget;
+export '/modifier_annonce/modifier_annonce_widget.dart'
+    show ModifierAnnonceWidget;
+export '/modifier_sondage/modifier_sondage_widget.dart'
+    show ModifierSondageWidget;
+export '/adhesion_group/adhesion_group_widget.dart' show AdhesionGroupWidget;
+export '/ajout_group/ajout_group_widget.dart' show AjoutGroupWidget;
+export '/modifier_role/modifier_role_widget.dart' show ModifierRoleWidget;
+export '/list_users/list_users_widget.dart' show ListUsersWidget;

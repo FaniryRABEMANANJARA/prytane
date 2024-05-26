@@ -276,6 +276,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                   await selectMediaWithSourceBottomSheet(
                                 context: context,
                                 allowPhoto: true,
+                                allowVideo: true,
                               );
                               if (selectedMedia != null &&
                                   selectedMedia.every((m) => validateFileFormat(
@@ -285,6 +286,11 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
 
                                 var downloadUrls = <String>[];
                                 try {
+                                  showUploadMessage(
+                                    context,
+                                    'Uploading file...',
+                                    showLoading: true,
+                                  );
                                   selectedUploadedFiles = selectedMedia
                                       .map((m) => FFUploadedFile(
                                             name: m.storagePath.split('/').last,
@@ -305,6 +311,8 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                       .map((u) => u!)
                                       .toList();
                                 } finally {
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
                                   _model.isDataUploading = false;
                                 }
                                 if (selectedUploadedFiles.length ==
@@ -316,13 +324,16 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                         selectedUploadedFiles.first;
                                     _model.uploadedFileUrl = downloadUrls.first;
                                   });
+                                  showUploadMessage(context, 'Success!');
                                 } else {
                                   setState(() {});
+                                  showUploadMessage(
+                                      context, 'Failed to upload data');
                                   return;
                                 }
                               }
                             },
-                            text: 'Photo',
+                            text: 'Photo ou Video',
                             icon: FaIcon(
                               FontAwesomeIcons.photoVideo,
                             ),

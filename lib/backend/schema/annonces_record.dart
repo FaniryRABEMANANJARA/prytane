@@ -26,11 +26,6 @@ class AnnoncesRecord extends FirestoreRecord {
   String get description => _description ?? '';
   bool hasDescription() => _description != null;
 
-  // "auteur" field.
-  String? _auteur;
-  String get auteur => _auteur ?? '';
-  bool hasAuteur() => _auteur != null;
-
   // "date_creation" field.
   String? _dateCreation;
   String get dateCreation => _dateCreation ?? '';
@@ -51,14 +46,19 @@ class AnnoncesRecord extends FirestoreRecord {
   String get titre => _titre ?? '';
   bool hasTitre() => _titre != null;
 
+  // "auteur" field.
+  String? _auteur;
+  String get auteur => _auteur ?? '';
+  bool hasAuteur() => _auteur != null;
+
   void _initializeFields() {
     _type = snapshotData['type'] as String?;
     _description = snapshotData['description'] as String?;
-    _auteur = snapshotData['auteur'] as String?;
     _dateCreation = snapshotData['date_creation'] as String?;
     _localisation = snapshotData['localisation'] as String?;
     _image = snapshotData['image'] as String?;
     _titre = snapshotData['titre'] as String?;
+    _auteur = snapshotData['auteur'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -98,21 +98,21 @@ class AnnoncesRecord extends FirestoreRecord {
 Map<String, dynamic> createAnnoncesRecordData({
   String? type,
   String? description,
-  String? auteur,
   String? dateCreation,
   String? localisation,
   String? image,
   String? titre,
+  String? auteur,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'type': type,
       'description': description,
-      'auteur': auteur,
       'date_creation': dateCreation,
       'localisation': localisation,
       'image': image,
       'titre': titre,
+      'auteur': auteur,
     }.withoutNulls,
   );
 
@@ -126,22 +126,22 @@ class AnnoncesRecordDocumentEquality implements Equality<AnnoncesRecord> {
   bool equals(AnnoncesRecord? e1, AnnoncesRecord? e2) {
     return e1?.type == e2?.type &&
         e1?.description == e2?.description &&
-        e1?.auteur == e2?.auteur &&
         e1?.dateCreation == e2?.dateCreation &&
         e1?.localisation == e2?.localisation &&
         e1?.image == e2?.image &&
-        e1?.titre == e2?.titre;
+        e1?.titre == e2?.titre &&
+        e1?.auteur == e2?.auteur;
   }
 
   @override
   int hash(AnnoncesRecord? e) => const ListEquality().hash([
         e?.type,
         e?.description,
-        e?.auteur,
         e?.dateCreation,
         e?.localisation,
         e?.image,
-        e?.titre
+        e?.titre,
+        e?.auteur
       ]);
 
   @override

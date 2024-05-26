@@ -44,9 +44,6 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
     _model.titreTextController ??= TextEditingController();
     _model.titreFocusNode ??= FocusNode();
 
-    _model.auteurTextController ??= TextEditingController();
-    _model.auteurFocusNode ??= FocusNode();
-
     _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
 
@@ -288,82 +285,6 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                             .asValidator(context),
                       ),
                       TextFormField(
-                        controller: _model.auteurTextController,
-                        focusNode: _model.auteurFocusNode,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText:
-                              'Nom ou identifiant de l\'auteur de l\'annonce',
-                          labelStyle: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineSmallFamily,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineSmallFamily),
-                              ),
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
-                              ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 12.0, 16.0, 12.0),
-                        ),
-                        style:
-                            FlutterFlowTheme.of(context).headlineSmall.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineSmallFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineSmallFamily),
-                                ),
-                        cursorColor: FlutterFlowTheme.of(context).primary,
-                        validator: _model.auteurTextControllerValidator
-                            .asValidator(context),
-                      ),
-                      TextFormField(
                         controller: _model.descriptionTextController,
                         focusNode: _model.descriptionFocusNode,
                         autofocus: true,
@@ -481,6 +402,11 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
 
                                   var downloadUrls = <String>[];
                                   try {
+                                    showUploadMessage(
+                                      context,
+                                      'Uploading file...',
+                                      showLoading: true,
+                                    );
                                     selectedUploadedFiles = selectedMedia
                                         .map((m) => FFUploadedFile(
                                               name:
@@ -502,6 +428,8 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                         .map((u) => u!)
                                         .toList();
                                   } finally {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
                                     _model.isDataUploading = false;
                                   }
                                   if (selectedUploadedFiles.length ==
@@ -514,8 +442,11 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                       _model.uploadedFileUrl =
                                           downloadUrls.first;
                                     });
+                                    showUploadMessage(context, 'Success!');
                                   } else {
                                     setState(() {});
+                                    showUploadMessage(
+                                        context, 'Failed to upload data');
                                     return;
                                   }
                                 }
@@ -1021,7 +952,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                               type: _model.typeValue,
                               description:
                                   _model.descriptionTextController.text,
-                              auteur: _model.titreTextController.text,
+                              auteur: currentUserDisplayName,
                               dateCreation: dateTimeFormat(
                                   'MMMMEEEEd', _model.datePicked),
                               localisation:

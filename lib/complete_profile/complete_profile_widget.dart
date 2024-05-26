@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -534,6 +536,80 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                             .asValidator(context),
                       ),
                     ),
+                    if (valueOrDefault(currentUserDocument?.role, '') ==
+                        'admin')
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => StreamBuilder<List<RoleRecord>>(
+                            stream: queryRoleRecord(
+                              queryBuilder: (roleRecord) =>
+                                  roleRecord.orderBy('nom'),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<RoleRecord> dropDownRoleRecordList =
+                                  snapshot.data!;
+                              return FlutterFlowDropDown<String>(
+                                controller: _model.dropDownValueController ??=
+                                    FormFieldController<String>(null),
+                                options: dropDownRoleRecordList
+                                    .map((e) => e.nom)
+                                    .toList(),
+                                onChanged: (val) =>
+                                    setState(() => _model.dropDownValue = val),
+                                width: 300.0,
+                                height: 56.0,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                                hintText: 'Choisissez votre rôle',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 2.0,
+                                borderRadius: 8.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                hidesUnderline: true,
+                                isOverButton: true,
+                                isSearchable: false,
+                                isMultiSelect: false,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -547,6 +623,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                             province: _model.textController5.text,
                             link: _model.textController4.text,
                             bio: _model.textController2.text,
+                            role: _model.dropDownValue,
                           ));
 
                           context.pushNamed('profilMembreCommunautairre');
@@ -595,11 +672,12 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                     ),
                     Text(
                       'En complétant votre profil, vous acceptez notre politique de confidentialité.',
+                      textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodySmallFamily,
                             color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 10.0,
+                            fontSize: 14.0,
                             letterSpacing: 0.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).bodySmallFamily),
