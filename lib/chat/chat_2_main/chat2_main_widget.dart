@@ -147,9 +147,9 @@ class _Chat2MainWidgetState extends State<Chat2MainWidget> {
                             color: FlutterFlowTheme.of(context).primary,
                             size: 90.0,
                           ),
-                          title: 'No Chats',
+                          title: 'Pas de discussions',
                           body:
-                              'You don\'t have any chats created, start a chat by tapping the button in the top right. ',
+                              'Vous n\'avez pas créé de chat, démarrez un chat en appuyant sur le bouton en haut à droite. ',
                         ),
                       ),
                     );
