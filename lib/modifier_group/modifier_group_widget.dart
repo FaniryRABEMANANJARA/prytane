@@ -111,6 +111,7 @@ class _ModifierGroupWidgetState extends State<ModifierGroupWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
               child: Text(
                 'Modifier votre groupe',
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily:
                           FlutterFlowTheme.of(context).headlineMediumFamily,

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -397,7 +398,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       return;
                                     }
 
-                                    context.goNamedAuth(
+                                    context.pushNamedAuth(
+                                        'chargement', context.mounted);
+
+                                    context.pushNamedAuth(
                                         'Accueil', context.mounted);
                                   },
                                   text: 'Se connecter',
@@ -408,7 +412,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFF4C8C5C),
+                                    color: FlutterFlowTheme.of(context).success,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
@@ -444,7 +448,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFF24B3D),
+                                    color: FlutterFlowTheme.of(context).success,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
@@ -513,55 +517,33 @@ class _LoginWidgetState extends State<LoginWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 0.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    final user = await authManager
-                                        .signInWithGoogle(context);
-                                    if (user == null) {
-                                      return;
-                                    }
-
-                                    context.pushNamedAuth(
-                                        'profilMembreCommunautairre',
-                                        context.mounted);
-                                  },
-                                  text: 'Avec Google',
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.googlePlus,
-                                  ),
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFF10405),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          color: Colors.white,
-                                          fontSize: 12.0,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
+                              FlutterFlowIconButton(
+                                borderColor:
+                                    FlutterFlowTheme.of(context).success,
+                                borderRadius: 20.0,
+                                borderWidth: 1.0,
+                                buttonSize: 50.0,
+                                fillColor: FlutterFlowTheme.of(context).accent1,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.googlePlus,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  size: 30.0,
                                 ),
+                                onPressed: () async {
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  final user = await authManager
+                                      .signInWithGoogle(context);
+                                  if (user == null) {
+                                    return;
+                                  }
+
+                                  context.pushNamedAuth(
+                                      'chargement', context.mounted);
+
+                                  context.pushNamedAuth(
+                                      'Accueil', context.mounted);
+                                },
                               ),
                             ],
                           ),

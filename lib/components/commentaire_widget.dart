@@ -259,7 +259,7 @@ class _CommentaireWidgetState extends State<CommentaireWidget> {
                                           child: Icon(
                                             Icons.delete_sharp,
                                             color: FlutterFlowTheme.of(context)
-                                                .error,
+                                                .secondaryText,
                                             size: 24.0,
                                           ),
                                         ),

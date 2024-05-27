@@ -83,14 +83,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
-        child: appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+        child: appStateNotifier.loggedIn ? ChargementWidget() : LoginWidget(),
       ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+              appStateNotifier.loggedIn ? ChargementWidget() : LoginWidget(),
         ),
         FFRoute(
           name: 'login',
@@ -118,9 +118,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Listegroupe',
           path: '/listegroupe',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Listegroupe')
-              : ListegroupeWidget(),
+          builder: (context, params) => ListegroupeWidget(),
         ),
         FFRoute(
           name: 'Ajoutpublication',
@@ -160,9 +158,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'chat_2_main',
           path: '/chat2Main',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'chat_2_main')
-              : Chat2MainWidget(),
+          builder: (context, params) => Chat2MainWidget(),
         ),
         FFRoute(
           name: 'chat_2_InviteUsers',
@@ -192,13 +188,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Accueil',
-          path: '/accueil',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Accueil')
-              : AccueilWidget(),
-        ),
-        FFRoute(
           name: 'Ajoutstory',
           path: '/ajoutstory',
           builder: (context, params) => AjoutstoryWidget(),
@@ -218,9 +207,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profilMembreCommunautairre',
           path: '/profilMembreCommunautairre',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profilMembreCommunautairre')
-              : ProfilMembreCommunautairreWidget(),
+          builder: (context, params) => ProfilMembreCommunautairreWidget(),
         ),
         FFRoute(
           name: 'DetailsGroup',
@@ -270,13 +257,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'RejoindreGroup',
           path: '/rejoindreGroup',
-          asyncParams: {
-            'adhesionGroup': getDoc(['groupes'], GroupesRecord.fromSnapshot),
-          },
           builder: (context, params) => RejoindreGroupWidget(
             adhesionGroup: params.getParam(
               'adhesionGroup',
-              ParamType.Document,
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['groupes'],
             ),
           ),
         ),
@@ -428,6 +414,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ListUsers',
           path: '/listUsers',
           builder: (context, params) => ListUsersWidget(),
+        ),
+        FFRoute(
+          name: 'chargement',
+          path: '/chargement',
+          builder: (context, params) => ChargementWidget(),
+        ),
+        FFRoute(
+          name: 'Accueil',
+          path: '/accueil',
+          builder: (context, params) => AccueilWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

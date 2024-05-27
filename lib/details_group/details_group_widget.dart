@@ -337,13 +337,10 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget> {
                                   'RejoindreGroup',
                                   queryParameters: {
                                     'adhesionGroup': serializeParam(
-                                      parentColumnGroupesRecord,
-                                      ParamType.Document,
+                                      parentColumnGroupesRecord.reference,
+                                      ParamType.DocumentReference,
                                     ),
                                   }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'adhesionGroup': parentColumnGroupesRecord,
-                                  },
                                 );
                               },
                               child: Container(

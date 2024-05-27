@@ -22,7 +22,7 @@ class RejoindreGroupWidget extends StatefulWidget {
     required this.adhesionGroup,
   });
 
-  final GroupesRecord? adhesionGroup;
+  final DocumentReference? adhesionGroup;
 
   @override
   State<RejoindreGroupWidget> createState() => _RejoindreGroupWidgetState();
@@ -199,6 +199,7 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
+                                                fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
@@ -735,6 +736,7 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyMediumFamily,
+                                                      fontSize: 16.0,
                                                       letterSpacing: 0.0,
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
@@ -813,6 +815,11 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
 
                                                 var downloadUrls = <String>[];
                                                 try {
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Uploading file...',
+                                                    showLoading: true,
+                                                  );
                                                   selectedUploadedFiles =
                                                       selectedMedia
                                                           .map((m) =>
@@ -847,6 +854,8 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
                                                           .map((u) => u!)
                                                           .toList();
                                                 } finally {
+                                                  ScaffoldMessenger.of(context)
+                                                      .hideCurrentSnackBar();
                                                   _model.isDataUploading =
                                                       false;
                                                 }
@@ -862,8 +871,12 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
                                                     _model.uploadedFileUrl =
                                                         downloadUrls.first;
                                                   });
+                                                  showUploadMessage(
+                                                      context, 'Success!');
                                                 } else {
                                                   setState(() {});
+                                                  showUploadMessage(context,
+                                                      'Failed to upload data');
                                                   return;
                                                 }
                                               }
@@ -929,7 +942,7 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget> {
                       decoration: BoxDecoration(),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 12.0),
+                            16.0, 12.0, 16.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             await MembresGroupeRecord.collection

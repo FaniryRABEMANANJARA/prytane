@@ -217,6 +217,7 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
                   } else {
                     return Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(

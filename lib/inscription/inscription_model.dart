@@ -14,10 +14,10 @@ import 'package:provider/provider.dart';
 class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressTextController;
-  String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
+  // State field(s) for email widget.
+  FocusNode? emailFocusNode;
+  TextEditingController? emailTextController;
+  String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for prenom widget.
   FocusNode? prenomFocusNode;
   TextEditingController? prenomTextController;
@@ -31,18 +31,25 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
   TextEditingController? passwordTextController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  // State field(s) for password_confirm widget.
+  FocusNode? passwordConfirmFocusNode;
+  TextEditingController? passwordConfirmTextController;
+  late bool passwordConfirmVisibility;
+  String? Function(BuildContext, String?)?
+      passwordConfirmTextControllerValidator;
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController;
 
   @override
   void initState(BuildContext context) {
     passwordVisibility = false;
+    passwordConfirmVisibility = false;
   }
 
   @override
   void dispose() {
-    emailAddressFocusNode?.dispose();
-    emailAddressTextController?.dispose();
+    emailFocusNode?.dispose();
+    emailTextController?.dispose();
 
     prenomFocusNode?.dispose();
     prenomTextController?.dispose();
@@ -52,6 +59,9 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
 
     passwordFocusNode?.dispose();
     passwordTextController?.dispose();
+
+    passwordConfirmFocusNode?.dispose();
+    passwordConfirmTextController?.dispose();
   }
 
   /// Additional helper methods.

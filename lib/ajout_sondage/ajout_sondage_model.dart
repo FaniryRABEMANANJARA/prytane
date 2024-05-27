@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/components/nav_bar1_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -26,9 +26,13 @@ class AjoutSondageModel extends FlutterFlowModel<AjoutSondageWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
+  // Model for NavBar1 component.
+  late NavBar1Model navBar1Model;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    navBar1Model = createModel(context, () => NavBar1Model());
+  }
 
   @override
   void dispose() {
@@ -41,5 +45,7 @@ class AjoutSondageModel extends FlutterFlowModel<AjoutSondageWidget> {
 
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
+
+    navBar1Model.dispose();
   }
 }

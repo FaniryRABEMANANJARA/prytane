@@ -13,7 +13,6 @@ export '/chat/chat_2_main/chat2_main_widget.dart' show Chat2MainWidget;
 export '/chat/chat_2_invite_users/chat2_invite_users_widget.dart'
     show Chat2InviteUsersWidget;
 export '/chat/image_details/image_details_widget.dart' show ImageDetailsWidget;
-export '/accueil/accueil_widget.dart' show AccueilWidget;
 export '/ajoutstory/ajoutstory_widget.dart' show AjoutstoryWidget;
 export '/modifier_profil/modifier_profil_widget.dart' show ModifierProfilWidget;
 export '/profil_membre_communautairre/profil_membre_communautairre_widget.dart'
@@ -49,3 +48,5 @@ export '/adhesion_group/adhesion_group_widget.dart' show AdhesionGroupWidget;
 export '/ajout_group/ajout_group_widget.dart' show AjoutGroupWidget;
 export '/modifier_role/modifier_role_widget.dart' show ModifierRoleWidget;
 export '/list_users/list_users_widget.dart' show ListUsersWidget;
+export '/chargement/chargement_widget.dart' show ChargementWidget;
+export '/accueil/accueil_widget.dart' show AccueilWidget;
