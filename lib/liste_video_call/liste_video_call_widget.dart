@@ -1,5 +1,5 @@
 import '/backend/backend.dart';
-import '/components/nav_bar1_widget.dart';
+import '/components/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -426,9 +426,9 @@ class _ListeVideoCallWidgetState extends State<ListeVideoCallWidget> {
                 ),
               ),
               wrapWithModel(
-                model: _model.navBar1Model,
+                model: _model.navBar2Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(),
+                child: NavBar2Widget(),
               ),
             ],
           ),

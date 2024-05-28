@@ -26,15 +26,15 @@ class AjoutGroupModel extends FlutterFlowModel<AjoutGroupWidget> {
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionTextController;
   String? Function(BuildContext, String?)? descriptionTextControllerValidator;
-  // State field(s) for membres widget.
-  List<String>? membresValue;
-  FormFieldController<List<String>>? membresValueController;
   // State field(s) for type widget.
   String? typeValue;
   FormFieldController<String>? typeValueController;
   // State field(s) for administrateurs widget.
   List<String>? administrateursValue;
   FormFieldController<List<String>>? administrateursValueController;
+  // State field(s) for membres widget.
+  List<String>? membresValue;
+  FormFieldController<List<String>>? membresValueController;
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
