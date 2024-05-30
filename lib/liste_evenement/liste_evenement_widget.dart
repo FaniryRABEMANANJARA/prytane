@@ -33,9 +33,8 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().searchActiveEvenement = false;
-      });
+      FFAppState().searchActiveEvenement = false;
+      setState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -214,10 +213,9 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                                       .toList();
                                               ;
                                             });
-                                            setState(() {
-                                              FFAppState()
-                                                  .searchActiveEvenement = true;
-                                            });
+                                            FFAppState().searchActiveEvenement =
+                                                true;
+                                            setState(() {});
                                           },
                                         ),
                                         autofocus: true,
@@ -328,10 +326,9 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
                                       setState(() {
                                         _model.textController?.clear();
                                       });
-                                      setState(() {
-                                        FFAppState().searchActiveEvenement =
-                                            false;
-                                      });
+                                      FFAppState().searchActiveEvenement =
+                                          false;
+                                      setState(() {});
                                     },
                                     child: Icon(
                                       Icons.clear,

@@ -32,9 +32,8 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().searchActive = false;
-      });
+      FFAppState().searchActive = false;
+      setState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -207,10 +206,8 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                         .toList();
                                                 ;
                                               });
-                                              setState(() {
-                                                FFAppState().searchActive =
-                                                    true;
-                                              });
+                                              FFAppState().searchActive = true;
+                                              setState(() {});
                                             },
                                           ),
                                           autofocus: true,
@@ -323,9 +320,8 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                         setState(() {
                                           _model.textController?.clear();
                                         });
-                                        setState(() {
-                                          FFAppState().searchActive = false;
-                                        });
+                                        FFAppState().searchActive = false;
+                                        setState(() {});
                                       },
                                       child: Icon(
                                         Icons.clear,

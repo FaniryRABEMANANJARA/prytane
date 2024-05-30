@@ -35,9 +35,8 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().searchActive = false;
-      });
+      FFAppState().searchActive = false;
+      setState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -284,10 +283,9 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                                                           .toList();
                                                   ;
                                                 });
-                                                setState(() {
-                                                  FFAppState().searchActive =
-                                                      true;
-                                                });
+                                                FFAppState().searchActive =
+                                                    true;
+                                                setState(() {});
                                               },
                                             ),
                                             autofocus: true,

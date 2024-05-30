@@ -103,11 +103,6 @@ class _AppelsVideoWidgetState extends State<AppelsVideoWidget> {
                               width: double.infinity,
                               height: 467.0,
                               decoration: BoxDecoration(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [],
-                              ),
                             ),
                           ],
                         ),

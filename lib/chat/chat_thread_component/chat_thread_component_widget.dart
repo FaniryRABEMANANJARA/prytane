@@ -355,10 +355,9 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
 
                             if (_model.uploadedFileUrl != null &&
                                 _model.uploadedFileUrl != '') {
-                              setState(() {
-                                _model.addToImagesUploaded(
-                                    _model.uploadedFileUrl);
-                              });
+                              _model
+                                  .addToImagesUploaded(_model.uploadedFileUrl);
+                              setState(() {});
                             }
                           },
                         ),
@@ -440,9 +439,8 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
                                         _model.uploadedFileUrl = '';
                                       });
 
-                                      setState(() {
-                                        _model.imagesUploaded = [];
-                                      });
+                                      _model.imagesUploaded = [];
+                                      setState(() {});
 
                                       setState(() {});
                                     },
@@ -649,9 +647,8 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
                                           _model.uploadedFileUrl = '';
                                         });
 
-                                        setState(() {
-                                          _model.imagesUploaded = [];
-                                        });
+                                        _model.imagesUploaded = [];
+                                        setState(() {});
                                       } finally {
                                         await firestoreBatch.commit();
                                       }

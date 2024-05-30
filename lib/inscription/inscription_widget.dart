@@ -248,7 +248,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Prénom(s)',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -260,6 +259,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .labelMediumFamily),
                                   ),
+                              hintText: 'Prénom(s)',
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -442,7 +442,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                   autofocus: true,
                                   obscureText: !_model.passwordVisibility,
                                   decoration: InputDecoration(
-                                    labelText: 'Mot de passe',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -455,6 +454,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMediumFamily),
                                         ),
+                                    hintText: 'Mot de passe',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -554,8 +554,6 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                   obscureText:
                                       !_model.passwordConfirmVisibility,
                                   decoration: InputDecoration(
-                                    labelText:
-                                        'Veuillez confirmer votre mot de passe',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -568,6 +566,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMediumFamily),
                                         ),
+                                    hintText:
+                                        'Veuillez confirmer votre mot de passe',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -764,6 +764,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                               .override(
                                 fontFamily: 'Roboto',
                                 color: Colors.white,
+                                fontSize: 16.0,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.bold,
                                 useGoogleFonts:
