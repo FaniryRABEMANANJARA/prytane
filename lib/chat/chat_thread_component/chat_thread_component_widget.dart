@@ -232,7 +232,7 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
                                   alignment: AlignmentDirectional(-1.0, -1.0),
                                   child: FlutterFlowIconButton(
                                     borderColor:
-                                        FlutterFlowTheme.of(context).error,
+                                        FlutterFlowTheme.of(context).warning,
                                     borderRadius: 20.0,
                                     borderWidth: 2.0,
                                     buttonSize: 40.0,
@@ -240,7 +240,8 @@ class _ChatThreadComponentWidgetState extends State<ChatThreadComponentWidget> {
                                         .primaryBackground,
                                     icon: Icon(
                                       Icons.delete_outline_rounded,
-                                      color: FlutterFlowTheme.of(context).error,
+                                      color:
+                                          FlutterFlowTheme.of(context).warning,
                                       size: 24.0,
                                     ),
                                     onPressed: () async {

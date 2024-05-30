@@ -1,3 +1,4 @@
+import '/components/liste_users_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -144,8 +145,19 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           color: Colors.white,
                           size: 30.0,
                         ),
-                        onPressed: () {
-                          print('MiddleButton pressed ...');
+                        onPressed: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: ListeUsersWidget(),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
                         },
                       ),
                     ),

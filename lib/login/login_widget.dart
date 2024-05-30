@@ -418,7 +418,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .override(
                                           fontFamily: 'Lexend Deca',
                                           color: Colors.white,
-                                          fontSize: 18.0,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           useGoogleFonts: GoogleFonts.asMap()
@@ -454,7 +454,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .override(
                                           fontFamily: 'Lexend Deca',
                                           color: Colors.white,
-                                          fontSize: 18.0,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           useGoogleFonts: GoogleFonts.asMap()

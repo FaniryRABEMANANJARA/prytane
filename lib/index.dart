@@ -50,3 +50,4 @@ export '/modifier_role/modifier_role_widget.dart' show ModifierRoleWidget;
 export '/list_users/list_users_widget.dart' show ListUsersWidget;
 export '/chargement/chargement_widget.dart' show ChargementWidget;
 export '/accueil/accueil_widget.dart' show AccueilWidget;
+export '/appels_video/appels_video_widget.dart' show AppelsVideoWidget;

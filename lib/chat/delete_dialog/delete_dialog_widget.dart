@@ -228,7 +228,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Icon(
                                   Icons.delete_outline_rounded,
-                                  color: FlutterFlowTheme.of(context).error,
+                                  color: FlutterFlowTheme.of(context).warning,
                                   size: 20.0,
                                 ),
                               ),
@@ -245,7 +245,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                               FlutterFlowTheme.of(context)
                                                   .bodyMediumFamily,
                                           color: FlutterFlowTheme.of(context)
-                                              .error,
+                                              .warning,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(

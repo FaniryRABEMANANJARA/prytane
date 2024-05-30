@@ -424,6 +424,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Accueil',
           path: '/accueil',
           builder: (context, params) => AccueilWidget(),
+        ),
+        FFRoute(
+          name: 'AppelsVideo',
+          path: '/appelsVideo',
+          builder: (context, params) => AppelsVideoWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
