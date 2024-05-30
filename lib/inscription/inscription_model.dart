@@ -16,14 +16,6 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
-  // State field(s) for prenom widget.
-  FocusNode? prenomFocusNode;
-  TextEditingController? prenomTextController;
-  String? Function(BuildContext, String?)? prenomTextControllerValidator;
-  // State field(s) for nom widget.
-  FocusNode? nomFocusNode;
-  TextEditingController? nomTextController;
-  String? Function(BuildContext, String?)? nomTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
   TextEditingController? passwordTextController;
@@ -48,12 +40,6 @@ class InscriptionModel extends FlutterFlowModel<InscriptionWidget> {
   void dispose() {
     emailFocusNode?.dispose();
     emailTextController?.dispose();
-
-    prenomFocusNode?.dispose();
-    prenomTextController?.dispose();
-
-    nomFocusNode?.dispose();
-    nomTextController?.dispose();
 
     passwordFocusNode?.dispose();
     passwordTextController?.dispose();

@@ -358,10 +358,11 @@ class _CommentaireWidgetState extends State<CommentaireWidget> {
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 1.0),
                               child: TextFormField(
                                 controller: _model.textController,
                                 focusNode: _model.textFieldFocusNode,
@@ -451,8 +452,8 @@ class _CommentaireWidgetState extends State<CommentaireWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyMediumFamily),
                                     ),
-                                maxLines: 8,
-                                minLines: 3,
+                                maxLines: 5,
+                                minLines: 1,
                                 validator: _model.textControllerValidator
                                     .asValidator(context),
                               ),

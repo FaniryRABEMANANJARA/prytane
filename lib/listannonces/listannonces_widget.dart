@@ -378,6 +378,7 @@ class _ListannoncesWidgetState extends State<ListannoncesWidget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .bodyMediumFamily,
+                                                  color: Color(0xFF0677BC),
                                                   letterSpacing: 0.0,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()

@@ -97,6 +97,7 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
                   style: FlutterFlowTheme.of(context).labelSmall.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).labelSmallFamily,
+                        fontSize: 10.0,
                         letterSpacing: 0.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).labelSmallFamily),

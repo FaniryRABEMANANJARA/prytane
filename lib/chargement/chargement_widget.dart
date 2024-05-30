@@ -104,12 +104,14 @@ class _ChargementWidgetState extends State<ChargementWidget>
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
               image: DecorationImage(
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
+                alignment: AlignmentDirectional(0.0, 1.0),
                 image: Image.asset(
-                  'assets/images/Capture_decran_2024-05-26_a_20.13.14.png',
+                  'assets/images/0zhao_8.jpg',
                 ).image,
               ),
             ),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Column(
@@ -120,7 +122,7 @@ class _ChargementWidgetState extends State<ChargementWidget>
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 300.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 250.0, 0.0, 0.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
@@ -139,7 +141,7 @@ class _ChargementWidgetState extends State<ChargementWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
                       child: Container(
-                        width: 241.0,
+                        width: 245.0,
                         height: 25.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(

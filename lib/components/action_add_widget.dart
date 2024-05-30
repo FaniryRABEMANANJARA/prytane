@@ -81,10 +81,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                             width: 40.0,
                             height: 40.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).accent1,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
@@ -159,10 +160,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                 width: 40.0,
                                 height: 40.0,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),
@@ -237,10 +239,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                 width: 40.0,
                                 height: 40.0,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),
@@ -315,10 +318,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                             width: 40.0,
                             height: 40.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).accent1,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
@@ -386,10 +390,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                             width: 40.0,
                             height: 40.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).accent1,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
@@ -463,10 +468,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                 width: 40.0,
                                 height: 40.0,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),

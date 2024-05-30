@@ -9,7 +9,6 @@ import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'modifier_profil_model.dart';
@@ -644,8 +643,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 0.0, 24.0),
-                          prefixIcon: FaIcon(
-                            FontAwesomeIcons.link,
+                          prefixIcon: Icon(
+                            Icons.link_sharp,
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -736,7 +735,8 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget> {
                                       .bodyMediumFamily),
                             ),
                         textAlign: TextAlign.start,
-                        maxLines: 2,
+                        maxLines: 5,
+                        minLines: 1,
                         validator: _model.myBioTextControllerValidator
                             .asValidator(context),
                       ),

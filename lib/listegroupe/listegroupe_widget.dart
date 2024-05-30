@@ -133,7 +133,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 635.0,
+                    height: 745.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
