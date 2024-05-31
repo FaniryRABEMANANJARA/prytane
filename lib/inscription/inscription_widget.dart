@@ -137,9 +137,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(16.0),
                             ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 5.0, 0.0, 0.0),
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: TextFormField(
                                 controller: _model.emailTextController,
                                 focusNode: _model.emailFocusNode,

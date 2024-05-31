@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/nav_bar1_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -57,37 +56,32 @@ class _SondageWidgetState extends State<SondageWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+          title: Align(
+            alignment: AlignmentDirectional(0.0, 0.0),
+            child: Text(
+              'Sondage',
+              style: FlutterFlowTheme.of(context).headlineLarge.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineLargeFamily,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineLargeFamily),
+                  ),
             ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            'Sondage',
-            style: FlutterFlowTheme.of(context).headlineLarge.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineLargeFamily,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineLargeFamily),
-                ),
           ),
           actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FutureBuilder<List<SondageRecord>>(
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 725.0,
+              decoration: BoxDecoration(),
+              child: FutureBuilder<List<SondageRecord>>(
                 future: (_model.firestoreRequestCompleter ??=
                         Completer<List<SondageRecord>>()
                           ..complete(querySondageRecordOnce()))
@@ -713,16 +707,16 @@ class _SondageWidgetState extends State<SondageWidget> {
                   );
                 },
               ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.navBar1Model,
-                  updateCallback: () => setState(() {}),
-                  child: NavBar1Widget(),
-                ),
+            ),
+            Align(
+              alignment: AlignmentDirectional(0.0, 1.0),
+              child: wrapWithModel(
+                model: _model.navBar1Model,
+                updateCallback: () => setState(() {}),
+                child: NavBar1Widget(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -59,7 +59,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
             children: [
               Container(
                 width: double.infinity,
-                height: 738.0,
+                height: 772.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),

@@ -109,16 +109,17 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
               centerTitle: true,
               elevation: 2.0,
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Stack(
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 723.0,
+                  child: Stack(
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 30.0, 10.0, 0.0),
+                            10.0, 0.0, 10.0, 0.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -1057,17 +1058,16 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                    child: wrapWithModel(
-                      model: _model.navBar1Model,
-                      updateCallback: () => setState(() {}),
-                      child: NavBar1Widget(),
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.navBar1Model,
+                    updateCallback: () => setState(() {}),
+                    child: NavBar1Widget(),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );
