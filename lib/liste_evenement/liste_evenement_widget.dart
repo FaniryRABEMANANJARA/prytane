@@ -1,15 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/nav_bar1_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,13 +21,10 @@ class ListeEvenementWidget extends StatefulWidget {
   State<ListeEvenementWidget> createState() => _ListeEvenementWidgetState();
 }
 
-class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
-    with TickerProviderStateMixin {
+class _ListeEvenementWidgetState extends State<ListeEvenementWidget> {
   late ListeEvenementModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -45,33 +39,6 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-
-    animationsMap.addAll({
-      'rowOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-        ],
-      ),
-      'columnOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-        ],
-      ),
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -125,6 +92,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
               title: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
@@ -153,14 +121,14 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
                           context.pushNamed('Ajoutevenement');
                         },
                         child: Icon(
-                          Icons.add_box,
+                          Icons.add_circle,
                           color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 30.0,
+                          size: 34.0,
                         ),
                       ),
                     ),
                 ],
-              ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+              ),
               actions: [],
               centerTitle: true,
               elevation: 2.0,
@@ -205,136 +173,150 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
                               16.0, 0.0, 16.0, 0.0),
                           child: Container(
                             width: 350.0,
-                            height: 40.0,
+                            height: 50.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 0.0),
-                                    child: TextFormField(
-                                      controller: _model.textController,
-                                      focusNode: _model.textFieldFocusNode,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        '_model.textController',
-                                        Duration(milliseconds: 2000),
-                                        () async {
-                                          safeSetState(() {
-                                            _model.simpleSearchResults =
-                                                TextSearch(
-                                              listeEvenementEvenementsRecordList
-                                                  .map(
-                                                    (record) => TextSearchItem
-                                                        .fromTerms(record, [
-                                                      record.title!,
-                                                      record.type!
-                                                    ]),
-                                                  )
-                                                  .toList(),
-                                            )
-                                                    .search(_model
-                                                        .textController.text)
-                                                    .map((r) => r.object)
-                                                    .toList();
-                                            ;
-                                          });
-                                          FFAppState().searchActiveEvenement =
-                                              true;
-                                          setState(() {});
-                                        },
-                                      ),
-                                      autofocus: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMediumFamily),
-                                            ),
-                                        hintText: 'Recherche',
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMediumFamily),
-                                            ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 0.0),
+                                      child: TextFormField(
+                                        controller: _model.textController,
+                                        focusNode: _model.textFieldFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.textController',
+                                          Duration(milliseconds: 2000),
+                                          () async {
+                                            safeSetState(() {
+                                              _model.simpleSearchResults =
+                                                  TextSearch(
+                                                listeEvenementEvenementsRecordList
+                                                    .map(
+                                                      (record) => TextSearchItem
+                                                          .fromTerms(record, [
+                                                        record.title!,
+                                                        record.type!
+                                                      ]),
+                                                    )
+                                                    .toList(),
+                                              )
+                                                      .search(_model
+                                                          .textController.text)
+                                                      .map((r) => r.object)
+                                                      .toList();
+                                              ;
+                                            });
+                                            FFAppState().searchActiveEvenement =
+                                                true;
+                                            setState(() {});
+                                          },
                                         ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.search_sharp,
-                                        ),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
+                                                        .labelMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
+                                              ),
+                                          hintText: 'Recherche',
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
+                                              ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
                                           ),
-                                      validator: _model.textControllerValidator
-                                          .asValidator(context),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          prefixIcon: Icon(
+                                            Icons.search_sharp,
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                        maxLines: null,
+                                        validator: _model
+                                            .textControllerValidator
+                                            .asValidator(context),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1067,7 +1049,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
                   child: NavBar1Widget(),
                 ),
               ],
-            ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
+            ),
           ),
         );
       },

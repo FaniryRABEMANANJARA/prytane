@@ -179,7 +179,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 10.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 10.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -348,8 +348,8 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                     FlutterFlowTheme.of(context)
                                         .bodyMediumFamily),
                               ),
-                          maxLines: 16,
-                          minLines: 6,
+                          maxLines: 10,
+                          minLines: 3,
                           cursorColor: FlutterFlowTheme.of(context).primary,
                           validator: _model.descriptionTextControllerValidator
                               .asValidator(context),
