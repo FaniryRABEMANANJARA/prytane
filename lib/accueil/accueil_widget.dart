@@ -598,10 +598,10 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                     ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          14.0),
+                                                          8.0),
                                                   child: Image.network(
                                                     path,
-                                                    width: 300.0,
+                                                    width: 358.0,
                                                     height: 200.0,
                                                     fit: BoxFit.cover,
                                                   ),
