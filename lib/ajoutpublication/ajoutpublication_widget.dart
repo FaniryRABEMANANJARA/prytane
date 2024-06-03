@@ -201,7 +201,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget> {
                                     child: FlutterFlowDropDown<String>(
                                       controller: _model.typeValueController ??=
                                           FormFieldController<String>(null),
-                                      options: ['Image', 'Vidéo', 'Text'],
+                                      options: ['Image', 'Vidéo', 'Texte'],
                                       onChanged: (val) => setState(
                                           () => _model.typeValue = val),
                                       width: 300.0,

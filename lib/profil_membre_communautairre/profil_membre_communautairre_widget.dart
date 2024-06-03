@@ -194,7 +194,9 @@ class _ProfilMembreCommunautairreWidgetState
                                             .labelLarge
                                             .override(
                                               fontFamily: 'Roboto',
-                                              color: Color(0xFF95A1AC),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               fontSize: 18.0,
                                               letterSpacing: 0.0,
                                               useGoogleFonts:
@@ -227,7 +229,7 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 5.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 60.0,
@@ -327,7 +329,7 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Aide et assistance',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -342,7 +344,7 @@ class _ProfilMembreCommunautairreWidgetState
                 if (valueOrDefault(currentUserDocument?.role, '') == 'paroisse')
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => Container(
                         width: double.infinity,
@@ -429,8 +431,7 @@ class _ProfilMembreCommunautairreWidgetState
                     ),
                   ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 60.0,
@@ -512,8 +513,7 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 60.0,
@@ -586,8 +586,7 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 60.0,
@@ -669,8 +668,7 @@ class _ProfilMembreCommunautairreWidgetState
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 60.0,
