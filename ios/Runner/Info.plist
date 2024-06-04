@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.644115233622-i0d89cs2q9fbai0kepkratnp25suidjs</string>
+                <string>com.googleusercontent.apps.644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2</string>
                 
             </array>
         </dict>
@@ -40,7 +40,7 @@
         <string>prytane</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>com.flutterflow.prytanes</string>
+        <string>com.flutterflow.prytane</string>
         </array>
         </dict>
     </array>

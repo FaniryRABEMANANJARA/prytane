@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,9 +9,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +34,13 @@ class ModifierEvenementWidget extends StatefulWidget {
       _ModifierEvenementWidgetState();
 }
 
-class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
+class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
+    with TickerProviderStateMixin {
   late ModifierEvenementModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -54,6 +61,66 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
 
     _model.participantTextController ??= TextEditingController();
     _model.participantFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'iconButtonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -111,7 +178,8 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                 onPressed: () async {
                   context.pop();
                 },
-              ),
+              ).animateOnPageLoad(
+                  animationsMap['iconButtonOnPageLoadAnimation']!),
               title: Text(
                 'Modifier un événement',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -122,7 +190,7 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).headlineMediumFamily),
                     ),
-              ),
+              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
               actions: [],
               centerTitle: true,
               elevation: 2.0,
@@ -142,6 +210,7 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -224,12 +293,12 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                                   },
                                   text: 'Télécharger une image',
                                   options: FFButtonOptions(
-                                    height: 40.0,
+                                    height: 30.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).accent2,
+                                    color: FlutterFlowTheme.of(context).success,
                                     textStyle: TextStyle(),
                                     elevation: 3.0,
                                     borderSide: BorderSide(
@@ -344,10 +413,9 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                                 size: 24.0,
                               ),
                               fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                                  .primaryBackground,
                               elevation: 2.0,
-                              borderColor:
-                                  FlutterFlowTheme.of(context).alternate,
+                              borderColor: FlutterFlowTheme.of(context).primary,
                               borderWidth: 2.0,
                               borderRadius: 8.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
@@ -1025,7 +1093,8 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget> {
                           ),
                         ],
                       ),
-                    ),
+                    ).animateOnPageLoad(
+                        animationsMap['columnOnPageLoadAnimation']!),
                   ),
                 ],
               ),

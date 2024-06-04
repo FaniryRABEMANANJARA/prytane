@@ -2,12 +2,16 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/nav_bar1_widget.dart';
 import '/components/parametres_sondage_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'list_sondage_model.dart';
@@ -20,15 +24,59 @@ class ListSondageWidget extends StatefulWidget {
   State<ListSondageWidget> createState() => _ListSondageWidgetState();
 }
 
-class _ListSondageWidgetState extends State<ListSondageWidget> {
+class _ListSondageWidgetState extends State<ListSondageWidget>
+    with TickerProviderStateMixin {
   late ListSondageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ListSondageModel());
+
+    animationsMap.addAll({
+      'rowOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -82,7 +130,7 @@ class _ListSondageWidgetState extends State<ListSondageWidget> {
                 ),
               ),
             ],
-          ),
+          ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
           actions: [],
           centerTitle: true,
           elevation: 2.0,
@@ -93,7 +141,7 @@ class _ListSondageWidgetState extends State<ListSondageWidget> {
           children: [
             Container(
               width: double.infinity,
-              height: 639.0,
+              height: 632.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
@@ -481,7 +529,7 @@ class _ListSondageWidgetState extends State<ListSondageWidget> {
                   ),
                 ],
               ),
-            ),
+            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation']!),
             wrapWithModel(
               model: _model.navBar1Model,
               updateCallback: () => setState(() {}),

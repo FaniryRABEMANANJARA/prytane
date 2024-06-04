@@ -5,7 +5,7 @@ import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 
 const _kDynamicLinksUrl = 'https://prytane.page.link';
-const _kAppBundleId = 'com.flutterflow.prytanes';
+const _kAppBundleId = 'com.flutterflow.prytane';
 const _kIosAppId = '6502392283';
 
 Future<String> generateCurrentPageLink(

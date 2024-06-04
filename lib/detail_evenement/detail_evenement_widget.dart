@@ -42,6 +42,25 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
     animationsMap.addAll({
+      'rowOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'textOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -61,7 +80,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
           ),
         ],
       ),
-      'rowOnPageLoadAnimation': AnimationInfo(
+      'rowOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -80,13 +99,26 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
           ),
         ],
       ),
+      'rowOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -184,7 +216,8 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
                           ),
                         ),
                       ],
-                    ),
+                    ).animateOnPageLoad(
+                        animationsMap['rowOnPageLoadAnimation1']!),
                   ),
                   Container(
                     width: double.infinity,
@@ -445,7 +478,7 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
                                   ),
                                 ],
                               ).animateOnPageLoad(
-                                  animationsMap['rowOnPageLoadAnimation']!),
+                                  animationsMap['rowOnPageLoadAnimation2']!),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -568,7 +601,8 @@ class _DetailEvenementWidgetState extends State<DetailEvenementWidget>
                                   ),
                                 ),
                               ],
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['rowOnPageLoadAnimation3']!),
                           ],
                         ),
                       ),

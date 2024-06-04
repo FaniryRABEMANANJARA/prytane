@@ -2,14 +2,18 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/nav_bar1_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'ajout_group_model.dart';
@@ -22,10 +26,13 @@ class AjoutGroupWidget extends StatefulWidget {
   State<AjoutGroupWidget> createState() => _AjoutGroupWidgetState();
 }
 
-class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
+class _AjoutGroupWidgetState extends State<AjoutGroupWidget>
+    with TickerProviderStateMixin {
   late AjoutGroupModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -37,6 +44,66 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
 
     _model.descriptionTextController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -73,7 +140,7 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                     useGoogleFonts: GoogleFonts.asMap().containsKey(
                         FlutterFlowTheme.of(context).headlineMediumFamily),
                   ),
-            ),
+            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
           ),
           actions: [],
           centerTitle: true,
@@ -454,13 +521,14 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                                                           .administrateursValue ??=
                                                       List<String>.from(
                                                 administrateursUsersRecordList
-                                                        .map((e) => e.nom)
+                                                        .map((e) =>
+                                                            e.displayName)
                                                         .toList() ??
                                                     [],
                                               )),
                                               options:
                                                   administrateursUsersRecordList
-                                                      .map((e) => e.nom)
+                                                      .map((e) => e.displayName)
                                                       .toList(),
                                               width: 300.0,
                                               height: 56.0,
@@ -481,9 +549,7 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                               hintText:
-                                                  administrateursUsersRecordList
-                                                      .length
-                                                      .toString(),
+                                                  'Veuillez sélectionner...',
                                               icon: Icon(
                                                 Icons
                                                     .keyboard_arrow_down_rounded,
@@ -618,12 +684,12 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                                                     _model.membresValue ??=
                                                         List<String>.from(
                                               membresUsersRecordList
-                                                      .map((e) => e.nom)
+                                                      .map((e) => e.displayName)
                                                       .toList() ??
                                                   [],
                                             )),
                                             options: membresUsersRecordList
-                                                .map((e) => e.nom)
+                                                .map((e) => e.displayName)
                                                 .toList(),
                                             width: 300.0,
                                             height: 56.0,
@@ -643,9 +709,8 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                                                                       context)
                                                                   .bodyMediumFamily),
                                                     ),
-                                            hintText: membresUsersRecordList
-                                                .length
-                                                .toString(),
+                                            hintText:
+                                                'Veuillez sélectionner...',
                                             icon: Icon(
                                               Icons.keyboard_arrow_down_rounded,
                                               color:
@@ -964,12 +1029,14 @@ class _AjoutGroupWidgetState extends State<AjoutGroupWidget> {
                             elevation: 0.0,
                             borderRadius: BorderRadius.circular(8.0),
                           ),
-                        ),
+                        ).animateOnPageLoad(
+                            animationsMap['buttonOnPageLoadAnimation']!),
                       ),
                     ],
                   ),
                 ),
-              ),
+              ).animateOnPageLoad(
+                  animationsMap['containerOnPageLoadAnimation']!),
             ),
             wrapWithModel(
               model: _model.navBar1Model,

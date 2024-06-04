@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>644115233622-i0d89cs2q9fbai0kepkratnp25suidjs.apps.googleusercontent.com</string>
+	<string>644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.644115233622-i0d89cs2q9fbai0kepkratnp25suidjs</string>
+	<string>com.googleusercontent.apps.644115233622-0g9r84hl58ksgpucbhojln3jkif2t8n2</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>644115233622-2c0vfhdqrustheahi7cg635hno453k5q.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.flutterflow.prytanes</string>
+	<string>com.flutterflow.prytane</string>
 	<key>PROJECT_ID</key>
 	<string>prytane-29c10</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:644115233622:ios:e76c6e7df45f22520374f7</string>
+	<string>1:644115233622:ios:72ed41e976d358550374f7</string>
 </dict>
 </plist>
