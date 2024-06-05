@@ -673,8 +673,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                 }
 
                                 context.pushNamedAuth(
-                                    'profilMembreCommunautairre',
-                                    context.mounted);
+                                    'Profile', context.mounted);
                               },
                               child: FaIcon(
                                 FontAwesomeIcons.googlePlus,

@@ -902,7 +902,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget>
                                   displayName: _model.nomTextController.text,
                                 ));
 
-                                context.pushNamed('profilMembreCommunautairre');
+                                context.pushNamed('Profile');
                               },
                               text: 'Modifier',
                               options: FFButtonOptions(
