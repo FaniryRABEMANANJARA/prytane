@@ -77,25 +77,34 @@ class _AppelsVideoWidgetState extends State<AppelsVideoWidget> {
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 615.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+        body: Align(
+          alignment: AlignmentDirectional(0.0, 0.0),
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: double.infinity,
+            ),
+            decoration: BoxDecoration(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 615.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
                 ),
-              ),
-              wrapWithModel(
-                model: _model.navBar2Model,
-                updateCallback: () => setState(() {}),
-                child: NavBar2Widget(),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.navBar2Model,
+                    updateCallback: () => setState(() {}),
+                    child: NavBar2Widget(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

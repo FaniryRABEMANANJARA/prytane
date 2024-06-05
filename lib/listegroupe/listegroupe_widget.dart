@@ -176,10 +176,10 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
             body: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   width: double.infinity,
-                  height: 637.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
@@ -189,8 +189,8 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -429,18 +429,11 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                               builder: (context) {
                                 final searchGroup =
                                     listegroupeGroupesRecordList.toList();
-                                return ListView.separated(
-                                  padding: EdgeInsets.fromLTRB(
-                                    0,
-                                    0,
-                                    0,
-                                    44.0,
-                                  ),
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: searchGroup.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(height: 1.0),
                                   itemBuilder: (context, searchGroupIndex) {
                                     final searchGroupItem =
                                         searchGroup[searchGroupIndex];
@@ -742,22 +735,22 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 5.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if (valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.role,
-                                                        '') ==
-                                                    'admin')
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: AuthUserStreamWidget(
-                                                      builder: (context) => Row(
+                                          if (valueOrDefault(
+                                                  currentUserDocument?.role,
+                                                  '') ==
+                                              'paroisse')
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 5.0, 0.0),
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) => Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         mainAxisAlignment:
@@ -919,144 +912,124 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 5.0, 5.0, 5.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if (valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.role,
-                                                        '') ==
-                                                    'admin')
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: AuthUserStreamWidget(
-                                                      builder: (context) => Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              context.pushNamed(
-                                                                'AdhesionGroup',
-                                                                queryParameters:
-                                                                    {
-                                                                  'adhesionGroup':
-                                                                      serializeParam(
-                                                                    searchGroupItem
-                                                                        .reference,
-                                                                    ParamType
-                                                                        .DocumentReference,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .accent1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                ),
-                                                              ),
-                                                              child: Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                          if (valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.role,
+                                                                  '') ==
+                                                              'paroisse')
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
+                                                                          45.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'AdhesionGroup',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'adhesionGroup':
+                                                                          serializeParam(
+                                                                        searchGroupItem
+                                                                            .reference,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                    ),
+                                                                  ),
+                                                                  child: Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           8.0,
                                                                           4.0,
                                                                           8.0,
                                                                           4.0),
-                                                                  child:
-                                                                      InkWell(
-                                                                    splashColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    focusColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    hoverColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    highlightColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    onTap:
-                                                                        () async {
-                                                                      context
-                                                                          .pushNamed(
-                                                                        'AdhesionGroup',
-                                                                        queryParameters:
-                                                                            {
-                                                                          'adhesionGroup':
-                                                                              serializeParam(
-                                                                            searchGroupItem.reference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                        }.withoutNulls,
-                                                                      );
-                                                                    },
-                                                                    child: Text(
-                                                                      'Adhesion des membres',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodySmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                          ),
+                                                                      child:
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          context
+                                                                              .pushNamed(
+                                                                            'AdhesionGroup',
+                                                                            queryParameters:
+                                                                                {
+                                                                              'adhesionGroup': serializeParam(
+                                                                                searchGroupItem.reference,
+                                                                                ParamType.DocumentReference,
+                                                                              ),
+                                                                            }.withoutNulls,
+                                                                          );
+                                                                        },
+                                                                        child:
+                                                                            Text(
+                                                                          'Adhesion des membres',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodySmall
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
                                                         ],
                                                       ),
                                                     ),
-                                                  ),
-                                              ],
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     );
@@ -1072,18 +1045,11 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                               builder: (context) {
                                 final searchGroup =
                                     listegroupeGroupesRecordList.toList();
-                                return ListView.separated(
-                                  padding: EdgeInsets.fromLTRB(
-                                    0,
-                                    0,
-                                    0,
-                                    44.0,
-                                  ),
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: searchGroup.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(height: 1.0),
                                   itemBuilder: (context, searchGroupIndex) {
                                     final searchGroupItem =
                                         searchGroup[searchGroupIndex];
@@ -1223,73 +1189,6 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                                                     ),
                                                   ),
                                                 ),
-                                                if (responsiveVisibility(
-                                                  context: context,
-                                                  phone: false,
-                                                ))
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  12.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        '5 mins ago',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                if (responsiveVisibility(
-                                                  context: context,
-                                                  phone: false,
-                                                  tablet: false,
-                                                ))
-                                                  Expanded(
-                                                    flex: 3,
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              -1.0, 0.0),
-                                                      child: Text(
-                                                        'Head of Design',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
                                                 Expanded(
                                                   flex: 2,
                                                   child: Row(
@@ -1446,78 +1345,11 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                if (responsiveVisibility(
-                                                  context: context,
-                                                  phone: false,
-                                                ))
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  12.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        '5 mins ago',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                if (responsiveVisibility(
-                                                  context: context,
-                                                  phone: false,
-                                                  tablet: false,
-                                                ))
-                                                  Expanded(
-                                                    flex: 3,
-                                                    child: Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              -1.0, 0.0),
-                                                      child: Text(
-                                                        'Head of Design',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
                                                 if (valueOrDefault(
                                                         currentUserDocument
                                                             ?.role,
                                                         '') ==
-                                                    'admin')
+                                                    'paroisse')
                                                   Expanded(
                                                     flex: 2,
                                                     child: AuthUserStreamWidget(
@@ -1662,107 +1494,92 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 5.0, 5.0, 5.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if (valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.role,
-                                                        '') ==
-                                                    'admin')
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: AuthUserStreamWidget(
-                                                      builder: (context) => Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              context.pushNamed(
-                                                                'AdhesionGroup',
-                                                                queryParameters:
-                                                                    {
-                                                                  'adhesionGroup':
-                                                                      serializeParam(
-                                                                    searchGroupItem
-                                                                        .reference,
-                                                                    ParamType
-                                                                        .DocumentReference,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .accent1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                ),
-                                                              ),
-                                                              child: Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                          if (valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.role,
+                                                                  '') ==
+                                                              'paroisse')
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
+                                                                          45.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'AdhesionGroup',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'adhesionGroup':
+                                                                          serializeParam(
+                                                                        searchGroupItem
+                                                                            .reference,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                    ),
+                                                                  ),
+                                                                  child: Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           8.0,
                                                                           4.0,
                                                                           8.0,
                                                                           4.0),
-                                                                  child: Text(
-                                                                    'Adhesion des membres',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodySmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                        ),
+                                                                      child:
+                                                                          Text(
+                                                                        'Adhesion des membres',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                              letterSpacing: 0.0,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -1783,10 +1600,13 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget>
                   ),
                 ).animateOnPageLoad(
                     animationsMap['containerOnPageLoadAnimation']!),
-                wrapWithModel(
-                  model: _model.navBar1Model,
-                  updateCallback: () => setState(() {}),
-                  child: NavBar1Widget(),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.navBar1Model,
+                    updateCallback: () => setState(() {}),
+                    child: NavBar1Widget(),
+                  ),
                 ),
               ],
             ),

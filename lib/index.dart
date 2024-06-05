@@ -13,7 +13,6 @@ export '/chat/chat_2_main/chat2_main_widget.dart' show Chat2MainWidget;
 export '/chat/chat_2_invite_users/chat2_invite_users_widget.dart'
     show Chat2InviteUsersWidget;
 export '/chat/image_details/image_details_widget.dart' show ImageDetailsWidget;
-export '/ajoutstory/ajoutstory_widget.dart' show AjoutstoryWidget;
 export '/modifier_profil/modifier_profil_widget.dart' show ModifierProfilWidget;
 export '/profil_membre_communautairre/profil_membre_communautairre_widget.dart'
     show ProfilMembreCommunautairreWidget;
@@ -31,7 +30,6 @@ export '/list_sondage/list_sondage_widget.dart' show ListSondageWidget;
 export '/sondage/sondage_widget.dart' show SondageWidget;
 export '/modifierpublication/modifierpublication_widget.dart'
     show ModifierpublicationWidget;
-export '/ajout_video/ajout_video_widget.dart' show AjoutVideoWidget;
 export '/complete_profile/complete_profile_widget.dart'
     show CompleteProfileWidget;
 export '/ajoutevenement/ajoutevenement_widget.dart' show AjoutevenementWidget;
@@ -51,3 +49,5 @@ export '/list_users/list_users_widget.dart' show ListUsersWidget;
 export '/chargement/chargement_widget.dart' show ChargementWidget;
 export '/accueil/accueil_widget.dart' show AccueilWidget;
 export '/appels_video/appels_video_widget.dart' show AppelsVideoWidget;
+export '/profile/profile_widget.dart' show ProfileWidget;
+export '/politique/politique_widget.dart' show PolitiqueWidget;

@@ -63,25 +63,6 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
     _model.participantFocusNode ??= FocusNode();
 
     animationsMap.addAll({
-      'columnOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 110.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
       'textOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -102,6 +83,25 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
         ],
       ),
       'iconButtonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -195,516 +195,372 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
               centerTitle: true,
               elevation: 2.0,
             ),
-            body: SafeArea(
-              top: true,
-              child: Stack(
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 10.0, 0.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 0.0),
-                                child: Text(
-                                  'Photo',
-                                  style: TextStyle(),
-                                ),
+            body: Align(
+              alignment: AlignmentDirectional(0.0, 0.0),
+              child: Container(
+                height: double.infinity,
+                constraints: BoxConstraints(
+                  maxWidth: double.infinity,
+                ),
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 24.0, 0.0, 0.0),
+                              child: Text(
+                                'Photo',
+                                style: TextStyle(),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    final selectedMedia =
-                                        await selectMediaWithSourceBottomSheet(
-                                      context: context,
-                                      allowPhoto: true,
-                                    );
-                                    if (selectedMedia != null &&
-                                        selectedMedia.every((m) =>
-                                            validateFileFormat(
-                                                m.storagePath, context))) {
-                                      setState(
-                                          () => _model.isDataUploading = true);
-                                      var selectedUploadedFiles =
-                                          <FFUploadedFile>[];
-
-                                      var downloadUrls = <String>[];
-                                      try {
-                                        showUploadMessage(
-                                          context,
-                                          'Uploading file...',
-                                          showLoading: true,
-                                        );
-                                        selectedUploadedFiles = selectedMedia
-                                            .map((m) => FFUploadedFile(
-                                                  name: m.storagePath
-                                                      .split('/')
-                                                      .last,
-                                                  bytes: m.bytes,
-                                                  height: m.dimensions?.height,
-                                                  width: m.dimensions?.width,
-                                                  blurHash: m.blurHash,
-                                                ))
-                                            .toList();
-
-                                        downloadUrls = (await Future.wait(
-                                          selectedMedia.map(
-                                            (m) async => await uploadData(
-                                                m.storagePath, m.bytes),
-                                          ),
-                                        ))
-                                            .where((u) => u != null)
-                                            .map((u) => u!)
-                                            .toList();
-                                      } finally {
-                                        ScaffoldMessenger.of(context)
-                                            .hideCurrentSnackBar();
-                                        _model.isDataUploading = false;
-                                      }
-                                      if (selectedUploadedFiles.length ==
-                                              selectedMedia.length &&
-                                          downloadUrls.length ==
-                                              selectedMedia.length) {
-                                        setState(() {
-                                          _model.uploadedLocalFile =
-                                              selectedUploadedFiles.first;
-                                          _model.uploadedFileUrl =
-                                              downloadUrls.first;
-                                        });
-                                        showUploadMessage(context, 'Success!');
-                                      } else {
-                                        setState(() {});
-                                        showUploadMessage(
-                                            context, 'Failed to upload data');
-                                        return;
-                                      }
-                                    }
-                                  },
-                                  text: 'Télécharger une image',
-                                  options: FFButtonOptions(
-                                    height: 30.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).success,
-                                    textStyle: TextStyle(),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.titreTextController,
-                              focusNode: _model.titreFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Titre',
-                                hintText:
-                                    modifierEvenementEvenementsRecord.title,
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
-                                    ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyLargeFamily),
-                                  ),
-                              validator: _model.titreTextControllerValidator
-                                  .asValidator(context),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: FlutterFlowDropDown<String>(
-                              controller: _model.typeValueController ??=
-                                  FormFieldController<String>(null),
-                              options: [
-                                'Connect groupe',
-                                'Louange',
-                                'Prière',
-                                'Sortie'
-                              ],
-                              onChanged: (val) =>
-                                  setState(() => _model.typeValue = val),
-                              width: 300.0,
-                              height: 56.0,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              hintText: modifierEvenementEvenementsRecord.type,
-                              icon: Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              elevation: 2.0,
-                              borderColor: FlutterFlowTheme.of(context).primary,
-                              borderWidth: 2.0,
-                              borderRadius: 8.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 4.0, 16.0, 4.0),
-                              hidesUnderline: true,
-                              isOverButton: true,
-                              isSearchable: false,
-                              isMultiSelect: false,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.descriptionTextController,
-                              focusNode: _model.descriptionFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Description',
-                                hintText: modifierEvenementEvenementsRecord
-                                    .description,
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
-                                    ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyLargeFamily),
-                                  ),
-                              maxLines: 3,
-                              validator: _model
-                                  .descriptionTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (kIsWeb) {
-                                      final _datePicked1Date =
-                                          await showDatePicker(
-                                        context: context,
-                                        initialDate: getCurrentTimestamp,
-                                        firstDate: getCurrentTimestamp,
-                                        lastDate: DateTime(2050),
-                                        builder: (context, child) {
-                                          return wrapInMaterialDatePickerTheme(
-                                            context,
-                                            child!,
-                                            headerBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            headerForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            headerTextStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineLarge
-                                                    .override(
-                                                      fontFamily: FlutterFlowTheme
-                                                              .of(context)
-                                                          .headlineLargeFamily,
-                                                      fontSize: 32.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .headlineLargeFamily),
-                                                    ),
-                                            pickerBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            pickerForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            selectedDateTimeBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            selectedDateTimeForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            actionButtonForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            iconSize: 24.0,
-                                          );
-                                        },
-                                      );
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 24.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    setState(
+                                        () => _model.isDataUploading = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                      TimeOfDay? _datePicked1Time;
-                                      if (_datePicked1Date != null) {
-                                        _datePicked1Time = await showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.fromDateTime(
-                                              getCurrentTimestamp),
-                                          builder: (context, child) {
-                                            return wrapInMaterialTimePickerTheme(
-                                              context,
-                                              child!,
-                                              headerBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              headerForegroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .info,
-                                              headerTextStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineLarge
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineLargeFamily,
-                                                        fontSize: 32.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineLargeFamily),
-                                                      ),
-                                              pickerBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              pickerForegroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              selectedDateTimeBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              selectedDateTimeForegroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .info,
-                                              actionButtonForegroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              iconSize: 24.0,
-                                            );
-                                          },
-                                        );
-                                      }
-
-                                      if (_datePicked1Date != null &&
-                                          _datePicked1Time != null) {
-                                        safeSetState(() {
-                                          _model.datePicked1 = DateTime(
-                                            _datePicked1Date.year,
-                                            _datePicked1Date.month,
-                                            _datePicked1Date.day,
-                                            _datePicked1Time!.hour,
-                                            _datePicked1Time.minute,
-                                          );
-                                        });
-                                      }
-                                    } else {
-                                      await DatePicker.showDateTimePicker(
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      showUploadMessage(
                                         context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          safeSetState(() {
-                                            _model.datePicked1 = date;
-                                          });
-                                        },
-                                        currentTime: getCurrentTimestamp,
-                                        minTime: getCurrentTimestamp,
+                                        'Uploading file...',
+                                        showLoading: true,
                                       );
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
+
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                      _model.isDataUploading = false;
                                     }
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.4,
-                                    height: 50.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 5.0, 12.0, 5.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            dateTimeFormat('d/M H:mm',
-                                                getCurrentTimestamp),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmallFamily,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmallFamily),
-                                                ),
-                                          ),
-                                          Icon(
-                                            Icons.schedule,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
+                                      setState(() {
+                                        _model.uploadedLocalFile =
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl =
+                                            downloadUrls.first;
+                                      });
+                                      showUploadMessage(context, 'Success!');
+                                    } else {
+                                      setState(() {});
+                                      showUploadMessage(
+                                          context, 'Failed to upload data');
+                                      return;
+                                    }
+                                  }
+                                },
+                                text: 'Télécharger une image',
+                                options: FFButtonOptions(
+                                  height: 30.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).success,
+                                  textStyle: TextStyle(),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
                                   ),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (kIsWeb) {
-                                      final _datePicked2Time =
-                                          await showTimePicker(
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.titreTextController,
+                            focusNode: _model.titreFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Titre',
+                              hintText: modifierEvenementEvenementsRecord.title,
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyLargeFamily),
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily),
+                                ),
+                            validator: _model.titreTextControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: FlutterFlowDropDown<String>(
+                            controller: _model.typeValueController ??=
+                                FormFieldController<String>(null),
+                            options: [
+                              'Connect groupe',
+                              'Louange',
+                              'Prière',
+                              'Sortie'
+                            ],
+                            onChanged: (val) =>
+                                setState(() => _model.typeValue = val),
+                            width: 300.0,
+                            height: 56.0,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily),
+                                ),
+                            hintText: modifierEvenementEvenementsRecord.type,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                            fillColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            elevation: 2.0,
+                            borderColor: FlutterFlowTheme.of(context).primary,
+                            borderWidth: 2.0,
+                            borderRadius: 8.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 4.0, 16.0, 4.0),
+                            hidesUnderline: true,
+                            isOverButton: true,
+                            isSearchable: false,
+                            isMultiSelect: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.descriptionTextController,
+                            focusNode: _model.descriptionFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Description',
+                              hintText:
+                                  modifierEvenementEvenementsRecord.description,
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyLargeFamily),
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily),
+                                ),
+                            maxLines: 3,
+                            validator: _model.descriptionTextControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (kIsWeb) {
+                                    final _datePicked1Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: getCurrentTimestamp,
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLargeFamily,
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineLargeFamily),
+                                              ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    TimeOfDay? _datePicked1Time;
+                                    if (_datePicked1Date != null) {
+                                      _datePicked1Time = await showTimePicker(
                                         context: context,
                                         initialTime: TimeOfDay.fromDateTime(
                                             getCurrentTimestamp),
@@ -755,137 +611,227 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                           );
                                         },
                                       );
-                                      if (_datePicked2Time != null) {
-                                        safeSetState(() {
-                                          _model.datePicked2 = DateTime(
-                                            getCurrentTimestamp.year,
-                                            getCurrentTimestamp.month,
-                                            getCurrentTimestamp.day,
-                                            _datePicked2Time.hour,
-                                            _datePicked2Time.minute,
-                                          );
-                                        });
-                                      }
-                                    } else {
-                                      await DatePicker.showTimePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          safeSetState(() {
-                                            _model.datePicked2 = date;
-                                          });
-                                        },
-                                        currentTime: getCurrentTimestamp,
-                                      );
                                     }
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.4,
-                                    height: 50.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 5.0, 12.0, 5.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            dateTimeFormat(
-                                                'Hm', getCurrentTimestamp),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmallFamily,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmallFamily),
-                                                ),
-                                          ),
-                                          Icon(
-                                            Icons.schedule,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                        ],
-                                      ),
+
+                                    if (_datePicked1Date != null &&
+                                        _datePicked1Time != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 = DateTime(
+                                          _datePicked1Date.year,
+                                          _datePicked1Date.month,
+                                          _datePicked1Date.day,
+                                          _datePicked1Time!.hour,
+                                          _datePicked1Time.minute,
+                                        );
+                                      });
+                                    }
+                                  } else {
+                                    await DatePicker.showDateTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      onConfirm: (date) {
+                                        safeSetState(() {
+                                          _model.datePicked1 = date;
+                                        });
+                                      },
+                                      currentTime: getCurrentTimestamp,
+                                      minTime: getCurrentTimestamp,
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.4,
+                                  height: 40.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.emplacementTextController,
-                              focusNode: _model.emplacementFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Emplacement',
-                                hintText:
-                                    modifierEvenementEvenementsRecord.location,
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 5.0, 12.0, 5.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          dateTimeFormat(
+                                              'd/M H:mm', getCurrentTimestamp),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmallFamily,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmallFamily),
+                                              ),
+                                        ),
+                                        Icon(
+                                          Icons.schedule,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                      ],
                                     ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (kIsWeb) {
+                                    final _datePicked2Time =
+                                        await showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.fromDateTime(
+                                          getCurrentTimestamp),
+                                      builder: (context, child) {
+                                        return wrapInMaterialTimePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLargeFamily,
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineLargeFamily),
+                                              ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+                                    if (_datePicked2Time != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          getCurrentTimestamp.year,
+                                          getCurrentTimestamp.month,
+                                          getCurrentTimestamp.day,
+                                          _datePicked2Time.hour,
+                                          _datePicked2Time.minute,
+                                        );
+                                      });
+                                    }
+                                  } else {
+                                    await DatePicker.showTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      onConfirm: (date) {
+                                        safeSetState(() {
+                                          _model.datePicked2 = date;
+                                        });
+                                      },
+                                      currentTime: getCurrentTimestamp,
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.4,
+                                  height: 40.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 5.0, 12.0, 5.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          dateTimeFormat(
+                                              'Hm', getCurrentTimestamp),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmallFamily,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmallFamily),
+                                              ),
+                                        ),
+                                        Icon(
+                                          Icons.schedule,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.emplacementTextController,
+                            focusNode: _model.emplacementFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Emplacement',
+                              hintText:
+                                  modifierEvenementEvenementsRecord.location,
+                              hintStyle: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
@@ -896,64 +842,62 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                             FlutterFlowTheme.of(context)
                                                 .bodyLargeFamily),
                                   ),
-                              validator: _model
-                                  .emplacementTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.organisateurTextController,
-                              focusNode: _model.organisateurFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Organisateur',
-                                hintText: modifierEvenementEvenementsRecord
-                                    .organizers,
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
-                                    ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              style: FlutterFlowTheme.of(context)
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily),
+                                ),
+                            validator: _model.emplacementTextControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.organisateurTextController,
+                            focusNode: _model.organisateurFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Organisateur',
+                              hintText:
+                                  modifierEvenementEvenementsRecord.organizers,
+                              hintStyle: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
@@ -964,64 +908,63 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                             FlutterFlowTheme.of(context)
                                                 .bodyLargeFamily),
                                   ),
-                              validator: _model
-                                  .organisateurTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.participantTextController,
-                              focusNode: _model.participantFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Participants',
-                                hintText: modifierEvenementEvenementsRecord
-                                    .participants,
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
-                                    ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              style: FlutterFlowTheme.of(context)
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily),
+                                ),
+                            validator: _model
+                                .organisateurTextControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.participantTextController,
+                            focusNode: _model.participantFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Participants',
+                              hintText: modifierEvenementEvenementsRecord
+                                  .participants,
+                              hintStyle: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
@@ -1032,14 +975,54 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                             FlutterFlowTheme.of(context)
                                                 .bodyLargeFamily),
                                   ),
-                              validator: _model
-                                  .participantTextControllerValidator
-                                  .asValidator(context),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyLargeFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyLargeFamily),
+                                ),
+                            validator: _model.participantTextControllerValidator
+                                .asValidator(context),
                           ),
-                          Padding(
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
+                                0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 await modifierEvenementEvenementsRecord
@@ -1067,8 +1050,8 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                               },
                               text: 'Modifier',
                               options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 55.0,
+                                width: 150.0,
+                                height: 40.0,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -1091,12 +1074,12 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['columnOnPageLoadAnimation']!),
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['columnOnPageLoadAnimation']!),
+                ),
               ),
             ),
           ),

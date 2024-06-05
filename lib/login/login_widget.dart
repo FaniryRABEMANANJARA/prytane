@@ -123,33 +123,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 16.0, 0.0, 4.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Bienvenue à nouveau,',
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .displaySmallFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      fontSize: 24.0,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .displaySmallFamily),
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -173,7 +146,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily),
                                         ),
-                                    hintText: 'Nom d\'utilisateur ou Mail',
+                                    hintText: 'E-mail',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -359,18 +332,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  context.pushNamed(
-                                    'changePassword',
-                                    queryParameters: {
-                                      'userProfile': serializeParam(
-                                        loginUsersRecord,
-                                        ParamType.Document,
-                                      ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      'userProfile': loginUsersRecord,
-                                    },
-                                  );
+                                  context.pushNamed('changePassword');
                                 },
                                 child: Text(
                                   'Mot de passe oublié?',

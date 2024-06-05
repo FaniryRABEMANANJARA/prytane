@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/nav_bar1_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

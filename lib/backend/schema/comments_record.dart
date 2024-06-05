@@ -41,6 +41,11 @@ class CommentsRecord extends FirestoreRecord {
   DateTime? get createdAt => _createdAt;
   bool hasCreatedAt() => _createdAt != null;
 
+  // "like" field.
+  List<DocumentReference>? _like;
+  List<DocumentReference> get like => _like ?? const [];
+  bool hasLike() => _like != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -49,6 +54,7 @@ class CommentsRecord extends FirestoreRecord {
     _postType = snapshotData['post_type'] as DocumentReference?;
     _image = snapshotData['image'] as String?;
     _createdAt = snapshotData['created_at'] as DateTime?;
+    _like = getDataList(snapshotData['like']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -115,16 +121,18 @@ class CommentsRecordDocumentEquality implements Equality<CommentsRecord> {
 
   @override
   bool equals(CommentsRecord? e1, CommentsRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.createdBy == e2?.createdBy &&
         e1?.comment == e2?.comment &&
         e1?.postType == e2?.postType &&
         e1?.image == e2?.image &&
-        e1?.createdAt == e2?.createdAt;
+        e1?.createdAt == e2?.createdAt &&
+        listEquality.equals(e1?.like, e2?.like);
   }
 
   @override
-  int hash(CommentsRecord? e) => const ListEquality()
-      .hash([e?.createdBy, e?.comment, e?.postType, e?.image, e?.createdAt]);
+  int hash(CommentsRecord? e) => const ListEquality().hash(
+      [e?.createdBy, e?.comment, e?.postType, e?.image, e?.createdAt, e?.like]);
 
   @override
   bool isValidKey(Object? o) => o is CommentsRecord;

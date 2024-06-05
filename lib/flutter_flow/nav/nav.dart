@@ -100,15 +100,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'changePassword',
           path: '/changePassword',
-          asyncParams: {
-            'userProfile': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => ChangePasswordWidget(
-            userProfile: params.getParam(
-              'userProfile',
-              ParamType.Document,
-            ),
-          ),
+          builder: (context, params) => ChangePasswordWidget(),
         ),
         FFRoute(
           name: 'inscription',
@@ -186,11 +178,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
-        ),
-        FFRoute(
-          name: 'Ajoutstory',
-          path: '/ajoutstory',
-          builder: (context, params) => AjoutstoryWidget(),
         ),
         FFRoute(
           name: 'ModifierProfil',
@@ -305,11 +292,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               collectionNamePath: ['publications'],
             ),
           ),
-        ),
-        FFRoute(
-          name: 'AjoutVideo',
-          path: '/ajoutVideo',
-          builder: (context, params) => AjoutVideoWidget(),
         ),
         FFRoute(
           name: 'CompleteProfile',
@@ -429,6 +411,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AppelsVideo',
           path: '/appelsVideo',
           builder: (context, params) => AppelsVideoWidget(),
+        ),
+        FFRoute(
+          name: 'Profile',
+          path: '/profile',
+          builder: (context, params) => ProfileWidget(),
+        ),
+        FFRoute(
+          name: 'Politique',
+          path: '/politique',
+          builder: (context, params) => PolitiqueWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

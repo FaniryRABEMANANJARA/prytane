@@ -216,377 +216,401 @@ class _ModifierGroupWidgetState extends State<ModifierGroupWidget>
           ),
           body: SafeArea(
             top: true,
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(2.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  final selectedMedia =
-                                      await selectMediaWithSourceBottomSheet(
-                                    context: context,
-                                    allowPhoto: true,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    setState(
-                                        () => _model.isDataUploading = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
-
-                                    var downloadUrls = <String>[];
-                                    try {
-                                      showUploadMessage(
-                                        context,
-                                        'Uploading file...',
-                                        showLoading: true,
+            child: Align(
+              alignment: AlignmentDirectional(0.0, 0.0),
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: double.infinity,
+                ),
+                decoration: BoxDecoration(),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 16.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      final selectedMedia =
+                                          await selectMediaWithSourceBottomSheet(
+                                        context: context,
+                                        allowPhoto: true,
                                       );
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
+                                      if (selectedMedia != null &&
+                                          selectedMedia.every((m) =>
+                                              validateFileFormat(
+                                                  m.storagePath, context))) {
+                                        setState(() =>
+                                            _model.isDataUploading = true);
+                                        var selectedUploadedFiles =
+                                            <FFUploadedFile>[];
 
-                                      downloadUrls = (await Future.wait(
-                                        selectedMedia.map(
-                                          (m) async => await uploadData(
-                                              m.storagePath, m.bytes),
-                                        ),
-                                      ))
-                                          .where((u) => u != null)
-                                          .map((u) => u!)
-                                          .toList();
-                                    } finally {
-                                      ScaffoldMessenger.of(context)
-                                          .hideCurrentSnackBar();
-                                      _model.isDataUploading = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                            selectedMedia.length &&
-                                        downloadUrls.length ==
-                                            selectedMedia.length) {
-                                      setState(() {
-                                        _model.uploadedLocalFile =
-                                            selectedUploadedFiles.first;
-                                        _model.uploadedFileUrl =
-                                            downloadUrls.first;
-                                      });
-                                      showUploadMessage(context, 'Success!');
-                                    } else {
-                                      setState(() {});
-                                      showUploadMessage(
-                                          context, 'Failed to upload data');
-                                      return;
-                                    }
-                                  }
-                                },
-                                child: Container(
-                                  width: 90.0,
-                                  height: 90.0,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: CachedNetworkImage(
-                                    fadeInDuration: Duration(milliseconds: 500),
-                                    fadeOutDuration:
-                                        Duration(milliseconds: 500),
-                                    imageUrl: modifierGroupGroupesRecord!.photo,
-                                    fit: BoxFit.fitWidth,
+                                        var downloadUrls = <String>[];
+                                        try {
+                                          showUploadMessage(
+                                            context,
+                                            'Uploading file...',
+                                            showLoading: true,
+                                          );
+                                          selectedUploadedFiles = selectedMedia
+                                              .map((m) => FFUploadedFile(
+                                                    name: m.storagePath
+                                                        .split('/')
+                                                        .last,
+                                                    bytes: m.bytes,
+                                                    height:
+                                                        m.dimensions?.height,
+                                                    width: m.dimensions?.width,
+                                                    blurHash: m.blurHash,
+                                                  ))
+                                              .toList();
+
+                                          downloadUrls = (await Future.wait(
+                                            selectedMedia.map(
+                                              (m) async => await uploadData(
+                                                  m.storagePath, m.bytes),
+                                            ),
+                                          ))
+                                              .where((u) => u != null)
+                                              .map((u) => u!)
+                                              .toList();
+                                        } finally {
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
+                                          _model.isDataUploading = false;
+                                        }
+                                        if (selectedUploadedFiles.length ==
+                                                selectedMedia.length &&
+                                            downloadUrls.length ==
+                                                selectedMedia.length) {
+                                          setState(() {
+                                            _model.uploadedLocalFile =
+                                                selectedUploadedFiles.first;
+                                            _model.uploadedFileUrl =
+                                                downloadUrls.first;
+                                          });
+                                          showUploadMessage(
+                                              context, 'Success!');
+                                        } else {
+                                          setState(() {});
+                                          showUploadMessage(
+                                              context, 'Failed to upload data');
+                                          return;
+                                        }
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 90.0,
+                                      height: 90.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            Duration(milliseconds: 500),
+                                        imageUrl:
+                                            modifierGroupGroupesRecord!.photo,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-                      child: TextFormField(
-                        controller: _model.nomTextController,
-                        focusNode: _model.nomFocusNode,
-                        textCapitalization: TextCapitalization.words,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: modifierGroupGroupesRecord?.nom,
-                          labelStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
-                              ),
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
-                              ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 24.0, 0.0, 24.0),
-                          prefixIcon: Icon(
-                            Icons.location_history,
+                            ],
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
-                        validator: _model.nomTextControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 12.0),
-                      child: TextFormField(
-                        controller: _model.myBioTextController,
-                        focusNode: _model.myBioFocusNode,
-                        textCapitalization: TextCapitalization.sentences,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 16.0),
+                          child: TextFormField(
+                            controller: _model.nomTextController,
+                            focusNode: _model.nomFocusNode,
+                            textCapitalization: TextCapitalization.words,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: modifierGroupGroupesRecord?.nom,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .labelMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .labelMediumFamily),
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .labelMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .labelMediumFamily),
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                          hintText: valueOrDefault<String>(
-                            modifierGroupGroupesRecord?.description,
-                            'description',
-                          ),
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .labelMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .labelMediumFamily),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 0.0, 24.0),
+                              prefixIcon: Icon(
+                                Icons.location_history,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 24.0, 0.0, 24.0),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
-                        textAlign: TextAlign.start,
-                        maxLines: 4,
-                        validator: _model.myBioTextControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                    FlutterFlowDropDown<String>(
-                      controller: _model.dropDownValueController ??=
-                          FormFieldController<String>(
-                        _model.dropDownValue ??=
-                            modifierGroupGroupesRecord?.type,
-                      ),
-                      options: [
-                        '3ème âge',
-                        'Chorale',
-                        'Groupe de femme',
-                        'Groupe de jeune',
-                        'Groupe sportif'
-                      ],
-                      onChanged: (val) =>
-                          setState(() => _model.dropDownValue = val),
-                      width: 300.0,
-                      height: 56.0,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
-                      hintText: 'Veuillez choisir le type de groupe',
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 24.0,
-                      ),
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      elevation: 2.0,
-                      borderColor: FlutterFlowTheme.of(context).alternate,
-                      borderWidth: 2.0,
-                      borderRadius: 8.0,
-                      margin:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-                      hidesUnderline: true,
-                      isOverButton: true,
-                      isSearchable: false,
-                      isMultiSelect: false,
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.05),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await modifierGroupGroupesRecord!.reference
-                                .update(createGroupesRecordData(
-                              nom: _model.nomTextController.text,
-                              description: _model.myBioTextController.text,
-                              type: _model.dropDownValue,
-                              photo: _model.uploadedFileUrl,
-                            ));
-
-                            context.pushNamed('Listegroupe');
-                          },
-                          text: 'Modifier',
-                          options: FFButtonOptions(
-                            width: 270.0,
-                            height: 50.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  color: Colors.white,
+                                      .bodyMediumFamily,
                                   letterSpacing: 0.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
+                                          .bodyMediumFamily),
                                 ),
-                            elevation: 2.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
+                            validator: _model.nomTextControllerValidator
+                                .asValidator(context),
                           ),
-                        ).animateOnPageLoad(
-                            animationsMap['buttonOnPageLoadAnimation']!),
-                      ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 12.0),
+                          child: TextFormField(
+                            controller: _model.myBioTextController,
+                            focusNode: _model.myBioFocusNode,
+                            textCapitalization: TextCapitalization.sentences,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .labelMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .labelMediumFamily),
+                                  ),
+                              hintText: valueOrDefault<String>(
+                                modifierGroupGroupesRecord?.description,
+                                'description',
+                              ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .labelMediumFamily,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .labelMediumFamily),
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 0.0, 24.0),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily),
+                                ),
+                            textAlign: TextAlign.start,
+                            maxLines: 4,
+                            validator: _model.myBioTextControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        FlutterFlowDropDown<String>(
+                          controller: _model.dropDownValueController ??=
+                              FormFieldController<String>(
+                            _model.dropDownValue ??=
+                                modifierGroupGroupesRecord?.type,
+                          ),
+                          options: [
+                            '3ème âge',
+                            'Chorale',
+                            'Groupe de femme',
+                            'Groupe de jeune',
+                            'Groupe sportif'
+                          ],
+                          onChanged: (val) =>
+                              setState(() => _model.dropDownValue = val),
+                          width: 300.0,
+                          height: 56.0,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
+                          hintText: 'Veuillez choisir le type de groupe',
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 2.0,
+                          borderColor: FlutterFlowTheme.of(context).alternate,
+                          borderWidth: 2.0,
+                          borderRadius: 8.0,
+                          margin: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 4.0, 16.0, 4.0),
+                          hidesUnderline: true,
+                          isOverButton: true,
+                          isSearchable: false,
+                          isMultiSelect: false,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.05),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 24.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await modifierGroupGroupesRecord!.reference
+                                    .update(createGroupesRecordData(
+                                  nom: _model.nomTextController.text,
+                                  description: _model.myBioTextController.text,
+                                  type: _model.dropDownValue,
+                                  photo: _model.uploadedFileUrl,
+                                ));
+
+                                context.pushNamed('Listegroupe');
+                              },
+                              text: 'Modifier',
+                              options: FFButtonOptions(
+                                width: 270.0,
+                                height: 50.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .titleMediumFamily,
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .titleMediumFamily),
+                                    ),
+                                elevation: 2.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                            ).animateOnPageLoad(
+                                animationsMap['buttonOnPageLoadAnimation']!),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ).animateOnPageLoad(
+                      animationsMap['columnOnPageLoadAnimation']!),
                 ),
-              ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
+              ),
             ),
           ),
         );

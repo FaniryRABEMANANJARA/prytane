@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -29,6 +30,10 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   FocusNode? nomFocusNode;
   TextEditingController? nomTextController;
   String? Function(BuildContext, String?)? nomTextControllerValidator;
+  // State field(s) for telephone widget.
+  FocusNode? telephoneFocusNode;
+  TextEditingController? telephoneTextController;
+  String? Function(BuildContext, String?)? telephoneTextControllerValidator;
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
@@ -37,10 +42,6 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   FocusNode? cityFocusNode;
   TextEditingController? cityTextController;
   String? Function(BuildContext, String?)? cityTextControllerValidator;
-  // State field(s) for telephone widget.
-  FocusNode? telephoneFocusNode;
-  TextEditingController? telephoneTextController;
-  String? Function(BuildContext, String?)? telephoneTextControllerValidator;
   // State field(s) for lien widget.
   FocusNode? lienFocusNode;
   TextEditingController? lienTextController;
@@ -55,17 +56,18 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
 
   @override
   void dispose() {
+    unfocusNode.dispose();
     nomFocusNode?.dispose();
     nomTextController?.dispose();
+
+    telephoneFocusNode?.dispose();
+    telephoneTextController?.dispose();
 
     emailFocusNode?.dispose();
     emailTextController?.dispose();
 
     cityFocusNode?.dispose();
     cityTextController?.dispose();
-
-    telephoneFocusNode?.dispose();
-    telephoneTextController?.dispose();
 
     lienFocusNode?.dispose();
     lienTextController?.dispose();
