@@ -257,8 +257,14 @@ class _ImageDetailsWidgetState extends State<ImageDetailsWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 0.0),
                                       child: Text(
-                                        dateTimeFormat('relative',
-                                            widget.chatMessage!.timestamp!),
+                                        dateTimeFormat(
+                                          'relative',
+                                          widget.chatMessage!.timestamp!,
+                                          locale: FFLocalizations.of(context)
+                                                  .languageShortCode ??
+                                              FFLocalizations.of(context)
+                                                  .languageCode,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .labelSmall
                                             .override(

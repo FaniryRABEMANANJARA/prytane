@@ -1,4 +1,4 @@
-import '/components/nav_bar2_widget.dart';
+import '/components/nav_bar1_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -84,23 +84,29 @@ class _AppelsVideoWidgetState extends State<AppelsVideoWidget> {
               maxWidth: double.infinity,
             ),
             decoration: BoxDecoration(),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 615.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 615.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 1.0),
                   child: wrapWithModel(
-                    model: _model.navBar2Model,
+                    model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar2Widget(),
+                    child: NavBar1Widget(
+                      hidden: false,
+                    ),
                   ),
                 ),
               ],

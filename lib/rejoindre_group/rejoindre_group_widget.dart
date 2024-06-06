@@ -948,7 +948,7 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget>
                                                     try {
                                                       showUploadMessage(
                                                         context,
-                                                        'Uploading file...',
+                                                        'Téléchargement du fichier',
                                                         showLoading: true,
                                                       );
                                                       selectedUploadedFiles =
@@ -1008,11 +1008,11 @@ class _RejoindreGroupWidgetState extends State<RejoindreGroupWidget>
                                                             downloadUrls.first;
                                                       });
                                                       showUploadMessage(
-                                                          context, 'Success!');
+                                                          context, 'Succès!');
                                                     } else {
                                                       setState(() {});
                                                       showUploadMessage(context,
-                                                          'Failed to upload data');
+                                                          'Échec du téléchargement des données');
                                                       return;
                                                     }
                                                   }

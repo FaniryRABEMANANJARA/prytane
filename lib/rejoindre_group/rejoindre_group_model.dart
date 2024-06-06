@@ -30,7 +30,7 @@ class RejoindreGroupModel extends FlutterFlowModel<RejoindreGroupWidget> {
   String? Function(BuildContext, String?)? fullNameTextControllerValidator;
   String? _fullNameTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Please enter the patients full name.';
+      return 'Veuillez saisir le nom complet';
     }
 
     return null;
@@ -42,7 +42,7 @@ class RejoindreGroupModel extends FlutterFlowModel<RejoindreGroupWidget> {
   String? Function(BuildContext, String?)? ageTextControllerValidator;
   String? _ageTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Please enter an age for the patient.';
+      return 'Veuillez indiquer votre âge.';
     }
 
     return null;

@@ -837,6 +837,13 @@ class _ModifierAnnonceWidgetState extends State<ModifierAnnonceWidget>
                                         },
                                         currentTime: getCurrentTimestamp,
                                         minTime: getCurrentTimestamp,
+                                        locale: LocaleType.values.firstWhere(
+                                          (l) =>
+                                              l.name ==
+                                              FFLocalizations.of(context)
+                                                  .languageCode,
+                                          orElse: () => LocaleType.en,
+                                        ),
                                       );
                                     }
                                   },
@@ -873,8 +880,13 @@ class _ModifierAnnonceWidgetState extends State<ModifierAnnonceWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              dateTimeFormat('d/M/y h:mm a',
-                                                  getCurrentTimestamp),
+                                              dateTimeFormat(
+                                                'd/M/y h:mm a',
+                                                getCurrentTimestamp,
+                                                locale:
+                                                    FFLocalizations.of(context)
+                                                        .languageCode,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -1105,8 +1117,12 @@ class _ModifierAnnonceWidgetState extends State<ModifierAnnonceWidget>
                                 type: _model.typeValue,
                                 description:
                                     _model.descriptionTextController.text,
-                                dateCreation:
-                                    dateTimeFormat('d/M/y', _model.datePicked),
+                                dateCreation: dateTimeFormat(
+                                  'd/M/y',
+                                  _model.datePicked,
+                                  locale:
+                                      FFLocalizations.of(context).languageCode,
+                                ),
                                 localisation:
                                     _model.localisationTextController.text,
                                 image: _model.uploadedFileUrl,

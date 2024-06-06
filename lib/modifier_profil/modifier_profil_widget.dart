@@ -236,6 +236,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget>
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Container(
+                  width: double.infinity,
                   constraints: BoxConstraints(
                     maxWidth: double.infinity,
                   ),
@@ -286,7 +287,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget>
                                           try {
                                             showUploadMessage(
                                               context,
-                                              'Uploading file...',
+                                              'Téléchargement du fichier',
                                               showLoading: true,
                                             );
                                             selectedUploadedFiles =
@@ -329,11 +330,11 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget>
                                                   downloadUrls.first;
                                             });
                                             showUploadMessage(
-                                                context, 'Success!');
+                                                context, 'Succès!');
                                           } else {
                                             setState(() {});
                                             showUploadMessage(context,
-                                                'Failed to upload data');
+                                                'Échec du téléchargement des données');
                                             return;
                                           }
                                         }
@@ -902,7 +903,7 @@ class _ModifierProfilWidgetState extends State<ModifierProfilWidget>
                                   displayName: _model.nomTextController.text,
                                 ));
 
-                                context.pushNamed('Profile');
+                                context.pushNamed('profilMembreCommunautairre');
                               },
                               text: 'Modifier',
                               options: FFButtonOptions(

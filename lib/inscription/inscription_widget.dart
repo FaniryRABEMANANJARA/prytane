@@ -557,7 +557,7 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Passwords don\'t match!',
+                                    'Les mots de passe ne correspondent pas',
                                   ),
                                 ),
                               );
@@ -673,7 +673,8 @@ class _InscriptionWidgetState extends State<InscriptionWidget> {
                                 }
 
                                 context.pushNamedAuth(
-                                    'Profile', context.mounted);
+                                    'profilMembreCommunautairre',
+                                    context.mounted);
                               },
                               child: FaIcon(
                                 FontAwesomeIcons.googlePlus,

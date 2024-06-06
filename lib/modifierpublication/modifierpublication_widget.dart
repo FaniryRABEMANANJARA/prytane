@@ -408,7 +408,7 @@ class _ModifierpublicationWidgetState extends State<ModifierpublicationWidget>
                                         try {
                                           showUploadMessage(
                                             context,
-                                            'Uploading file...',
+                                            'Téléchargement du fichier',
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -448,12 +448,11 @@ class _ModifierpublicationWidgetState extends State<ModifierpublicationWidget>
                                             _model.uploadedFileUrl =
                                                 downloadUrls.first;
                                           });
-                                          showUploadMessage(
-                                              context, 'Success!');
+                                          showUploadMessage(context, 'Succès!');
                                         } else {
                                           setState(() {});
-                                          showUploadMessage(
-                                              context, 'Failed to upload data');
+                                          showUploadMessage(context,
+                                              'Échec du téléchargement des données');
                                           return;
                                         }
                                       }
@@ -500,7 +499,7 @@ class _ModifierpublicationWidgetState extends State<ModifierpublicationWidget>
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 0.0, 0.0),
+                              16.0, 0.0, 0.0, 50.0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               await PublicationsRecord.collection

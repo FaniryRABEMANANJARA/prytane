@@ -292,8 +292,14 @@ class _ListeVideoCallWidgetState extends State<ListeVideoCallWidget>
                                                               ),
                                                     ),
                                                     Text(
-                                                      dateTimeFormat('relative',
-                                                          getCurrentTimestamp),
+                                                      dateTimeFormat(
+                                                        'relative',
+                                                        getCurrentTimestamp,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -435,9 +441,14 @@ class _ListeVideoCallWidgetState extends State<ListeVideoCallWidget>
                                                     ),
                                                     Text(
                                                       dateTimeFormat(
-                                                          'relative',
-                                                          columnUsersRecord
-                                                              .createdTime!),
+                                                        'relative',
+                                                        columnUsersRecord
+                                                            .createdTime!,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)

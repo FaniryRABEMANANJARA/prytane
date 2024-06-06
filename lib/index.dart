@@ -49,5 +49,4 @@ export '/list_users/list_users_widget.dart' show ListUsersWidget;
 export '/chargement/chargement_widget.dart' show ChargementWidget;
 export '/accueil/accueil_widget.dart' show AccueilWidget;
 export '/appels_video/appels_video_widget.dart' show AppelsVideoWidget;
-export '/profile/profile_widget.dart' show ProfileWidget;
 export '/politique/politique_widget.dart' show PolitiqueWidget;

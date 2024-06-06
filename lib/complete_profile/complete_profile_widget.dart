@@ -217,7 +217,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                 try {
                                   showUploadMessage(
                                     context,
-                                    'Uploading file...',
+                                    'Téléchargement du fichier',
                                     showLoading: true,
                                   );
                                   selectedUploadedFiles = selectedMedia
@@ -253,11 +253,11 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                         selectedUploadedFiles.first;
                                     _model.uploadedFileUrl = downloadUrls.first;
                                   });
-                                  showUploadMessage(context, 'Success!');
+                                  showUploadMessage(context, 'Succès!');
                                 } else {
                                   setState(() {});
-                                  showUploadMessage(
-                                      context, 'Failed to upload data');
+                                  showUploadMessage(context,
+                                      'Échec du téléchargement des données');
                                   return;
                                 }
                               }
@@ -703,7 +703,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                 role: _model.dropDownValue,
                               ));
 
-                              context.pushNamed('Profile');
+                              context.pushNamed('profilMembreCommunautairre');
                             },
                             text: 'Valider',
                             options: FFButtonOptions(

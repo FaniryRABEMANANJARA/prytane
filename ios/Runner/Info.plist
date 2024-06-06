@@ -54,13 +54,13 @@
 	<true/>
 
 	<key>NSCameraUsageDescription</key>
-    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+    <string>Besoin d&#39;un accès à la camera</string>
 	<key>NSMicrophoneUsageDescription</key>
     <string>In order to record audio for video, this app requires permission to access the microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>In order to upload data, this app requires permission to access the photo library.</string>
+    <string>Besoin d&#39;un accès à la photo</string>
 	<key>PermissionGroupNotification</key>
-    <string>Need notification access</string>
+    <string>Besoin d'un accès à la notification</string>
 
 
 	<key>UILaunchStoryboardName</key>

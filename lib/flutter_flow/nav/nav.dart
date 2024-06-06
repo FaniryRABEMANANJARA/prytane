@@ -413,11 +413,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AppelsVideoWidget(),
         ),
         FFRoute(
-          name: 'Profile',
-          path: '/profile',
-          builder: (context, params) => ProfileWidget(),
-        ),
-        FFRoute(
           name: 'Politique',
           path: '/politique',
           builder: (context, params) => PolitiqueWidget(),

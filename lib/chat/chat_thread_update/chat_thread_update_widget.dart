@@ -202,8 +202,14 @@ class _ChatThreadUpdateWidgetState extends State<ChatThreadUpdateWidget> {
                                     )),
                                     Text(
                                       valueOrDefault<String>(
-                                        dateTimeFormat('relative',
-                                            widget.chatMessagesRef?.timestamp),
+                                        dateTimeFormat(
+                                          'relative',
+                                          widget.chatMessagesRef?.timestamp,
+                                          locale: FFLocalizations.of(context)
+                                                  .languageShortCode ??
+                                              FFLocalizations.of(context)
+                                                  .languageCode,
+                                        ),
                                         '--',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -371,7 +377,12 @@ class _ChatThreadUpdateWidgetState extends State<ChatThreadUpdateWidget> {
                       child: Text(
                         valueOrDefault<String>(
                           dateTimeFormat(
-                              'relative', widget.chatMessagesRef?.timestamp),
+                            'relative',
+                            widget.chatMessagesRef?.timestamp,
+                            locale:
+                                FFLocalizations.of(context).languageShortCode ??
+                                    FFLocalizations.of(context).languageCode,
+                          ),
                           '--',
                         ),
                         style: FlutterFlowTheme.of(context).labelSmall.override(

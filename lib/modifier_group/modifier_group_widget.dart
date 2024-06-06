@@ -269,7 +269,7 @@ class _ModifierGroupWidgetState extends State<ModifierGroupWidget>
                                         try {
                                           showUploadMessage(
                                             context,
-                                            'Uploading file...',
+                                            'Téléchargement du fichier',
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -309,12 +309,11 @@ class _ModifierGroupWidgetState extends State<ModifierGroupWidget>
                                             _model.uploadedFileUrl =
                                                 downloadUrls.first;
                                           });
-                                          showUploadMessage(
-                                              context, 'Success!');
+                                          showUploadMessage(context, 'Succès!');
                                         } else {
                                           setState(() {});
-                                          showUploadMessage(
-                                              context, 'Failed to upload data');
+                                          showUploadMessage(context,
+                                              'Échec du téléchargement des données');
                                           return;
                                         }
                                       }

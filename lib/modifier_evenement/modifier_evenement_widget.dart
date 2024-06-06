@@ -248,7 +248,7 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                     try {
                                       showUploadMessage(
                                         context,
-                                        'Uploading file...',
+                                        'Téléchargement du fichier',
                                         showLoading: true,
                                       );
                                       selectedUploadedFiles = selectedMedia
@@ -287,11 +287,11 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                         _model.uploadedFileUrl =
                                             downloadUrls.first;
                                       });
-                                      showUploadMessage(context, 'Success!');
+                                      showUploadMessage(context, 'Succès!');
                                     } else {
                                       setState(() {});
-                                      showUploadMessage(
-                                          context, 'Failed to upload data');
+                                      showUploadMessage(context,
+                                          'Échec du téléchargement des données');
                                       return;
                                     }
                                   }
@@ -636,6 +636,13 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                       },
                                       currentTime: getCurrentTimestamp,
                                       minTime: getCurrentTimestamp,
+                                      locale: LocaleType.values.firstWhere(
+                                        (l) =>
+                                            l.name ==
+                                            FFLocalizations.of(context)
+                                                .languageCode,
+                                        orElse: () => LocaleType.en,
+                                      ),
                                     );
                                   }
                                 },
@@ -660,7 +667,11 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                       children: [
                                         Text(
                                           dateTimeFormat(
-                                              'd/M H:mm', getCurrentTimestamp),
+                                            'd/M H:mm',
+                                            getCurrentTimestamp,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
                                               .override(
@@ -764,6 +775,13 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                         });
                                       },
                                       currentTime: getCurrentTimestamp,
+                                      locale: LocaleType.values.firstWhere(
+                                        (l) =>
+                                            l.name ==
+                                            FFLocalizations.of(context)
+                                                .languageCode,
+                                        orElse: () => LocaleType.en,
+                                      ),
                                     );
                                   }
                                 },
@@ -788,7 +806,11 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                       children: [
                                         Text(
                                           dateTimeFormat(
-                                              'Hm', getCurrentTimestamp),
+                                            'Hm',
+                                            getCurrentTimestamp,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
                                               .override(
@@ -1034,9 +1056,17 @@ class _ModifierEvenementWidgetState extends State<ModifierEvenementWidget>
                                   location:
                                       _model.emplacementTextController.text,
                                   dateDebut: dateTimeFormat(
-                                      'd/M/y', _model.datePicked1),
-                                  dateFin:
-                                      dateTimeFormat('jm', _model.datePicked2),
+                                    'd/M/y',
+                                    _model.datePicked1,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
+                                  ),
+                                  dateFin: dateTimeFormat(
+                                    'jm',
+                                    _model.datePicked2,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
+                                  ),
                                   image: _model.uploadedFileUrl,
                                   organizers:
                                       _model.organisateurTextController.text,
