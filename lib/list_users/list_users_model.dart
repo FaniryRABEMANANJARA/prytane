@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 class ListUsersModel extends FlutterFlowModel<ListUsersWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for NavBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -26,7 +25,6 @@ class ListUsersModel extends FlutterFlowModel<ListUsersWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navBar1Model.dispose();
   }
 }

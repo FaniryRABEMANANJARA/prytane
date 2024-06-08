@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 class ListSondageModel extends FlutterFlowModel<ListSondageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for NavBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -30,7 +29,6 @@ class ListSondageModel extends FlutterFlowModel<ListSondageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navBar1Model.dispose();
   }
 }

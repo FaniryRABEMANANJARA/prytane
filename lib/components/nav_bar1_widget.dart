@@ -136,266 +136,223 @@ class _NavBar1WidgetState extends State<NavBar1Widget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
       child: Container(
-        width: 350.0,
+        width: 360.0,
         height: 80.0,
         decoration: BoxDecoration(
-          color: Color(0x00EEEEEE),
+          gradient: LinearGradient(
+            colors: [
+              FlutterFlowTheme.of(context).secondary,
+              FlutterFlowTheme.of(context).success
+            ],
+            stops: [0.0, 1.0],
+            begin: AlignmentDirectional(0.0, -1.0),
+            end: AlignmentDirectional(0, 1.0),
+          ),
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
+            bottomLeft: Radius.circular(16.0),
+            bottomRight: Radius.circular(16.0),
+            topLeft: Radius.circular(16.0),
+            topRight: Radius.circular(16.0),
           ),
         ),
-        child: Stack(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Material(
-                  color: Colors.transparent,
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
+                Opacity(
+                  opacity: widget.selectedpage == 1 ? 1.0 : 0.5,
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      Icons.cottage_outlined,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 24.0,
                     ),
-                  ),
-                  child: Container(
-                    width: 360.0,
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          FlutterFlowTheme.of(context).primaryBackground,
-                          FlutterFlowTheme.of(context).primary
-                        ],
-                        stops: [0.0, 1.0],
-                        begin: AlignmentDirectional(0.0, -1.0),
-                        end: AlignmentDirectional(0, 1.0),
-                      ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20.0),
-                        bottomRight: Radius.circular(20.0),
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                    ),
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    onPressed: () async {
+                      context.goNamed(
+                        'Accueil',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    },
                   ),
                 ),
+                if (widget.selectedpage == 1)
+                  SizedBox(
+                    width: 30.0,
+                    child: Divider(
+                      height: 2.0,
+                      thickness: 2.0,
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['dividerOnPageLoadAnimation1']!),
               ],
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: widget.selectedpage == 1 ? 1.0 : 0.5,
-                        child: FlutterFlowIconButton(
-                          borderRadius: 30.0,
-                          buttonSize: 50.0,
-                          icon: Icon(
-                            Icons.cottage_outlined,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            context.goNamed(
-                              'Accueil',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      if (widget.selectedpage == 1)
-                        SizedBox(
-                          width: 30.0,
-                          child: Divider(
-                            height: 2.0,
-                            thickness: 2.0,
-                            color: FlutterFlowTheme.of(context).primary,
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['dividerOnPageLoadAnimation1']!),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: widget.selectedpage == 2 ? 1.0 : 0.5,
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          buttonSize: 50.0,
-                          icon: Icon(
-                            Icons.chat_bubble_outline,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            context.goNamed(
-                              'chat_2_main',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      if (widget.selectedpage == 2)
-                        SizedBox(
-                          width: 30.0,
-                          child: Divider(
-                            height: 2.0,
-                            thickness: 2.0,
-                            color: FlutterFlowTheme.of(context).primary,
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['dividerOnPageLoadAnimation2']!),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 25.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: ActionAddWidget(),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: widget.selectedpage == 2 ? 1.0 : 0.5,
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      Icons.chat_bubble_outline,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 24.0,
                     ),
+                    onPressed: () async {
+                      context.goNamed(
+                        'chat_2_main',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    },
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: widget.selectedpage == 3 ? 1.0 : 0.5,
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          buttonSize: 50.0,
-                          icon: Icon(
-                            Icons.groups_outlined,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            context.goNamed(
-                              'Listegroupe',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      if (widget.selectedpage == 3)
-                        SizedBox(
-                          width: 30.0,
-                          child: Divider(
-                            height: 2.0,
-                            thickness: 2.0,
-                            color: FlutterFlowTheme.of(context).primary,
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['dividerOnPageLoadAnimation3']!),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: widget.selectedpage == 4 ? 1.0 : 0.5,
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          buttonSize: 50.0,
-                          icon: Icon(
-                            Icons.person_outlined,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            context.goNamed(
-                              'profilMembreCommunautairre',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      if (widget.selectedpage == 4)
-                        SizedBox(
-                          width: 30.0,
-                          child: Divider(
-                            height: 2.0,
-                            thickness: 2.0,
-                            color: FlutterFlowTheme.of(context).primary,
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['dividerOnPageLoadAnimation4']!),
-                    ],
-                  ),
-                ]
-                    .divide(SizedBox(width: 16.0))
-                    .addToStart(SizedBox(width: 16.0))
-                    .addToEnd(SizedBox(width: 16.0)),
+                ),
+                if (widget.selectedpage == 2)
+                  SizedBox(
+                    width: 30.0,
+                    child: Divider(
+                      height: 2.0,
+                      thickness: 2.0,
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['dividerOnPageLoadAnimation2']!),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+              child: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 25.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                fillColor: FlutterFlowTheme.of(context).primary,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    enableDrag: false,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.viewInsetsOf(context),
+                        child: ActionAddWidget(),
+                      );
+                    },
+                  ).then((value) => safeSetState(() {}));
+                },
               ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: widget.selectedpage == 3 ? 1.0 : 0.5,
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      Icons.groups_outlined,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.goNamed(
+                        'Listegroupe',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    },
+                  ),
+                ),
+                if (widget.selectedpage == 3)
+                  SizedBox(
+                    width: 30.0,
+                    child: Divider(
+                      height: 2.0,
+                      thickness: 2.0,
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['dividerOnPageLoadAnimation3']!),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: widget.selectedpage == 4 ? 1.0 : 0.5,
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      Icons.person_outlined,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.goNamed(
+                        'profilMembreCommunautairre',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    },
+                  ),
+                ),
+                if (widget.selectedpage == 4)
+                  SizedBox(
+                    width: 30.0,
+                    child: Divider(
+                      height: 2.0,
+                      thickness: 2.0,
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['dividerOnPageLoadAnimation4']!),
+              ],
             ),
           ],
         ),

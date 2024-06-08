@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 class DetailsAnnonceModel extends FlutterFlowModel<DetailsAnnonceWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for NavBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -26,7 +25,6 @@ class DetailsAnnonceModel extends FlutterFlowModel<DetailsAnnonceWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navBar1Model.dispose();
   }
 }

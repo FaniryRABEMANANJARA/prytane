@@ -23,7 +23,6 @@ import 'package:provider/provider.dart';
 class AjoutevenementModel extends FlutterFlowModel<AjoutevenementWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -64,7 +63,6 @@ class AjoutevenementModel extends FlutterFlowModel<AjoutevenementWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     titreFocusNode?.dispose();
     titreTextController?.dispose();
 

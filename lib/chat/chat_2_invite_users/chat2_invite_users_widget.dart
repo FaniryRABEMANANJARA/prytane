@@ -314,8 +314,10 @@ class _Chat2InviteUsersWidgetState extends State<Chat2InviteUsersWidget> {
                                                   Duration(milliseconds: 200),
                                               fadeOutDuration:
                                                   Duration(milliseconds: 200),
-                                              imageUrl:
-                                                  listViewUsersRecord.photoUrl,
+                                              imageUrl: valueOrDefault<String>(
+                                                listViewUsersRecord.photoUrl,
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                              ),
                                               width: 44.0,
                                               height: 44.0,
                                               fit: BoxFit.cover,

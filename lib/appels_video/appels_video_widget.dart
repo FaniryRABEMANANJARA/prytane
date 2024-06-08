@@ -77,39 +77,44 @@ class _AppelsVideoWidgetState extends State<AppelsVideoWidget> {
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: Align(
-          alignment: AlignmentDirectional(0.0, 0.0),
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: double.infinity,
-            ),
-            decoration: BoxDecoration(),
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 615.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
-                  child: wrapWithModel(
-                    model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
-                      hidden: false,
+        body: SafeArea(
+          top: true,
+          child: Align(
+            alignment: AlignmentDirectional(0.0, 0.0),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: double.infinity,
+              ),
+              decoration: BoxDecoration(),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                        ),
+                      ].addToEnd(SizedBox(height: 100.0)),
                     ),
                   ),
-                ),
-              ],
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 1.0),
+                    child: wrapWithModel(
+                      model: _model.navBar1Model,
+                      updateCallback: () => setState(() {}),
+                      child: NavBar1Widget(
+                        hidden: false,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -214,7 +214,10 @@ class _ImageDetailsWidgetState extends State<ImageDetailsWidget>
                                 child: CachedNetworkImage(
                                   fadeInDuration: Duration(milliseconds: 200),
                                   fadeOutDuration: Duration(milliseconds: 200),
-                                  imageUrl: otherUserUsersRecord.photoUrl,
+                                  imageUrl: valueOrDefault<String>(
+                                    otherUserUsersRecord.photoUrl,
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                  ),
                                   width: 44.0,
                                   height: 44.0,
                                   fit: BoxFit.cover,

@@ -179,36 +179,33 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
-            child: Text(
-              'Ajouter une annonce',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineMediumFamily,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineMediumFamily),
-                  ),
-            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 2.0,
+        automaticallyImplyLeading: false,
+        title: Align(
+          alignment: AlignmentDirectional(0.0, 0.0),
+          child: Text(
+            'Ajouter une annonce',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
         ),
-        body: Align(
+        actions: [],
+        centerTitle: false,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -218,7 +215,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -229,26 +226,9 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
-                                child: Text(
-                                  'Remplissez le formulaire ci-dessous',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .labelLargeFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLargeFamily),
-                                      ),
-                                ),
-                              ),
                               Column(
                                 mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   TextFormField(
@@ -332,6 +312,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .headlineSmallFamily,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
@@ -423,6 +404,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMediumFamily,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
@@ -438,7 +420,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                                         .asValidator(context),
                                   ),
                                 ]
-                                    .divide(SizedBox(height: 10.0))
+                                    .divide(SizedBox(height: 1.0))
                                     .addToStart(SizedBox(height: 0.0)),
                               ),
                               Padding(
@@ -1204,7 +1186,7 @@ class _AjoutAnnonceWidgetState extends State<AjoutAnnonceWidget>
                         ).animateOnPageLoad(
                             animationsMap['columnOnPageLoadAnimation']!),
                       ),
-                    ],
+                    ].addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
                 Align(

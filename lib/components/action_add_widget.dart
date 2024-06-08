@@ -47,15 +47,27 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AnimatedContainer(
               duration: Duration(milliseconds: 150),
               curve: Curves.easeInOut,
               decoration: BoxDecoration(
-                color: _model.iuserHovered!
-                    ? FlutterFlowTheme.of(context).primaryBackground
-                    : FlutterFlowTheme.of(context).secondaryBackground,
-                borderRadius: BorderRadius.circular(12.0),
+                gradient: LinearGradient(
+                  colors: [
+                    FlutterFlowTheme.of(context).secondary,
+                    FlutterFlowTheme.of(context).success
+                  ],
+                  stops: [0.0, 1.0],
+                  begin: AlignmentDirectional(0.0, -1.0),
+                  end: AlignmentDirectional(0, 1.0),
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16.0),
+                  bottomRight: Radius.circular(16.0),
+                  topLeft: Radius.circular(16.0),
+                  topRight: Radius.circular(16.0),
+                ),
                 border: Border.all(
                   color: FlutterFlowTheme.of(context).alternate,
                 ),
@@ -85,7 +97,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
@@ -93,8 +104,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: FaIcon(
                                 FontAwesomeIcons.ad,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
                                 size: 25.0,
                               ),
                             ),
@@ -164,14 +173,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),
                                 child: Icon(
                                   Icons.event_note,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
                                   size: 30.0,
                                 ),
                               ),
@@ -243,7 +249,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),
@@ -251,8 +256,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Icon(
                                     Icons.groups_2,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
                                     size: 30.0,
                                   ),
                                 ),
@@ -322,13 +325,11 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
                             child: Icon(
                               Icons.content_paste,
-                              color: FlutterFlowTheme.of(context).secondaryText,
                               size: 30.0,
                             ),
                           ),
@@ -394,7 +395,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).success,
                                 width: 2.0,
                               ),
                             ),
@@ -402,8 +402,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: FaIcon(
                                 FontAwesomeIcons.solidNewspaper,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
                                 size: 25.0,
                               ),
                             ),
@@ -472,7 +470,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(12.0),
                                   border: Border.all(
-                                    color: FlutterFlowTheme.of(context).success,
                                     width: 2.0,
                                   ),
                                 ),
@@ -480,8 +477,6 @@ class _ActionAddWidgetState extends State<ActionAddWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FaIcon(
                                     FontAwesomeIcons.donate,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
                                     size: 30.0,
                                   ),
                                 ),

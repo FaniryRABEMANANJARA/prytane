@@ -90,54 +90,53 @@ class _ListSondageWidgetState extends State<ListSondageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Liste des sondages',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineMediumFamily,
-                      fontSize: 25.0,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineMediumFamily),
-                    ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Liste des sondages',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    fontSize: 25.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
+            ),
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed('ajoutSondage');
+              },
+              child: Icon(
+                Icons.add_circle,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 30.0,
               ),
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('ajoutSondage');
-                },
-                child: Icon(
-                  Icons.add_circle,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 30.0,
-                ),
-              ),
-            ],
-          ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: Align(
+            ),
+          ],
+        ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+        actions: [],
+        centerTitle: true,
+        elevation: 2.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -147,7 +146,7 @@ class _ListSondageWidgetState extends State<ListSondageWidget>
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: double.infinity,
@@ -473,17 +472,11 @@ class _ListSondageWidgetState extends State<ListSondageWidget>
                                                                           context,
                                                                       builder:
                                                                           (context) {
-                                                                        return GestureDetector(
-                                                                          onTap: () => _model.unfocusNode.canRequestFocus
-                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                              : FocusScope.of(context).unfocus(),
+                                                                        return Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
                                                                           child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                MediaQuery.viewInsetsOf(context),
-                                                                            child:
-                                                                                ParametresSondageWidget(),
-                                                                          ),
+                                                                              ParametresSondageWidget(),
                                                                         );
                                                                       },
                                                                     ).then((value) =>
@@ -578,7 +571,7 @@ class _ListSondageWidgetState extends State<ListSondageWidget>
                         ),
                       ).animateOnPageLoad(
                           animationsMap['containerOnPageLoadAnimation']!),
-                    ],
+                    ].addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
                 Align(

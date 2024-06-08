@@ -1,8 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/components/nav_bar1_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -50,9 +50,13 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
   FocusNode? myBioFocusNode;
   TextEditingController? myBioTextController;
   String? Function(BuildContext, String?)? myBioTextControllerValidator;
+  // Model for NavBar1 component.
+  late NavBar1Model navBar1Model;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    navBar1Model = createModel(context, () => NavBar1Model());
+  }
 
   @override
   void dispose() {
@@ -74,5 +78,7 @@ class ModifierProfilModel extends FlutterFlowModel<ModifierProfilWidget> {
 
     myBioFocusNode?.dispose();
     myBioTextController?.dispose();
+
+    navBar1Model.dispose();
   }
 }

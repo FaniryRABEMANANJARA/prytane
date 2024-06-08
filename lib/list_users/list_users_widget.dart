@@ -86,32 +86,31 @@ class _ListUsersWidgetState extends State<ListUsersWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Les utilisateurs',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
-          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: Align(
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Les utilisateurs',
+          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                letterSpacing: 0.0,
+                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                    FlutterFlowTheme.of(context).headlineMediumFamily),
+              ),
+        ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+        actions: [],
+        centerTitle: true,
+        elevation: 2.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -121,7 +120,7 @@ class _ListUsersWidgetState extends State<ListUsersWidget>
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
                         child: Column(
@@ -287,8 +286,12 @@ class _ListUsersWidgetState extends State<ListUsersWidget>
                                                             BorderRadius
                                                                 .circular(44.0),
                                                         child: Image.network(
-                                                          listViewUsersRecord
-                                                              .photoUrl,
+                                                          valueOrDefault<
+                                                              String>(
+                                                            listViewUsersRecord
+                                                                .photoUrl,
+                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                          ),
                                                           width: 44.0,
                                                           height: 44.0,
                                                           fit: BoxFit.cover,
@@ -413,7 +416,7 @@ class _ListUsersWidgetState extends State<ListUsersWidget>
                         ),
                       ).animateOnPageLoad(
                           animationsMap['columnOnPageLoadAnimation']!),
-                    ],
+                    ].addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
                 Align(

@@ -76,57 +76,53 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
           );
         }
         List<GroupesRecord> listegroupeGroupesRecordList = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
+        return Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-              automaticallyImplyLeading: false,
-              title: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Liste des groupes',
-                    style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).headlineMediumFamily,
-                          fontSize: 25.0,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context)
-                                  .headlineMediumFamily),
-                        ),
-                  ),
-                  if (valueOrDefault(currentUserDocument?.role, '') ==
-                      'paroisse')
-                    AuthUserStreamWidget(
-                      builder: (context) => InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('AjoutGroup');
-                        },
-                        child: Icon(
-                          Icons.add_circle,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 30.0,
-                        ),
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Liste des groupes',
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).headlineMediumFamily,
+                        fontSize: 25.0,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).headlineMediumFamily),
+                      ),
+                ),
+                if (valueOrDefault(currentUserDocument?.role, '') == 'paroisse')
+                  AuthUserStreamWidget(
+                    builder: (context) => InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('AjoutGroup');
+                      },
+                      child: Icon(
+                        Icons.add_circle,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 30.0,
                       ),
                     ),
-                ],
-              ),
-              actions: [],
-              centerTitle: false,
-              elevation: 2.0,
+                  ),
+              ],
             ),
-            body: Container(
+            actions: [],
+            centerTitle: false,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Container(
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
@@ -137,7 +133,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                   SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
@@ -500,9 +496,8 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                                       .circular(
                                                                           8.0),
                                                               child:
-                                                                  Image.network(
-                                                                searchGroupItem
-                                                                    .photo,
+                                                                  Image.asset(
+                                                                'assets/images/facebook-group-default-cover-photo.jpg',
                                                                 width: 120.0,
                                                                 height: 120.0,
                                                                 fit: BoxFit
@@ -1096,8 +1091,12 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                                                                           8.0),
                                                               child:
                                                                   Image.network(
-                                                                searchGroupItem
-                                                                    .photo,
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  searchGroupItem
+                                                                      .photo,
+                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/asqqjf1sxwrv/facebook-group-default-cover-photo.jpg',
+                                                                ),
                                                                 width: 120.0,
                                                                 height: 120.0,
                                                                 fit: BoxFit
@@ -1564,7 +1563,7 @@ class _ListegroupeWidgetState extends State<ListegroupeWidget> {
                             ),
                           ),
                         ),
-                      ],
+                      ].addToEnd(SizedBox(height: 100.0)),
                     ),
                   ),
                   Align(

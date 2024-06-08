@@ -17,7 +17,6 @@ import 'package:provider/provider.dart';
 class ListeVideoCallModel extends FlutterFlowModel<ListeVideoCallWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for NavBar2 component.
   late NavBar2Model navBar2Model;
 
@@ -28,7 +27,6 @@ class ListeVideoCallModel extends FlutterFlowModel<ListeVideoCallWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navBar2Model.dispose();
   }
 }

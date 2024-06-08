@@ -124,32 +124,31 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Faire un don',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
-          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: Align(
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Faire un don',
+          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                letterSpacing: 0.0,
+                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                    FlutterFlowTheme.of(context).headlineMediumFamily),
+              ),
+        ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+        actions: [],
+        centerTitle: true,
+        elevation: 2.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, -1.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -159,7 +158,7 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget>
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: double.infinity,
@@ -827,7 +826,7 @@ class _LeverdeDonsWidgetState extends State<LeverdeDonsWidget>
                         ),
                       ).animateOnPageLoad(
                           animationsMap['containerOnPageLoadAnimation']!),
-                    ],
+                    ].addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
                 Align(

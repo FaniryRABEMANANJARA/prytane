@@ -115,13 +115,14 @@ class _ProfilMembreCommunautairreWidgetState
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Container(
-            width: double.infinity,
-            height: 817.0,
+            height: double.infinity,
+            constraints: BoxConstraints(
+              maxWidth: double.infinity,
+            ),
             decoration: BoxDecoration(),
             child: Stack(
               children: [
                 SingleChildScrollView(
-                  primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -170,8 +171,11 @@ class _ProfilMembreCommunautairreWidgetState
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: Image.network(
-                                          currentUserPhoto,
-                                          width: 90.0,
+                                          valueOrDefault<String>(
+                                            currentUserPhoto,
+                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                          ),
+                                          width: 100.0,
                                           height: 100.0,
                                           fit: BoxFit.cover,
                                         ),
@@ -197,7 +201,10 @@ class _ProfilMembreCommunautairreWidgetState
                                                   0.0, 50.0, 0.0, 0.0),
                                           child: AuthUserStreamWidget(
                                             builder: (context) => Text(
-                                              currentUserDisplayName,
+                                              valueOrDefault<String>(
+                                                currentUserDisplayName,
+                                                'Membre',
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .labelLarge
@@ -845,7 +852,7 @@ class _ProfilMembreCommunautairreWidgetState
                           ),
                         ],
                       ),
-                    ],
+                    ].addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
                 Align(

@@ -191,7 +191,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
-                                currentUserPhoto,
+                                valueOrDefault<String>(
+                                  currentUserPhoto,
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                ),
                                 fit: BoxFit.cover,
                               ),
                             ),

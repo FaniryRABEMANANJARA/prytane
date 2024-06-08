@@ -116,300 +116,304 @@ class _AjoutSondageWidgetState extends State<AjoutSondageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
-            child: Text(
-              'Création d\'un sondage',
-              style: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
-                    fontSize: 25.0,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).titleLargeFamily),
-                  ),
-            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 0.0,
+        automaticallyImplyLeading: false,
+        title: Align(
+          alignment: AlignmentDirectional(0.0, 0.0),
+          child: Text(
+            'Création d\'un sondage',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).titleLargeFamily,
+                  fontSize: 25.0,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).titleLargeFamily),
+                ),
+          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
         ),
-        body: Align(
+        actions: [],
+        centerTitle: false,
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
             decoration: BoxDecoration(),
             child: Stack(
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 16.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.textController1,
-                              focusNode: _model.textFieldFocusNode1,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Question',
-                                hintText:
-                                    'Saisissez la question pour le sondage...',
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 16.0, 0.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController1,
+                                focusNode: _model.textFieldFocusNode1,
+                                autofocus: false,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Question',
+                                  hintText:
+                                      'Saisissez la question pour le sondage...',
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyLargeFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily),
+                                      ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
+                                                  .bodyMediumFamily),
                                     ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
+                                validator: _model.textController1Validator
+                                    .asValidator(context),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              validator: _model.textController1Validator
-                                  .asValidator(context),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 16.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.textController2,
-                              focusNode: _model.textFieldFocusNode2,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Option 1',
-                                hintText: 'Saisissez l\'option 1...',
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 16.0, 0.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController2,
+                                focusNode: _model.textFieldFocusNode2,
+                                autofocus: false,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Option 1',
+                                  hintText: 'Saisissez l\'option 1...',
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyLargeFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily),
+                                      ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
+                                                  .bodyMediumFamily),
                                     ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
+                                validator: _model.textController2Validator
+                                    .asValidator(context),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              validator: _model.textController2Validator
-                                  .asValidator(context),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 16.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.textController3,
-                              focusNode: _model.textFieldFocusNode3,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Option 2',
-                                hintText: 'Saisissez l\'option 2...',
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 16.0, 0.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController3,
+                                focusNode: _model.textFieldFocusNode3,
+                                autofocus: false,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Option 2',
+                                  hintText: 'Saisissez l\'option 2...',
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyLargeFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily),
+                                      ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
+                                          .bodyMediumFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyLargeFamily),
+                                                  .bodyMediumFamily),
                                     ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
+                                validator: _model.textController3Validator
+                                    .asValidator(context),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              validator: _model.textController3Validator
-                                  .asValidator(context),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await SondageRecord.collection
-                                    .doc()
-                                    .set(createSondageRecordData(
-                                      question: _model.textController1.text,
-                                      option1: _model.textController2.text,
-                                      option2: _model.textController3.text,
-                                      owner: currentUserReference,
-                                      votecreated: getCurrentTimestamp,
-                                    ));
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 24.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await SondageRecord.collection
+                                      .doc()
+                                      .set(createSondageRecordData(
+                                        question: _model.textController1.text,
+                                        option1: _model.textController2.text,
+                                        option2: _model.textController3.text,
+                                        owner: currentUserReference,
+                                        votecreated: getCurrentTimestamp,
+                                      ));
 
-                                context.pushNamed('ListSondage');
-                              },
-                              text: 'Proposer un sondage',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 55.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleMediumFamily,
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMediumFamily),
-                                    ),
-                                elevation: 2.0,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ).animateOnPageLoad(
-                                animationsMap['buttonOnPageLoadAnimation']!),
-                          ),
-                        ],
-                      ).animateOnPageLoad(
-                          animationsMap['columnOnPageLoadAnimation']!),
-                    ),
-                  ],
+                                  context.pushNamed('ListSondage');
+                                },
+                                text: 'Proposer un sondage',
+                                options: FFButtonOptions(
+                                  width: double.infinity,
+                                  height: 55.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleMediumFamily,
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily),
+                                      ),
+                                  elevation: 2.0,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ).animateOnPageLoad(
+                                  animationsMap['buttonOnPageLoadAnimation']!),
+                            ),
+                          ],
+                        ).animateOnPageLoad(
+                            animationsMap['columnOnPageLoadAnimation']!),
+                      ),
+                    ].addToEnd(SizedBox(height: 100.0)),
+                  ),
                 ),
                 Align(
                   alignment: AlignmentDirectional(0.0, 1.0),

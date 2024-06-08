@@ -217,7 +217,10 @@ class _ModifierRoleWidgetState extends State<ModifierRoleWidget>
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
-                                modifierRoleUsersRecord.photoUrl,
+                                valueOrDefault<String>(
+                                  modifierRoleUsersRecord.photoUrl,
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                ),
                                 width: 100.0,
                                 height: 100.0,
                                 fit: BoxFit.cover,

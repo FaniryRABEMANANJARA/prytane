@@ -23,7 +23,6 @@ import 'package:provider/provider.dart';
 class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for titre widget.
   FocusNode? titreFocusNode;
   TextEditingController? titreTextController;
@@ -55,7 +54,6 @@ class AjoutAnnonceModel extends FlutterFlowModel<AjoutAnnonceWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     titreFocusNode?.dispose();
     titreTextController?.dispose();
 

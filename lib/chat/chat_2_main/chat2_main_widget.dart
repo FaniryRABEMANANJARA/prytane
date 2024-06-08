@@ -638,7 +638,10 @@ class _Chat2MainWidgetState extends State<Chat2MainWidget> {
                                                                               child: CachedNetworkImage(
                                                                                 fadeInDuration: Duration(milliseconds: 200),
                                                                                 fadeOutDuration: Duration(milliseconds: 200),
-                                                                                imageUrl: containerUsersRecord.photoUrl,
+                                                                                imageUrl: valueOrDefault<String>(
+                                                                                  containerUsersRecord.photoUrl,
+                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                                                ),
                                                                                 width: 44.0,
                                                                                 height: 44.0,
                                                                                 fit: BoxFit.cover,
@@ -728,7 +731,10 @@ class _Chat2MainWidgetState extends State<Chat2MainWidget> {
                                                                             fadeOutDuration:
                                                                                 Duration(milliseconds: 200),
                                                                             imageUrl:
-                                                                                rowUsersRecord.photoUrl,
+                                                                                valueOrDefault<String>(
+                                                                              rowUsersRecord.photoUrl,
+                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                                            ),
                                                                             width:
                                                                                 44.0,
                                                                             height:

@@ -291,8 +291,11 @@ class _AdhesionGroupWidgetState extends State<AdhesionGroupWidget>
                                                       BorderRadius.circular(
                                                           16.0),
                                                   child: Image.network(
-                                                    adhesionGroupMembresGroupeRecord!
-                                                        .image,
+                                                    valueOrDefault<String>(
+                                                      adhesionGroupMembresGroupeRecord
+                                                          ?.image,
+                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                    ),
                                                     width: 100.0,
                                                     height: 100.0,
                                                     fit: BoxFit.cover,

@@ -205,7 +205,10 @@ class _ListeUsersWidgetState extends State<ListeUsersWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(44.0),
                                               child: Image.network(
-                                                listViewUsersRecord.photoUrl,
+                                                valueOrDefault<String>(
+                                                  listViewUsersRecord.photoUrl,
+                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                ),
                                                 width: 44.0,
                                                 height: 44.0,
                                                 fit: BoxFit.cover,

@@ -315,11 +315,14 @@ class _DetailsGroupWidgetState extends State<DetailsGroupWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 child: Image.network(
-                                                  parentColumnGroupesRecord
-                                                      .photo,
+                                                  valueOrDefault<String>(
+                                                    parentColumnGroupesRecord
+                                                        .photo,
+                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/asqqjf1sxwrv/facebook-group-default-cover-photo.jpg',
+                                                  ),
                                                   width: double.infinity,
-                                                  height: 230.0,
-                                                  fit: BoxFit.cover,
+                                                  height: double.infinity,
+                                                  fit: BoxFit.fitHeight,
                                                 ),
                                               ),
                                             ),

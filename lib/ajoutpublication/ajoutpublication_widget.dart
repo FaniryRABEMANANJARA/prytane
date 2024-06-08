@@ -147,6 +147,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget>
         body: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -157,7 +158,7 @@ class _AjoutpublicationWidgetState extends State<AjoutpublicationWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: double.infinity,

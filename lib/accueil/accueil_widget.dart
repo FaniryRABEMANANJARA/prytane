@@ -45,16 +45,15 @@ class _AccueilWidgetState extends State<AccueilWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Align(
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
@@ -64,7 +63,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: double.infinity,
@@ -75,7 +74,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -341,7 +340,7 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: List.generate(
@@ -464,8 +463,12 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                 ),
                                                                 child: Image
                                                                     .network(
-                                                                  columnPublicationsRecord
-                                                                      .postUserimage,
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    columnPublicationsRecord
+                                                                        .postUserimage,
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                                  ),
                                                                   fit: BoxFit
                                                                       .cover,
                                                                 ),
@@ -522,12 +525,9 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                               enableDrag: false,
                                                                               context: context,
                                                                               builder: (context) {
-                                                                                return GestureDetector(
-                                                                                  onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                                  child: Padding(
-                                                                                    padding: MediaQuery.viewInsetsOf(context),
-                                                                                    child: ParametresWidget(),
-                                                                                  ),
+                                                                                return Padding(
+                                                                                  padding: MediaQuery.viewInsetsOf(context),
+                                                                                  child: ParametresWidget(),
                                                                                 );
                                                                               },
                                                                             ).then((value) =>
@@ -643,9 +643,12 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                     0.0),
                                                         child:
                                                             FlutterFlowMediaDisplay(
-                                                          path:
-                                                              columnPublicationsRecord
-                                                                  .postImage,
+                                                          path: valueOrDefault<
+                                                              String>(
+                                                            columnPublicationsRecord
+                                                                .postImage,
+                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/dl2jo6x5i68m/no-image-icon-23485.png',
+                                                          ),
                                                           imageBuilder:
                                                               (path) =>
                                                                   ClipRRect(
@@ -835,13 +838,10 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                               context,
                                                                           builder:
                                                                               (context) {
-                                                                            return GestureDetector(
-                                                                              onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                              child: Padding(
-                                                                                padding: MediaQuery.viewInsetsOf(context),
-                                                                                child: CommentaireWidget(
-                                                                                  postID: columnPublicationsRecord,
-                                                                                ),
+                                                                            return Padding(
+                                                                              padding: MediaQuery.viewInsetsOf(context),
+                                                                              child: CommentaireWidget(
+                                                                                postID: columnPublicationsRecord,
                                                                               ),
                                                                             );
                                                                           },
@@ -1116,24 +1116,14 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                     context,
                                                                 builder:
                                                                     (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
+                                                                  return Padding(
+                                                                    padding: MediaQuery
+                                                                        .viewInsetsOf(
+                                                                            context),
                                                                     child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
-                                                                      child:
-                                                                          CommentaireWidget(
-                                                                        postID:
-                                                                            columnPublicationsRecord,
-                                                                      ),
+                                                                        CommentaireWidget(
+                                                                      postID:
+                                                                          columnPublicationsRecord,
                                                                     ),
                                                                   );
                                                                 },
@@ -1171,18 +1161,13 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                                                           context,
                                                                       builder:
                                                                           (context) {
-                                                                        return GestureDetector(
-                                                                          onTap: () => _model.unfocusNode.canRequestFocus
-                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                              : FocusScope.of(context).unfocus(),
+                                                                        return Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
                                                                           child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                MediaQuery.viewInsetsOf(context),
-                                                                            child:
-                                                                                CommentaireWidget(
-                                                                              postID: columnPublicationsRecord,
-                                                                            ),
+                                                                              CommentaireWidget(
+                                                                            postID:
+                                                                                columnPublicationsRecord,
                                                                           ),
                                                                         );
                                                                       },
@@ -1277,11 +1262,11 @@ class _AccueilWidgetState extends State<AccueilWidget> {
                                   },
                                 ),
                               ),
-                            ],
+                            ].addToEnd(SizedBox(height: 100.0)),
                           ),
                         ),
                       ),
-                    ],
+                    ].addToEnd(SizedBox(height: 50.0)),
                   ),
                 ),
                 Align(

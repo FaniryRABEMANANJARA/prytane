@@ -330,8 +330,10 @@ class _ModifierGroupWidgetState extends State<ModifierGroupWidget>
                                             Duration(milliseconds: 500),
                                         fadeOutDuration:
                                             Duration(milliseconds: 500),
-                                        imageUrl:
-                                            modifierGroupGroupesRecord!.photo,
+                                        imageUrl: valueOrDefault<String>(
+                                          modifierGroupGroupesRecord?.photo,
+                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/asqqjf1sxwrv/facebook-group-default-cover-photo.jpg',
+                                        ),
                                         fit: BoxFit.fitWidth,
                                       ),
                                     ),

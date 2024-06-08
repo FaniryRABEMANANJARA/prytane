@@ -151,34 +151,33 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget>
           );
         }
         List<UsersRecord> ajoutevenementUsersRecordList = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
+        return Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Ajouter un événement',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineMediumFamily,
-                      fontSize: 26.0,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineMediumFamily),
-                    ),
-              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-              actions: [],
-              centerTitle: true,
-              elevation: 2.0,
-            ),
-            body: Align(
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Ajouter un événement',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    fontSize: 26.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
+            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+            actions: [],
+            centerTitle: true,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
+                height: double.infinity,
                 constraints: BoxConstraints(
                   maxWidth: double.infinity,
                 ),
@@ -188,7 +187,7 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget>
                     SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
@@ -1367,7 +1366,7 @@ class _AjoutevenementWidgetState extends State<AjoutevenementWidget>
                               ),
                             ),
                           ),
-                        ],
+                        ].addToEnd(SizedBox(height: 100.0)),
                       ),
                     ),
                     Align(

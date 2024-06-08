@@ -94,290 +94,389 @@ class _SondageWidgetState extends State<SondageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
-            child: Text(
-              'Sondage',
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineLargeFamily,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineLargeFamily),
-                  ),
-            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 0.0,
+        automaticallyImplyLeading: false,
+        title: Align(
+          alignment: AlignmentDirectional(0.0, 0.0),
+          child: Text(
+            'Sondage',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineLargeFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineLargeFamily),
+                ),
+          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
         ),
-        body: Align(
+        actions: [],
+        centerTitle: false,
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
+            height: double.infinity,
             constraints: BoxConstraints(
               maxWidth: double.infinity,
             ),
             decoration: BoxDecoration(),
             child: Stack(
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 630.0,
-                      decoration: BoxDecoration(),
-                      child: FutureBuilder<List<SondageRecord>>(
-                        future: (_model.firestoreRequestCompleter ??=
-                                Completer<List<SondageRecord>>()
-                                  ..complete(querySondageRecordOnce()))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 630.0,
+                        decoration: BoxDecoration(),
+                        child: FutureBuilder<List<SondageRecord>>(
+                          future: (_model.firestoreRequestCompleter ??=
+                                  Completer<List<SondageRecord>>()
+                                    ..complete(querySondageRecordOnce()))
+                              .future,
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }
-                          List<SondageRecord> listViewSondageRecordList =
-                              snapshot.data!;
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: listViewSondageRecordList.length,
-                            itemBuilder: (context, listViewIndex) {
-                              final listViewSondageRecord =
-                                  listViewSondageRecordList[listViewIndex];
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 5.0),
-                                child: StreamBuilder<UsersRecord>(
-                                  stream: UsersRecord.getDocument(
-                                      listViewSondageRecord.owner!),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
+                              );
+                            }
+                            List<SondageRecord> listViewSondageRecordList =
+                                snapshot.data!;
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: listViewSondageRecordList.length,
+                              itemBuilder: (context, listViewIndex) {
+                                final listViewSondageRecord =
+                                    listViewSondageRecordList[listViewIndex];
+                                return Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 5.0),
+                                  child: StreamBuilder<UsersRecord>(
+                                    stream: UsersRecord.getDocument(
+                                        listViewSondageRecord.owner!),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }
-                                    final columnUsersRecord = snapshot.data!;
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: 60.0,
-                                                height: 60.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                  ),
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0),
-                                                  child: Image.network(
-                                                    columnUsersRecord.photoUrl,
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      columnUsersRecord
-                                                          .displayName,
-                                                      style:
+                                        );
+                                      }
+                                      final columnUsersRecord = snapshot.data!;
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  width: 60.0,
+                                                  height: 60.0,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily,
-                                                                fontSize: 14.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily),
-                                                              ),
+                                                              .primary,
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        50.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  dateTimeFormat(
-                                                    'relative',
-                                                    listViewSondageRecord
-                                                        .votecreated!,
-                                                    locale: FFLocalizations.of(
-                                                            context)
-                                                        .languageCode,
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24.0),
+                                                    child: Image.network(
+                                                      valueOrDefault<String>(
+                                                        columnUsersRecord
+                                                            .photoUrl,
+                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/yhalynv1o8in/user.png',
+                                                      ),
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        columnUsersRecord
+                                                            .displayName,
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
                                                       ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          50.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    dateTimeFormat(
+                                                      'relative',
+                                                      listViewSondageRecord
+                                                          .votecreated!,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 16.0),
-                                                child: Text(
-                                                  listViewSondageRecord
-                                                      .question,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 16.0),
+                                                  child: Text(
+                                                    listViewSondageRecord
+                                                        .question,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
                                                 ),
-                                              ),
-                                              SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    if (listViewSondageRecord
-                                                            .voteduser
-                                                            .contains(
-                                                                currentUserReference) ==
-                                                        true)
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    16.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          5.0),
-                                                              child: Container(
+                                                SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      if (listViewSondageRecord
+                                                              .voteduser
+                                                              .contains(
+                                                                  currentUserReference) ==
+                                                          true)
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      16.0,
+                                                                      0.0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: 300.0,
+                                                                  height: 40.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent3,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .only(
+                                                                      bottomLeft:
+                                                                          Radius.circular(
+                                                                              8.0),
+                                                                      bottomRight:
+                                                                          Radius.circular(
+                                                                              8.0),
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              8.0),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      if (listViewSondageRecord
+                                                                              .opt1list
+                                                                              .contains(currentUserReference) ==
+                                                                          true)
+                                                                        Icon(
+                                                                          Icons
+                                                                              .check_circle,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          listViewSondageRecord
+                                                                              .option1,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            150.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            formatNumber(
+                                                                              listViewSondageRecord.opt1list.length,
+                                                                              formatType: FormatType.decimal,
+                                                                              decimalType: DecimalType.automatic,
+                                                                            ),
+                                                                            '0',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Container(
                                                                 width: 300.0,
                                                                 height: 40.0,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .accent3,
+                                                                      .secondaryText,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .only(
@@ -401,7 +500,7 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                           .max,
                                                                   children: [
                                                                     if (listViewSondageRecord
-                                                                            .opt1list
+                                                                            .opt2list
                                                                             .contains(currentUserReference) ==
                                                                         true)
                                                                       Icon(
@@ -421,7 +520,7 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                       child:
                                                                           Text(
                                                                         listViewSondageRecord
-                                                                            .option1,
+                                                                            .option2,
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
@@ -442,7 +541,7 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                         valueOrDefault<
                                                                             String>(
                                                                           formatNumber(
-                                                                            listViewSondageRecord.opt1list.length,
+                                                                            listViewSondageRecord.opt2list.length,
                                                                             formatType:
                                                                                 FormatType.decimal,
                                                                             decimalType:
@@ -462,141 +561,113 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                   ],
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Container(
-                                                              width: 300.0,
-                                                              height: 40.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      if (listViewSondageRecord
+                                                              .voteduser
+                                                              .contains(
+                                                                  currentUserReference) ==
+                                                          false)
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0),
+                                                                child:
+                                                                    FFButtonWidget(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    await listViewSondageRecord
+                                                                        .reference
+                                                                        .update({
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'opt1list':
+                                                                              FieldValue.arrayUnion([
+                                                                            columnUsersRecord.reference
+                                                                          ]),
+                                                                          'voteduser':
+                                                                              FieldValue.arrayUnion([
+                                                                            currentUserReference
+                                                                          ]),
+                                                                        },
+                                                                      ),
+                                                                    });
+                                                                    setState(() =>
+                                                                        _model.firestoreRequestCompleter =
+                                                                            null);
+                                                                    await _model
+                                                                        .waitForFirestoreRequestCompleted();
+                                                                  },
+                                                                  text: listViewSondageRecord
+                                                                      .option1,
+                                                                  options:
+                                                                      FFButtonOptions(
+                                                                    width:
+                                                                        330.0,
+                                                                    height:
+                                                                        40.0,
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            24.0,
+                                                                            0.0,
+                                                                            24.0,
+                                                                            0.0),
+                                                                    iconPadding:
+                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent2,
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                        ),
+                                                                    elevation:
+                                                                        3.0,
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                  ),
                                                                 ),
                                                               ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  if (listViewSondageRecord
-                                                                          .opt2list
-                                                                          .contains(
-                                                                              currentUserReference) ==
-                                                                      true)
-                                                                    Icon(
-                                                                      Icons
-                                                                          .check_circle,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      listViewSondageRecord
-                                                                          .option2,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            150.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        formatNumber(
-                                                                          listViewSondageRecord
-                                                                              .opt2list
-                                                                              .length,
-                                                                          formatType:
-                                                                              FormatType.decimal,
-                                                                          decimalType:
-                                                                              DecimalType.automatic,
-                                                                        ),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    if (listViewSondageRecord
-                                                            .voteduser
-                                                            .contains(
-                                                                currentUserReference) ==
-                                                        false)
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          5.0),
-                                                              child:
-                                                                  FFButtonWidget(
+                                                              FFButtonWidget(
                                                                 onPressed:
                                                                     () async {
                                                                   await listViewSondageRecord
@@ -604,7 +675,7 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                       .update({
                                                                     ...mapToFirestore(
                                                                       {
-                                                                        'opt1list':
+                                                                        'opt2list':
                                                                             FieldValue.arrayUnion([
                                                                           columnUsersRecord
                                                                               .reference
@@ -624,7 +695,7 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                 },
                                                                 text:
                                                                     listViewSondageRecord
-                                                                        .option1,
+                                                                        .option2,
                                                                 options:
                                                                     FFButtonOptions(
                                                                   width: 330.0,
@@ -671,108 +742,28 @@ class _SondageWidgetState extends State<SondageWidget>
                                                                               8.0),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                await listViewSondageRecord
-                                                                    .reference
-                                                                    .update({
-                                                                  ...mapToFirestore(
-                                                                    {
-                                                                      'opt2list':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        columnUsersRecord
-                                                                            .reference
-                                                                      ]),
-                                                                      'voteduser':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        currentUserReference
-                                                                      ]),
-                                                                    },
-                                                                  ),
-                                                                });
-                                                                setState(() =>
-                                                                    _model.firestoreRequestCompleter =
-                                                                        null);
-                                                                await _model
-                                                                    .waitForFirestoreRequestCompleted();
-                                                              },
-                                                              text:
-                                                                  listViewSondageRecord
-                                                                      .option2,
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 330.0,
-                                                                height: 40.0,
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        24.0,
-                                                                        0.0,
-                                                                        24.0,
-                                                                        0.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .accent2,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleSmallFamily,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                    ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation']!),
-                  ],
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
+                    ].addToEnd(SizedBox(height: 100.0)),
+                  ),
                 ),
                 Align(
                   alignment: AlignmentDirectional(0.0, 1.0),

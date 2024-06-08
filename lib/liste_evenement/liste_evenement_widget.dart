@@ -126,63 +126,60 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
         }
         List<EvenementsRecord> listeEvenementEvenementsRecordList =
             snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
+        return Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-              automaticallyImplyLeading: false,
-              title: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Evénements',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily),
-                              ),
-                    ),
-                  ),
-                  if (valueOrDefault(currentUserDocument?.role, '') ==
-                      'paroisse')
-                    AuthUserStreamWidget(
-                      builder: (context) => InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('Ajoutevenement');
-                        },
-                        child: Icon(
-                          Icons.add_circle,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 34.0,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Text(
+                    'Evénements',
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).headlineMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context)
+                                  .headlineMediumFamily),
                         ),
+                  ),
+                ),
+                if (valueOrDefault(currentUserDocument?.role, '') == 'paroisse')
+                  AuthUserStreamWidget(
+                    builder: (context) => InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('Ajoutevenement');
+                      },
+                      child: Icon(
+                        Icons.add_circle,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 34.0,
                       ),
                     ),
-                ],
-              ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
-              actions: [],
-              centerTitle: true,
-              elevation: 2.0,
-            ),
-            body: Align(
+                  ),
+              ],
+            ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+            actions: [],
+            centerTitle: true,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
+                height: double.infinity,
                 constraints: BoxConstraints(
                   maxWidth: double.infinity,
                 ),
@@ -192,7 +189,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
                     SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
@@ -1164,7 +1161,7 @@ class _ListeEvenementWidgetState extends State<ListeEvenementWidget>
                             ).animateOnPageLoad(
                                 animationsMap['containerOnPageLoadAnimation']!),
                           ),
-                        ],
+                        ].addToEnd(SizedBox(height: 100.0)),
                       ),
                     ),
                     Align(

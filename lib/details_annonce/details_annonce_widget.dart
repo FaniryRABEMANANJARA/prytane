@@ -122,33 +122,32 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget>
             detailsAnnonceAnnoncesRecordList.isNotEmpty
                 ? detailsAnnonceAnnoncesRecordList.first
                 : null;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
+        return Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Détails annonce',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineMediumFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineMediumFamily),
-                    ),
-              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-              actions: [],
-              centerTitle: true,
-              elevation: 2.0,
-            ),
-            body: Align(
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Détails annonce',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
+            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+            actions: [],
+            centerTitle: true,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
+                height: double.infinity,
                 constraints: BoxConstraints(
                   maxWidth: double.infinity,
                 ),
@@ -157,7 +156,7 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget>
                   children: [
                     Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
                           child: SingleChildScrollView(
@@ -220,8 +219,11 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget>
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               child: Image.network(
-                                                detailsAnnonceAnnoncesRecord!
-                                                    .image,
+                                                valueOrDefault<String>(
+                                                  detailsAnnonceAnnoncesRecord
+                                                      ?.image,
+                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/prytane-th9qb9/assets/dl2jo6x5i68m/no-image-icon-23485.png',
+                                                ),
                                                 width: double.infinity,
                                                 height: 230.0,
                                                 fit: BoxFit.cover,
@@ -516,7 +518,7 @@ class _DetailsAnnonceWidgetState extends State<DetailsAnnonceWidget>
                           ).animateOnPageLoad(
                               animationsMap['columnOnPageLoadAnimation']!),
                         ),
-                      ],
+                      ].addToEnd(SizedBox(height: 100.0)),
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 1.0),
